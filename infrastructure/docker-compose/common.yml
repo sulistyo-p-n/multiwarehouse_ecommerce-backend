@@ -1,0 +1,3 @@
+networks:
+  multiwarehouse-app:
+    driver: bridge

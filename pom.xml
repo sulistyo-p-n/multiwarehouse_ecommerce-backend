@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.multiwarehouse.app</groupId>
+    <artifactId>multiwarehouse-app</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>common</module>
+        <module>infrastructure</module>
+        <module>warehouse-service</module>
+        <module>user-service</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <org.springframework.kafka.version>3.2.4</org.springframework.kafka.version>
+        <io.confluent.version>7.7.1</io.confluent.version>
+        <org.apache.avro.version>1.12.0</org.apache.avro.version>
+        <org.postgresql.version>42.7.4</org.postgresql.version>
+        <org.projectlombok.version>1.18.34</org.projectlombok.version>
+        <org.mockito.version>5.11.0</org.mockito.version>
+        <org.slf4j.version>2.0.16</org.slf4j.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>common-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>common-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>common-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>kafka-producer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>kafka-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>kafka-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>kafka-config-data</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>saga</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>warehouse-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>warehouse-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>warehouse-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>warehouse-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>warehouse-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>warehouse-container</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>user-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>user-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>user-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>user-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>user-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>user-container</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.kafka</groupId>-->
+<!--                <artifactId>spring-kafka-test</artifactId>-->
+<!--                <scope>test</scope>-->
+<!--            </dependency>-->
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>
