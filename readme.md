@@ -1,8 +1,5 @@
 **Database Diagram**
-![Multiwarehouse E-Commerce](https://github.com/user-attachments/assets/6a69700f-6ea0-4dc0-a573-a63a4515fc72)
-
-**Database Diagram Test**
-![Multiwarehouse E-Commerce](docs/images/dbd.png)
+![Database Diagram](docs/images/dbd.png)
 
 **Q&A**
 - get user id login, for autorization? -
