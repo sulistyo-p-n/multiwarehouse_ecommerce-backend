@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/cart-service/cart-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-service/cart-container/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-service/cart-dataaccess/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-service/cart-domain/cart-application-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-service/cart-domain/cart-domain-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-service/cart-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-service/cart-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-service/cart-messaging/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/common-application/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/common-application/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/common-dataaccess/src/main/java" charset="UTF-8" />
@@ -19,6 +29,46 @@
     <file url="file://$PROJECT_DIR$/infrastructure/saga/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/infrastructure/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/infrastructure/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/order-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/order-container/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/order-dataaccess/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/order-domain/order-application-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/order-domain/order-domain-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/order-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/order-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/order-messaging/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-container/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-dataaccess/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-domain/payment-application-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-domain/payment-domain-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-messaging/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/product-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/product-container/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/product-dataaccess/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/product-domain/product-application-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/product-domain/product-domain-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/product-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/product-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/product-messaging/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/product-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/shipping-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/shipping-container/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/shipping-dataaccess/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/shipping-domain/shipping-application-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/shipping-domain/shipping-domain-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/shipping-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/shipping-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/shipping-messaging/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shipping-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-service/src/main/java" charset="UTF-8" />

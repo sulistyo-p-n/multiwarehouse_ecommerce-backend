@@ -9,14 +9,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>warehouse-service</artifactId>
+    <artifactId>payment-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>warehouse-domain</module>
-        <module>warehouse-dataaccess</module>
-        <module>warehouse-application</module>
-        <module>warehouse-messaging</module>
-        <module>warehouse-container</module>
+        <module>payment-application</module>
+        <module>payment-container</module>
+        <module>payment-dataaccess</module>
+        <module>payment-domain</module>
+        <module>payment-messaging</module>
     </modules>
 
 </project>

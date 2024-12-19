@@ -9,14 +9,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>warehouse-service</artifactId>
+    <artifactId>cart-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>warehouse-domain</module>
-        <module>warehouse-dataaccess</module>
-        <module>warehouse-application</module>
-        <module>warehouse-messaging</module>
-        <module>warehouse-container</module>
+        <module>cart-application</module>
+        <module>cart-container</module>
+        <module>cart-dataaccess</module>
+        <module>cart-domain</module>
+        <module>cart-messaging</module>
     </modules>
 
 </project>

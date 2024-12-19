@@ -9,14 +9,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>warehouse-service</artifactId>
+    <artifactId>order-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>warehouse-domain</module>
-        <module>warehouse-dataaccess</module>
-        <module>warehouse-application</module>
-        <module>warehouse-messaging</module>
-        <module>warehouse-container</module>
+        <module>order-application</module>
+        <module>order-container</module>
+        <module>order-dataaccess</module>
+        <module>order-domain</module>
+        <module>order-messaging</module>
     </modules>
 
 </project>

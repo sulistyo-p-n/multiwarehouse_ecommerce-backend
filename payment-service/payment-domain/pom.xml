@@ -5,18 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.multiwarehouse.app</groupId>
-        <artifactId>multiwarehouse-app</artifactId>
+        <artifactId>payment-service</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>warehouse-service</artifactId>
+    <artifactId>payment-domain</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>warehouse-domain</module>
-        <module>warehouse-dataaccess</module>
-        <module>warehouse-application</module>
-        <module>warehouse-messaging</module>
-        <module>warehouse-container</module>
+        <module>payment-application-service</module>
+        <module>payment-domain-core</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${org.projectlombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -14,6 +14,11 @@
 
 ---
 
+**DEPENDENCY GRAPH**
+mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -DreduceEdges=false -Dscope=compile "-Dincludes=com.multiwarehouse.app*:product*,com.multiwarehouse.app*:common*"
+
+---
+
 **LOCAL KUBERNETES**
 1. enable kubernetes in docker
 2. mvn clean install
