@@ -1,3 +1,7 @@
+**Database Diagram**
+![Database Diagram](docs/images/dbd.png)
+https://dbdiagram.io/d/Multiwarehouse-E-Commerce-675fe033e763df1f000c17e4
+
 **Q&A**
 - get user id login, for autorization? -
 - relasi antar aggregate? use materialize or join directly with repository
