@@ -1,0 +1,5 @@
+DROP SCHEMA IF EXISTS "shipping" CASCADE;
+
+CREATE SCHEMA "shipping";
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
