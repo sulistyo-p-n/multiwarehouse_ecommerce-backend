@@ -1,0 +1,26 @@
+package com.multiwarehouse.app.product.service.domain.ports.input.service;
+
+import com.multiwarehouse.app.product.service.domain.dto.create.CreateProductCategoryCommand;
+import com.multiwarehouse.app.product.service.domain.dto.create.CreateProductCategoryResponse;
+import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductCategoryCommand;
+import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductCategoryResponse;
+import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoriesCommand;
+import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoriesResponse;
+import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoryCommand;
+import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoryResponse;
+import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCategoryCommand;
+import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCategoryResponse;
+import jakarta.validation.Valid;
+
+public interface ProductCategoryApplicationService {
+    public CreateProductCategoryResponse createProduct(@Valid CreateProductCategoryCommand createProductCategoryCommand);
+
+    public UpdateProductCategoryResponse updateProduct(@Valid UpdateProductCategoryCommand updateProductCategoryCommand);
+
+    public DeleteProductCategoryResponse deleteProduct(@Valid DeleteProductCategoryCommand deleteProductCategoryCommand);
+
+    public GetProductCategoriesResponse getProducts(@Valid GetProductCategoriesCommand getProductCategoriesCommand);
+
+    public GetProductCategoryResponse getProduct(@Valid GetProductCategoryCommand getProductCategoryCommand);
+}
+
