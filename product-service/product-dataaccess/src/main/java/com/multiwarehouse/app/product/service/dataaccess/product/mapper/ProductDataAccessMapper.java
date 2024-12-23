@@ -11,7 +11,7 @@ public class ProductDataAccessMapper {
                 .withId(new ProductId(productEntity.getId()))
                 .withCode(productEntity.getCode())
                 .withName(productEntity.getName())
-                .withDesc(productEntity.getDesc())
+                .withDescription(productEntity.getDescription())
                 .withPrice(new Money(productEntity.getPrice()))
                 .build();
     }
@@ -21,7 +21,7 @@ public class ProductDataAccessMapper {
                 .id(product.getId().getValue())
                 .code(product.getCode())
                 .name(product.getName())
-                .desc(product.getDesc())
+                .description(product.getDescription())
                 .price(product.getPrice().getAmount())
                 .build();
     }

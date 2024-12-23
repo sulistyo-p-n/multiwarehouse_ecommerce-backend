@@ -4,11 +4,11 @@ import com.multiwarehouse.app.domain.entity.AggregateRoot;
 import com.multiwarehouse.app.domain.valueobject.ProductId;
 import com.multiwarehouse.app.domain.valueobject.StockId;
 
-public class Stock extends AggregateRoot<StockId> {
+public class ProductStock extends AggregateRoot<StockId> {
     private final ProductId productId;
     private final Integer quantity;
 
-    private Stock(Builder builder) {
+    private ProductStock(Builder builder) {
         super.setId(builder.id);
         productId = builder.productId;
         quantity = builder.quantity;
@@ -49,8 +49,8 @@ public class Stock extends AggregateRoot<StockId> {
             return this;
         }
 
-        public Stock build() {
-            return new Stock(this);
+        public ProductStock build() {
+            return new ProductStock(this);
         }
     }
 }

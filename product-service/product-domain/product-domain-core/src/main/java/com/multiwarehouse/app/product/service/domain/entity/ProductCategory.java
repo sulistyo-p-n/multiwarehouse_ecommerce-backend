@@ -9,7 +9,7 @@ import java.util.UUID;
 public class ProductCategory extends BaseEntity<ProductCategoryId> {
     private final String code;
     private final String name;
-    private final String desc;
+    private final String description;
     private final Boolean active;
 
     public void initializeCategory() {
@@ -26,7 +26,7 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
         super.setId(builder.id);
         code = builder.code;
         name = builder.name;
-        desc = builder.desc;
+        description = builder.description;
         active = builder.active;
     }
 
@@ -42,8 +42,8 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
         return name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
     public Boolean getActive() {
@@ -54,7 +54,7 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
         private ProductCategoryId id;
         private String code;
         private String name;
-        private String desc;
+        private String description;
         private Boolean active;
 
         private Builder() {
@@ -75,8 +75,8 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
             return this;
         }
 
-        public Builder withDesc(String val) {
-            desc = val;
+        public Builder withDescription(String val) {
+            description = val;
             return this;
         }
 

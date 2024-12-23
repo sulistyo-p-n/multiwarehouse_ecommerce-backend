@@ -22,7 +22,7 @@ public class CreateProductCategoryCommand {
     private final String name;
     @NotNull(message = "Description {jakarta.validation.constraints.NotNull.message}")
     @Size(min = 2, max = 50, message = "Description {jakarta.validation.constraints.Size.message}")
-    private final String desc;
+    private final String description;
     @NotNull(message = "CategoryId {jakarta.validation.constraints.NotNull.message}")
     private final Boolean active;
 }

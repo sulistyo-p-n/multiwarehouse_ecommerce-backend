@@ -16,7 +16,7 @@ public class UpdateProductCommand {
     private final UUID id;
     private final String code;
     private final String name;
-    private final String desc;
+    private final String description;
     private final BigDecimal price;
     private final UUID categoryId;
     private final Boolean active;

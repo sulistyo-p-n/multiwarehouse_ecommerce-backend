@@ -11,7 +11,7 @@ public class ProductImage extends BaseEntity<ProductImageId> {
     private final ProductId productId;
     private final String code;
     private final String name;
-    private final String desc;
+    private final String description;
     private final String path;
     private final Boolean active;
 
@@ -30,7 +30,7 @@ public class ProductImage extends BaseEntity<ProductImageId> {
         productId = builder.productId;
         code = builder.code;
         name = builder.name;
-        desc = builder.desc;
+        description = builder.description;
         path = builder.path;
         active = builder.active;
     }
@@ -51,8 +51,8 @@ public class ProductImage extends BaseEntity<ProductImageId> {
         return name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
     public String getPath() {
@@ -68,7 +68,7 @@ public class ProductImage extends BaseEntity<ProductImageId> {
         private ProductId productId;
         private String code;
         private String name;
-        private String desc;
+        private String description;
         private String path;
         private Boolean active;
 
@@ -95,8 +95,8 @@ public class ProductImage extends BaseEntity<ProductImageId> {
             return this;
         }
 
-        public Builder withDesc(String val) {
-            desc = val;
+        public Builder withDescription(String val) {
+            description = val;
             return this;
         }
 

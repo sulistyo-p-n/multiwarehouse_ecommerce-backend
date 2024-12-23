@@ -18,7 +18,7 @@ public class GetProductImageResponse {
     @NotNull(message = "Name {jakarta.validation.constraints.NotNull.message}")
     private final String name;
     @NotNull(message = "Description {jakarta.validation.constraints.NotNull.message}")
-    private final String desc;
+    private final String description;
     @NotNull(message = "Path {jakarta.validation.constraints.NotNull.message}")
     private final String path;
     @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")

@@ -1,9 +1,9 @@
-package com.multiwarehouse.app.product.service.dataaccess.product.entity;
+package com.multiwarehouse.app.product.service.dataaccess.stock.entity;
 
+import com.multiwarehouse.app.product.service.dataaccess.product.entity.ProductEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,24 +12,23 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product_categories")
+@Table(name = "stocks")
 @Entity
-public class ProductCategoryEntity {
+public class StockEntity {
     @Id
     private UUID id;
-    private String code;
-    private String name;
-    private String description;
-    private Boolean active;
+    private UUID warehouse_id;
+    private Integer quantity;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<ProductEntity> products;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    private ProductEntity product;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductCategoryEntity that = (ProductCategoryEntity) o;
+        StockEntity that = (StockEntity) o;
         return id.equals(that.id);
     }
 

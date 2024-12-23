@@ -16,6 +16,6 @@ public class UpdateProductCategoryCommand {
     private final UUID id;
     private final String code;
     private final String name;
-    private final String desc;
+    private final String description;
     private final Boolean active;
 }

@@ -20,16 +20,19 @@ public class ProductEntity {
     private UUID id;
     private String code;
     private String name;
-    private String desc;
+    private String description;
     private BigDecimal price;
     private Boolean active;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PRODUCT_CATEGORY_ID")
+    @JoinColumn(name = "product_category_id")
     private ProductCategoryEntity category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductImageEntity> images;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private ProductStockEntity stock;
 
     @Override
     public boolean equals(Object o) {

@@ -3,8 +3,6 @@ package com.multiwarehouse.app.product.service.dataaccess.product.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -20,12 +18,12 @@ public class ProductImageEntity {
     private UUID id;
     private String code;
     private String name;
-    private String desc;
+    private String description;
     private String path;
     private Boolean active;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PRODUCT_ID")
+    @JoinColumn(name = "product_id")
     private ProductEntity product;
 
     @Override

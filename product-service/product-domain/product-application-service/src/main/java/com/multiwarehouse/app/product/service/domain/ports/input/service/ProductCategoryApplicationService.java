@@ -13,14 +13,14 @@ import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCat
 import jakarta.validation.Valid;
 
 public interface ProductCategoryApplicationService {
-    public CreateProductCategoryResponse createProduct(@Valid CreateProductCategoryCommand createProductCategoryCommand);
+    public CreateProductCategoryResponse createProductCategory(@Valid CreateProductCategoryCommand createProductCategoryCommand);
 
-    public UpdateProductCategoryResponse updateProduct(@Valid UpdateProductCategoryCommand updateProductCategoryCommand);
+    public UpdateProductCategoryResponse updateProductCategory(@Valid UpdateProductCategoryCommand updateProductCategoryCommand);
 
-    public DeleteProductCategoryResponse deleteProduct(@Valid DeleteProductCategoryCommand deleteProductCategoryCommand);
+    public DeleteProductCategoryResponse deleteProductCategory(@Valid DeleteProductCategoryCommand deleteProductCategoryCommand);
 
-    public GetProductCategoriesResponse getProducts(@Valid GetProductCategoriesCommand getProductCategoriesCommand);
+    public GetProductCategoriesResponse getProductCategories(@Valid GetProductCategoriesCommand getProductCategoriesCommand);
 
-    public GetProductCategoryResponse getProduct(@Valid GetProductCategoryCommand getProductCategoryCommand);
+    public GetProductCategoryResponse getProductCategory(@Valid GetProductCategoryCommand getProductCategoryCommand);
 }
 

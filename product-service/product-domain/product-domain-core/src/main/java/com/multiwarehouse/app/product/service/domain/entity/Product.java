@@ -11,11 +11,11 @@ import java.util.UUID;
 public class Product extends AggregateRoot<ProductId> {
     private final String code;
     private final String name;
-    private final String desc;
+    private final String description;
     private final Money price;
     private final ProductCategory category;
     private final List<ProductImage> productImages;
-    private final Stock stock;
+    private final ProductStock productStock;
     private final Boolean active;
 
     public void initializeProduct() {
@@ -36,8 +36,8 @@ public class Product extends AggregateRoot<ProductId> {
         return name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
     public Money getPrice() {
@@ -52,8 +52,8 @@ public class Product extends AggregateRoot<ProductId> {
         return productImages;
     }
 
-    public Stock getStock() {
-        return stock;
+    public ProductStock getStock() {
+        return productStock;
     }
 
     public Boolean getActive() {
@@ -64,11 +64,11 @@ public class Product extends AggregateRoot<ProductId> {
         super.setId(builder.id);
         code = builder.code;
         name = builder.name;
-        desc = builder.desc;
+        description = builder.description;
         price = builder.price;
         category = builder.category;
         productImages = builder.productImages;
-        stock = builder.stock;
+        productStock = builder.productStock;
         active = builder.active;
     }
 
@@ -80,11 +80,11 @@ public class Product extends AggregateRoot<ProductId> {
         private ProductId id;
         private String code;
         private String name;
-        private String desc;
+        private String description;
         private Money price;
         private ProductCategory category;
         private List<ProductImage> productImages;
-        private Stock stock;
+        private ProductStock productStock;
         private Boolean active;
 
         private Builder() {
@@ -105,8 +105,8 @@ public class Product extends AggregateRoot<ProductId> {
             return this;
         }
 
-        public Builder withDesc(String val) {
-            desc = val;
+        public Builder withDescription(String val) {
+            description = val;
             return this;
         }
 
@@ -125,8 +125,8 @@ public class Product extends AggregateRoot<ProductId> {
             return this;
         }
 
-        public Builder withStock(Stock val) {
-            stock = val;
+        public Builder withStock(ProductStock val) {
+            productStock = val;
             return this;
         }
 
