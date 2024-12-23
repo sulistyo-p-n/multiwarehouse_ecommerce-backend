@@ -25,8 +25,8 @@ public class ProductCategoryCreateHelper {
     @Transactional
     public ProductCategory persistProductCategory(CreateProductCategoryCommand createProductCategoryCommand) {
         ProductCategory productCategory = productCategoryDataMapper.createProductCategoryCommandToProductCategory(createProductCategoryCommand);
-        productCategoryDomainService.validateAndInitiateCategory(productCategory);
-        return saveProductCategory(productCategory);
+        ProductCategory productCategoryValidated = productCategoryDomainService.validateAndInitiateCategory(productCategory);
+        return saveProductCategory(productCategoryValidated);
     }
 
     private ProductCategory saveProductCategory(ProductCategory productCategory) {

@@ -7,9 +7,11 @@ import com.multiwarehouse.app.product.service.dataaccess.product.repository.Prod
 import com.multiwarehouse.app.product.service.dataaccess.product.repository.ProductJpaRepository;
 import com.multiwarehouse.app.product.service.domain.entity.ProductCategory;
 import com.multiwarehouse.app.product.service.domain.ports.output.repository.ProductCategoryRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class ProductCategoryRepositoryImpl implements ProductCategoryRepository {
 
     private final ProductCategoryJpaRepository productCategoryJpaRepository;
@@ -25,6 +27,10 @@ public class ProductCategoryRepositoryImpl implements ProductCategoryRepository 
     public ProductCategory save(ProductCategory productCategory) {
         return productCategoryDataAccessMapper.productCategoryEntityToProductCategory(productCategoryJpaRepository
                 .save(productCategoryDataAccessMapper.productCategoryToProductCategoryEntity(productCategory)));
+    }
+
+    public void delete(ProductCategory productCategory) {
+        productCategoryJpaRepository.delete(productCategoryDataAccessMapper.productCategoryToProductCategoryEntity(productCategory));
     }
 
     @Override

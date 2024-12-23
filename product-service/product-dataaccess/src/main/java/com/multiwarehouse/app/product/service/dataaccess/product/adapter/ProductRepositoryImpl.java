@@ -6,10 +6,12 @@ import com.multiwarehouse.app.product.service.dataaccess.product.mapper.ProductD
 import com.multiwarehouse.app.product.service.dataaccess.product.repository.ProductJpaRepository;
 import com.multiwarehouse.app.product.service.domain.entity.Product;
 import com.multiwarehouse.app.product.service.domain.ports.output.repository.ProductRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class ProductRepositoryImpl implements ProductRepository {
 
     private final ProductJpaRepository productJpaRepository;

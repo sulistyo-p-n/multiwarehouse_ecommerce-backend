@@ -14,8 +14,9 @@ import java.time.ZonedDateTime;
 
 public class ProductCategoryDomainServiceImpl implements ProductCategoryDomainService {
     @Override
-    public void validateAndInitiateCategory(ProductCategory category) {
+    public ProductCategory validateAndInitiateCategory(ProductCategory category) {
         category.validationInitialCategory();
         category.initializeCategory();
+        return category;
     }
 }

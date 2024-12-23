@@ -4,7 +4,9 @@ import com.multiwarehouse.app.domain.valueobject.Money;
 import com.multiwarehouse.app.domain.valueobject.ProductId;
 import com.multiwarehouse.app.product.service.dataaccess.product.entity.ProductEntity;
 import com.multiwarehouse.app.product.service.domain.entity.Product;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductDataAccessMapper {
     public Product productEntityToProduct(ProductEntity productEntity) {
         return Product.builder()

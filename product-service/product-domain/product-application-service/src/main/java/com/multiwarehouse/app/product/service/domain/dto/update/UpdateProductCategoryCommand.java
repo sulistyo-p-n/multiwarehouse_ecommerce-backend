@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -12,10 +13,12 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class UpdateProductCategoryCommand {
+    @Setter
     @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
-    private final UUID id;
+    private UUID id;
     private final String code;
     private final String name;
     private final String description;
     private final Boolean active;
+
 }
