@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ProductRepositoryImpl implements ProductRepository {
@@ -36,6 +37,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public List<Product> findByProductCategoryId(ProductCategoryId productCategoryId) {
-        return productJpaRepository.findAll().stream().map(productDataAccessMapper::productEntityToProduct).toList();
+        return productJpaRepository.findAll().stream().map(productDataAccessMapper::productEntityToProduct).collect(Collectors.toList());
     }
 }

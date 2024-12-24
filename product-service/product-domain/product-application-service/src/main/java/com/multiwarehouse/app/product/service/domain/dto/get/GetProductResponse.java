@@ -19,16 +19,15 @@ public class GetProductResponse {
     private final String code;
     @NotNull(message = "Name {jakarta.validation.constraints.NotNull.message}")
     private final String name;
-    @NotNull(message = "Description {jakarta.validation.constraints.NotNull.message}")
     private final String description;
     @NotNull(message = "Price {jakarta.validation.constraints.NotNull.message}")
     private final BigDecimal price;
     @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")
     private final Boolean active;
 
-    @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")
+    @NotNull(message = "Category {jakarta.validation.constraints.NotNull.message}")
     private final GetProductCategoryResponse category;
 
-    @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")
+    @NotNull(message = "Product Images {jakarta.validation.constraints.NotNull.message}")
     private final List<GetProductImageResponse> productImages;
 }

@@ -19,4 +19,13 @@ public class ProductCategoryDomainServiceImpl implements ProductCategoryDomainSe
         category.initializeCategory();
         return category;
     }
+
+    @Override
+    public ProductCategory validateAndUpdateCategory(ProductCategory productCategory, ProductCategory newProductCategory) {
+        productCategory.setCode(newProductCategory.getCode());
+        productCategory.setName(newProductCategory.getName());
+        productCategory.setDescription(newProductCategory.getDescription());
+        productCategory.setActive(newProductCategory.getActive());
+        return productCategory;
+    }
 }

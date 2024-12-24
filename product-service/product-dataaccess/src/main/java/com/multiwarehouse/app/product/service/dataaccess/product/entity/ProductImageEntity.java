@@ -1,5 +1,6 @@
 package com.multiwarehouse.app.product.service.dataaccess.product.entity;
 
+import com.multiwarehouse.app.dataaccess.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "product_images")
 @Entity
-public class ProductImageEntity {
+public class ProductImageEntity extends BaseEntity {
     @Id
     private UUID id;
     private String code;

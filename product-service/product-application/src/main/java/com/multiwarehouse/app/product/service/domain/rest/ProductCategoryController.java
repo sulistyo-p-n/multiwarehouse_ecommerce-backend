@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -28,11 +30,11 @@ public class ProductCategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<GetProductCategoriesResponse> getProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
+    public ResponseEntity<List<GetProductCategoryResponse>> getProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
         log.info("Getting product categories: {}", getProductCategoriesCommand);
         GetProductCategoriesResponse getProductCategoriesResponse = productCategoryApplicationService.getProductCategories(getProductCategoriesCommand);
         log.info("Returning product categories: {}", getProductCategoriesResponse.getProductCategories());
-        return ResponseEntity.ok(getProductCategoriesResponse);
+        return ResponseEntity.ok(getProductCategoriesResponse.getProductCategories());
     }
 
     @GetMapping(path = "{id}")
@@ -63,10 +65,11 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<DeleteProductCategoryResponse> deleteProductCategory(@PathVariable("id") UUID id) {
+    public ResponseEntity<DeleteProductCategoryResponse> deleteProductCategory(@PathVariable("id") UUID id, @RequestBody Optional<DeleteProductCategoryCommand> deleteProductCategoryCommand) {
         log.info("Deleting product category with id: {}", id);
-        DeleteProductCategoryCommand deleteProductCategoryCommand = DeleteProductCategoryCommand.builder().id(id).build();
-        DeleteProductCategoryResponse deleteProductCategoryResponse = productCategoryApplicationService.deleteProductCategory(deleteProductCategoryCommand);
+        DeleteProductCategoryCommand deleteProductCategoryCommandWithId = deleteProductCategoryCommand.orElse(DeleteProductCategoryCommand.builder().build());
+        deleteProductCategoryCommandWithId.setId(id);
+        DeleteProductCategoryResponse deleteProductCategoryResponse = productCategoryApplicationService.deleteProductCategory(deleteProductCategoryCommandWithId);
         log.info("Product category deleted with id: {}", id);
         return ResponseEntity.ok(deleteProductCategoryResponse);
     }

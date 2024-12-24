@@ -21,9 +21,17 @@ import org.springframework.validation.annotation.Validated;
 public class ProductCategoryApplicationServiceImpl implements ProductCategoryApplicationService {
 
     private final ProductCategoryCreateCommandHandler productCategoryCreateCommandHandler;
+    private final ProductCategoryDeleteCommandHandler productCategoryDeleteCommandHandler;
+    private final ProductCategoryUpdateCommandHandler productCategoryUpdateCommandHandler;
+    private final ProductCategoryGetCommandHandler productCategoryGetCommandHandler;
+    private final ProductCategoriesGetCommandHandler productCategoriesGetCommandHandler;
 
-    public ProductCategoryApplicationServiceImpl(ProductCategoryCreateCommandHandler productCategoryCreateCommandHandler) {
+    public ProductCategoryApplicationServiceImpl(ProductCategoryCreateCommandHandler productCategoryCreateCommandHandler, ProductCategoryDeleteCommandHandler productCategoryDeleteCommandHandler, ProductCategoryUpdateCommandHandler productCategoryUpdateCommandHandler, ProductCategoryGetCommandHandler productCategoryGetCommandHandler, ProductCategoriesGetCommandHandler productCategoriesGetCommandHandler) {
         this.productCategoryCreateCommandHandler = productCategoryCreateCommandHandler;
+        this.productCategoryDeleteCommandHandler = productCategoryDeleteCommandHandler;
+        this.productCategoryUpdateCommandHandler = productCategoryUpdateCommandHandler;
+        this.productCategoryGetCommandHandler = productCategoryGetCommandHandler;
+        this.productCategoriesGetCommandHandler = productCategoriesGetCommandHandler;
     }
 
     @Override
@@ -33,21 +41,21 @@ public class ProductCategoryApplicationServiceImpl implements ProductCategoryApp
 
     @Override
     public UpdateProductCategoryResponse updateProductCategory(UpdateProductCategoryCommand updateProductCategoryCommand) {
-        return productCategoryCreateCommandHandler.updateProductCategory(updateProductCategoryCommand);
+        return productCategoryUpdateCommandHandler.updateProductCategory(updateProductCategoryCommand);
     }
 
     @Override
     public DeleteProductCategoryResponse deleteProductCategory(DeleteProductCategoryCommand deleteProductCategoryCommand) {
-        return productCategoryCreateCommandHandler.deleteProductCategory(deleteProductCategoryCommand);
+        return productCategoryDeleteCommandHandler.deleteProductCategory(deleteProductCategoryCommand);
     }
 
     @Override
     public GetProductCategoriesResponse getProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
-        return productCategoryCreateCommandHandler.getProductCategories(getProductCategoriesCommand);
+        return productCategoriesGetCommandHandler.getProductCategories(getProductCategoriesCommand);
     }
 
     @Override
     public GetProductCategoryResponse getProductCategory(GetProductCategoryCommand getProductCategoryCommand) {
-        return productCategoryCreateCommandHandler.getProductCategory(getProductCategoryCommand);
+        return productCategoryGetCommandHandler.getProductCategory(getProductCategoryCommand);
     }
 }

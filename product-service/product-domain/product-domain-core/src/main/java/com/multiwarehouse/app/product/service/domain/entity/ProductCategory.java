@@ -2,15 +2,16 @@ package com.multiwarehouse.app.product.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.ProductCategoryId;
+import com.multiwarehouse.app.product.service.domain.exception.ProductCategoryDomainException;
 import com.multiwarehouse.app.product.service.domain.exception.ProductDomainException;
 
 import java.util.UUID;
 
 public class ProductCategory extends BaseEntity<ProductCategoryId> {
-    private final String code;
-    private final String name;
-    private final String description;
-    private final Boolean active;
+    private String code;
+    private String name;
+    private String description;
+    private Boolean active;
 
     public void initializeCategory() {
         setId(new ProductCategoryId(UUID.randomUUID()));
@@ -18,8 +19,30 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
 
     public void validationInitialCategory() {
         if (getId() != null) {
-            throw  new ProductDomainException("Category is not in correct state for initialization");
+            throw  new ProductCategoryDomainException("Product Category is not in correct state for initialization");
         }
+    }
+
+    public void setCode(String value) {
+        if (value == null) return;
+        if (value.isEmpty()) throw  new ProductCategoryDomainException("Product Category Code cannot be empty");
+        code = value;
+    }
+
+    public void setName(String value) {
+        if (value == null) return;
+        if (value.isEmpty()) throw  new ProductCategoryDomainException("Product Category Name cannot be empty");
+        name = value;
+    }
+
+    public void setDescription(String value) {
+        if (value == null) return;
+        description = value;
+    }
+
+    public void setActive(Boolean value) {
+        if (value == null) return;
+        active = value;
     }
 
     private ProductCategory(Builder builder) {
