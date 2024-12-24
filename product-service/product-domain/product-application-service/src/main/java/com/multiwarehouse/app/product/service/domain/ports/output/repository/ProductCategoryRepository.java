@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface ProductCategoryRepository {
     List<ProductCategory> findAll();
+    List<ProductCategory> findByCriteria(Boolean withInactive, Boolean withTrashed);
     Optional<ProductCategory> findById(ProductCategoryId productCategoryId);
     ProductCategory save(ProductCategory productCategory);
     void hardDelete(ProductCategory productCategory);

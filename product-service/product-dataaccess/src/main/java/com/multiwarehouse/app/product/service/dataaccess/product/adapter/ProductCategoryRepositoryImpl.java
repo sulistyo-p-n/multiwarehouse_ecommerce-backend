@@ -33,6 +33,11 @@ public class ProductCategoryRepositoryImpl implements ProductCategoryRepository 
     }
 
     @Override
+    public List<ProductCategory> findByCriteria(Boolean withInactive, Boolean withTrashed) {
+        return productCategoryJpaRepository.findByCriteria(withInactive, withTrashed).stream().map(productCategoryDataAccessMapper::productCategoryEntityToProductCategory).collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<ProductCategory> findById(ProductCategoryId productCategoryId) {
         return productCategoryJpaRepository.findNotDeletedById(productCategoryId.getValue()).map(productCategoryDataAccessMapper::productCategoryEntityToProductCategory);
     }

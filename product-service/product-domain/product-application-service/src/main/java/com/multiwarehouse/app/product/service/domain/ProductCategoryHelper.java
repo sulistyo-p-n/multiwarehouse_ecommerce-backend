@@ -1,6 +1,7 @@
 package com.multiwarehouse.app.product.service.domain;
 
 import com.multiwarehouse.app.domain.valueobject.ProductCategoryId;
+import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoriesCommand;
 import com.multiwarehouse.app.product.service.domain.entity.ProductCategory;
 import com.multiwarehouse.app.product.service.domain.exception.ProductCategoryDomainException;
 import com.multiwarehouse.app.product.service.domain.exception.ProductCategoryNotFoundException;
@@ -22,6 +23,10 @@ public class ProductCategoryHelper {
 
     public List<ProductCategory> findProductCategories() {
         return productCategoryRepository.findAll();
+    }
+
+    public List<ProductCategory> findProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
+        return productCategoryRepository.findByCriteria(getProductCategoriesCommand.getWithInactive(), getProductCategoriesCommand.getWithTrashed());
     }
 
     public ProductCategory findProductCategoryById(ProductCategoryId productCategoryId) {

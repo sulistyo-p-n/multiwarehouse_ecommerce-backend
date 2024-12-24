@@ -27,7 +27,7 @@ public class ProductCategoriesGetCommandHandler {
 
     @Transactional
     public GetProductCategoriesResponse getProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
-        List<ProductCategory> productCategories = productCategoryHelper.findProductCategories();
+        List<ProductCategory> productCategories = productCategoryHelper.findProductCategories(getProductCategoriesCommand);
         log.info("Product category is selected with total: {}", productCategories.size());
         return productCategoryDataMapper.getCategoriesToGetProductCategoriesResponse(productCategories);
     }
