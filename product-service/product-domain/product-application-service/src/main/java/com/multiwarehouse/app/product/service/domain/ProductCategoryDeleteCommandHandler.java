@@ -25,7 +25,7 @@ public class ProductCategoryDeleteCommandHandler {
         ProductCategoryId productCategoryId = new ProductCategoryId(deleteProductCategoryCommand.getId());
         ProductCategory productCategory = productCategoryHelper.findProductCategoryById(productCategoryId);
         productCategoryHelper.deleteProductCategory(productCategory, deleteProductCategoryCommand.getForceDelete());
-        log.info("Product category is deleted with id: {}", productCategoryId.getValue());
-        return DeleteProductCategoryResponse.builder().id(productCategoryId.getValue()).build();
+        log.info("Product category is deleted with id: {}", productCategory.getId().getValue());
+        return DeleteProductCategoryResponse.builder().id(productCategory.getId().getValue()).build();
     }
 }

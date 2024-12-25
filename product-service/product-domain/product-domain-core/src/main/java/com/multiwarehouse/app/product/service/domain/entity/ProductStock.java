@@ -1,10 +1,10 @@
 package com.multiwarehouse.app.product.service.domain.entity;
 
-import com.multiwarehouse.app.domain.entity.AggregateRoot;
+import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.ProductId;
 import com.multiwarehouse.app.domain.valueobject.StockId;
 
-public class ProductStock extends AggregateRoot<StockId> {
+public class ProductStock extends BaseEntity<StockId> {
     private final ProductId productId;
     private final Integer quantity;
 

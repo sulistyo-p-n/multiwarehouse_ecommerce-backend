@@ -25,9 +25,9 @@ public class ProductCategoryCreateCommandHandler {
     @Transactional
     public CreateProductCategoryResponse createProductCategory(CreateProductCategoryCommand createProductCategoryCommand) {
         ProductCategory productCategory = productCategoryDataMapper.createProductCategoryCommandToProductCategory(createProductCategoryCommand);
-        ProductCategory productCategoryValidated = productCategoryDomainService.validateAndInitiateCategory(productCategory);
-        ProductCategory productCategorySaved = productCategoryHelper.saveProductCategory(productCategoryValidated);
-        log.info("Product Category is created with id: {}", productCategory.getId().getValue());
-        return productCategoryDataMapper.productCategoryToCreateProductCategoryResponse(productCategoryValidated);
+        ProductCategory productCategoryInitialized = productCategoryDomainService.validateAndInitializeProductCategory(productCategory);
+        ProductCategory productCategorySaved = productCategoryHelper.saveProductCategory(productCategoryInitialized);
+        log.info("Product Category is created with id: {}", productCategorySaved.getId().getValue());
+        return productCategoryDataMapper.productCategoryToCreateProductCategoryResponse(productCategorySaved);
     }
 }

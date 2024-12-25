@@ -18,7 +18,7 @@ public class ProductStockEntity {
     private UUID id;
     private Integer quantity;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id")
     private ProductEntity product;
 

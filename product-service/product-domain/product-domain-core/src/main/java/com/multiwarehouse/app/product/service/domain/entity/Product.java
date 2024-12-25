@@ -9,23 +9,105 @@ import java.util.List;
 import java.util.UUID;
 
 public class Product extends AggregateRoot<ProductId> {
-    private final String code;
-    private final String name;
-    private final String description;
-    private final Money price;
-    private final ProductCategory category;
+    private String code;
+    private String name;
+    private String description;
+    private Money price;
+    private final ProductCategory productCategory;
     private final List<ProductImage> productImages;
     private final ProductStock productStock;
-    private final Boolean active;
+    private Boolean active;
 
-    public void initializeProduct() {
+    public void initialize() {
         setId(new ProductId(UUID.randomUUID()));
+        initializeProductImages();
     }
 
-    public void validationInitialProduct() {
-        if (getId() != null) {
-            throw  new ProductDomainException("Warehouse is not in correct state for initialization");
+    private void initializeProductImages() {
+        for (ProductImage productImage : productImages) {
+            productImage.setProductId(getId());
         }
+    }
+
+    public void validateInitialization() {
+        validateInitialId();
+        validateFields();
+    }
+
+    public void validateInitialId() {
+        if (getId() != null) {
+            throw new ProductDomainException("Product is not in correct state for initialization");
+        }
+    }
+
+    public void validate() {
+        validateId();
+        validateFields();
+    }
+
+    public void validateId() {
+        if (getId() == null ) throw new ProductDomainException("Product Id cannot be empty");
+    }
+
+    public void validateFields() {
+        validateCode();
+        validateName();
+        validatePrice();
+        validateProductCategory();
+        validateActive();
+    }
+
+    private void validateCode() {
+        if (getCode() == null || getCode().isEmpty()) throw new ProductDomainException("Product Code cannot be empty");
+    }
+
+    private void validateName() {
+        if (getName() == null || getName().isEmpty()) throw new ProductDomainException("Product Name cannot be empty");
+    }
+
+    private void validatePrice() {
+        if (getPrice() == null || !getPrice().isGreaterThanZero()) throw new ProductDomainException("Product Price must be greater than zero");
+    }
+
+    private void validateProductCategory() {
+        if (getProductCategory() == null) throw new ProductDomainException("Product Active cannot be null");
+    }
+
+    private void validateActive() {
+        if (getActive() == null) throw new ProductDomainException("Product Active cannot be null");
+    }
+
+    public void setCode(String value) {
+        if (value == null) return;
+        if (value.isEmpty()) throw  new ProductDomainException("Product Code cannot be empty");
+        code = value;
+    }
+
+    public void setName(String value) {
+        if (value == null) return;
+        if (value.isEmpty()) throw  new ProductDomainException("Product Name cannot be empty");
+        name = value;
+    }
+
+    public void setDescription(String value) {
+        if (value == null) return;
+        description = value;
+    }
+
+    public void setPrice(Money value) {
+        if (value == null) return;
+        if (!value.isGreaterThanZero()) throw new ProductDomainException("Product Price must be greater than zero");
+        price = value;
+    }
+
+    public void setProductCategory(ProductCategory value) {
+        if (value == null) return;
+
+    }
+
+    public void setActive(Boolean value) {
+        if (value == null) return;
+        active = value;
     }
 
     public String getCode() {
@@ -44,15 +126,15 @@ public class Product extends AggregateRoot<ProductId> {
         return price;
     }
 
-    public ProductCategory getCategory() {
-        return category;
+    public ProductCategory getProductCategory() {
+        return productCategory;
     }
 
     public List<ProductImage> getProductImages() {
         return productImages;
     }
 
-    public ProductStock getStock() {
+    public ProductStock getProductStock() {
         return productStock;
     }
 
@@ -66,7 +148,7 @@ public class Product extends AggregateRoot<ProductId> {
         name = builder.name;
         description = builder.description;
         price = builder.price;
-        category = builder.category;
+        productCategory = builder.productCategory;
         productImages = builder.productImages;
         productStock = builder.productStock;
         active = builder.active;
@@ -82,7 +164,7 @@ public class Product extends AggregateRoot<ProductId> {
         private String name;
         private String description;
         private Money price;
-        private ProductCategory category;
+        private ProductCategory productCategory;
         private List<ProductImage> productImages;
         private ProductStock productStock;
         private Boolean active;
@@ -116,7 +198,7 @@ public class Product extends AggregateRoot<ProductId> {
         }
 
         public Builder withCategory(ProductCategory val) {
-            category = val;
+            productCategory = val;
             return this;
         }
 

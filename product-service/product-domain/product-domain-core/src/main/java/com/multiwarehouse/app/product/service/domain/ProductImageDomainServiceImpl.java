@@ -14,8 +14,20 @@ import java.time.ZonedDateTime;
 
 public class ProductImageDomainServiceImpl implements ProductImageDomainService {
     @Override
-    public void validateAndInitiateProductImage(ProductImage productImage) {
-        productImage.validationInitialProductImage();
-        productImage.initializeProductImage();
+    public ProductImage validateAndInitializeProductImage(ProductImage productImage) {
+        productImage.validateInitialization();
+        productImage.initialize();
+        return productImage;
+    }
+
+    @Override
+    public ProductImage validateAndSetProductImage(ProductImage productImage, ProductImage newProductImage) {
+        productImage.validateId();
+        productImage.setProductId(newProductImage.getProductId());
+        productImage.setCode(newProductImage.getCode());
+        productImage.setName(newProductImage.getName());
+        productImage.setDescription(newProductImage.getDescription());
+        productImage.setActive(newProductImage.getActive());
+        return productImage;
     }
 }

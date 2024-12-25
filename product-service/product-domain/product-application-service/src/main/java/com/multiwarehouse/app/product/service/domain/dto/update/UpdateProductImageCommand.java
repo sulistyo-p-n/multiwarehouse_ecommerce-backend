@@ -1,25 +1,22 @@
 package com.multiwarehouse.app.product.service.domain.dto.update;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class UpdateProductCommand {
-    @Setter
+public class UpdateProductImageCommand {
     @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
-    private UUID id;
+    private final UUID id;
     private final String code;
     private final String name;
     private final String description;
-    private final BigDecimal price;
-    private final UUID categoryId;
+    private final String path;
     private final Boolean active;
 }

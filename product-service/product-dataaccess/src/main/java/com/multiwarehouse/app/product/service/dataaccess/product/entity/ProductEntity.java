@@ -25,14 +25,14 @@ public class ProductEntity extends BaseEntity {
     private BigDecimal price;
     private Boolean active;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "product_category_id")
     private ProductCategoryEntity category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductImageEntity> images;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "product")
     private ProductStockEntity stock;
 
     @Override

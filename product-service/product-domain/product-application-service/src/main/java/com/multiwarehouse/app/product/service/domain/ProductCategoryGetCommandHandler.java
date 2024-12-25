@@ -21,11 +21,11 @@ public class ProductCategoryGetCommandHandler {
         this.productCategoryHelper = productCategoryHelper;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public GetProductCategoryResponse getProductCategory(GetProductCategoryCommand getProductCategoryCommand) {
         ProductCategoryId productCategoryId = new ProductCategoryId(getProductCategoryCommand.getId());
         ProductCategory productCategory = productCategoryHelper.findProductCategoryById(productCategoryId);
-        log.info("Product category is selected with id: {}", productCategoryId.getValue());
-        return productCategoryDataMapper.getCategoryToGetProductCategoryResponse(productCategory);
+        log.info("Product category is selected with id: {}", productCategory.getId().getValue());
+        return productCategoryDataMapper.productCategoryToGetProductCategoryResponse(productCategory);
     }
 }

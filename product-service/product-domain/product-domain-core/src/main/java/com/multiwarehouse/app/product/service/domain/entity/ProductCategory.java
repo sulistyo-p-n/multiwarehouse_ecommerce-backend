@@ -3,7 +3,6 @@ package com.multiwarehouse.app.product.service.domain.entity;
 import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.ProductCategoryId;
 import com.multiwarehouse.app.product.service.domain.exception.ProductCategoryDomainException;
-import com.multiwarehouse.app.product.service.domain.exception.ProductDomainException;
 
 import java.util.UUID;
 
@@ -13,25 +12,57 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
     private String description;
     private Boolean active;
 
-    public void initializeCategory() {
+    public void initialize() {
         setId(new ProductCategoryId(UUID.randomUUID()));
     }
 
-    public void validationInitialCategory() {
+    public void validateInitialization() {
+        validateInitialId();
+        validateFields();
+    }
+
+    public void validateInitialId() {
         if (getId() != null) {
-            throw  new ProductCategoryDomainException("Product Category is not in correct state for initialization");
+            throw new ProductCategoryDomainException("Product Category is not in correct state for initialization");
         }
+    }
+
+    public void validate() {
+        validateId();
+        validateFields();
+    }
+
+    public void validateId() {
+        if (getId() == null ) throw new ProductCategoryDomainException("ProductCategory Id cannot be null");
+    }
+
+    public void validateFields() {
+        validateCode();
+        validateName();
+        validateActive();
+    }
+
+    private void validateCode() {
+        if (getCode() == null || getCode().isEmpty()) throw new ProductCategoryDomainException("ProductCategory Code cannot be empty");
+    }
+
+    private void validateName() {
+        if (getName() == null || getName().isEmpty()) throw new ProductCategoryDomainException("ProductCategory Name cannot be empty");
+    }
+
+    private void validateActive() {
+        if (getActive() == null) throw new ProductCategoryDomainException("ProductCategory Active cannot be null");
     }
 
     public void setCode(String value) {
         if (value == null) return;
-        if (value.isEmpty()) throw  new ProductCategoryDomainException("Product Category Code cannot be empty");
+        if (value.isEmpty()) throw new ProductCategoryDomainException("ProductCategory Code cannot be empty");
         code = value;
     }
 
     public void setName(String value) {
         if (value == null) return;
-        if (value.isEmpty()) throw  new ProductCategoryDomainException("Product Category Name cannot be empty");
+        if (value.isEmpty()) throw new ProductCategoryDomainException("ProductCategory Name cannot be empty");
         name = value;
     }
 

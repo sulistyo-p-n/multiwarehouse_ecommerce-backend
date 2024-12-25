@@ -29,9 +29,9 @@ public class ProductCategoryUpdateCommandHandler {
         ProductCategoryId productCategoryId = new ProductCategoryId(updateProductCategoryCommand.getId());
         ProductCategory productCategory = productCategoryHelper.findProductCategoryById(productCategoryId);
         ProductCategory newProductCategory = productCategoryDataMapper.updateProductCategoryCommandToProductCategory(updateProductCategoryCommand);
-        ProductCategory productCategoryChanged = productCategoryDomainService.validateAndUpdateCategory(productCategory, newProductCategory);
+        ProductCategory productCategoryChanged = productCategoryDomainService.validateAndSetProductCategory(productCategory, newProductCategory);
         ProductCategory productCategorySaved = productCategoryHelper.saveProductCategory(productCategoryChanged);
-        log.info("Product category is updated with id: {}", productCategoryId.getValue());
-        return productCategoryDataMapper.updateCategoryToUpdateProductCategoryResponse(productCategorySaved);
+        log.info("Product category is updated with id: {}", productCategorySaved.getId().getValue());
+        return productCategoryDataMapper.productCategoryToUpdateProductCategoryResponse(productCategorySaved);
     }
 }

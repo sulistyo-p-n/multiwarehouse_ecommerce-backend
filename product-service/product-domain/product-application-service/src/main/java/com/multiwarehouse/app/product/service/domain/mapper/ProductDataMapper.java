@@ -4,13 +4,13 @@ import com.multiwarehouse.app.domain.valueobject.Money;
 import com.multiwarehouse.app.domain.valueobject.ProductCategoryId;
 import com.multiwarehouse.app.domain.valueobject.ProductId;
 import com.multiwarehouse.app.product.service.domain.dto.create.CreateProductCommand;
-import com.multiwarehouse.app.product.service.domain.dto.create.CreateProductImageCommand;
 import com.multiwarehouse.app.product.service.domain.dto.create.CreateProductResponse;
-import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductCommand;
-import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductResponse;
+import com.multiwarehouse.app.product.service.domain.dto.get.GetProductResponse;
+import com.multiwarehouse.app.product.service.domain.dto.get.GetProductsResponse;
+import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCommand;
+import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductResponse;
 import com.multiwarehouse.app.product.service.domain.entity.Product;
 import com.multiwarehouse.app.product.service.domain.entity.ProductCategory;
-import com.multiwarehouse.app.product.service.domain.entity.ProductImage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,6 +18,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class ProductDataMapper {
+    private final ProductCategoryDataMapper productCategoryDataMapper;
+    private final ProductImageDataMapper productImageDataMapper;
+
+    public ProductDataMapper(ProductCategoryDataMapper productCategoryDataMapper, ProductImageDataMapper productImageDataMapper) {
+        this.productCategoryDataMapper = productCategoryDataMapper;
+        this.productImageDataMapper = productImageDataMapper;
+    }
 
     public Product createProductCommandToProduct(CreateProductCommand createProductCommand) {
         return Product.builder()
@@ -27,21 +34,8 @@ public class ProductDataMapper {
                 .withPrice(new Money(createProductCommand.getPrice()))
                 .withActive(createProductCommand.getActive())
                 .withCategory(ProductCategory.builder().withId(new ProductCategoryId(createProductCommand.getCategoryId())).build())
-                .withProductImages(createProductImageCommandsToProductImages(createProductCommand.getCreateProductImageCommands()))
+                .withProductImages(productImageDataMapper.createProductImageCommandsToProductImages(createProductCommand.getCreateProductImageCommands()))
                 .build();
-    }
-
-    private List<ProductImage> createProductImageCommandsToProductImages(List<CreateProductImageCommand> createProductImageCommands) {
-        return createProductImageCommands.stream()
-                .map(createProductImageCommand ->
-                        ProductImage.builder()
-                                .withCode(createProductImageCommand.getCode())
-                                .withName(createProductImageCommand.getName())
-                                .withDescription(createProductImageCommand.getDescription())
-                                .withPath(createProductImageCommand.getPath())
-                                .withActive(createProductImageCommand.getActive())
-                                .build()
-                ).collect(Collectors.toList());
     }
 
     public CreateProductResponse productToCreateProductResponse(Product product) {
@@ -50,15 +44,38 @@ public class ProductDataMapper {
                 .build();
     }
 
-    public Product deleteProductCommandToProduct(DeleteProductCommand deleteProductCommand) {
+    public Product updateProductCommandToProduct(UpdateProductCommand updateProductCommand) {
         return Product.builder()
-                .withId(new ProductId(deleteProductCommand.getId()))
+                .withId(new ProductId(updateProductCommand.getId()))
+                .withCode(updateProductCommand.getCode())
+                .withName(updateProductCommand.getName())
+                .withDescription(updateProductCommand.getDescription())
+                .withPrice(new Money(updateProductCommand.getPrice()))
+                .withActive(updateProductCommand.getActive())
+                .withCategory(ProductCategory.builder().withId(new ProductCategoryId(updateProductCommand.getCategoryId())).build())
                 .build();
     }
 
-    public DeleteProductResponse productToDeleteProductResponse(Product product) {
-        return DeleteProductResponse.builder()
+    public UpdateProductResponse productToUpdateProductResponse(Product product) {
+        return UpdateProductResponse.builder()
                 .id(product.getId().getValue())
+                .build();
+    }
+
+    public GetProductsResponse productsToGetProductsResponse(List<Product> products) {
+        return GetProductsResponse.builder()
+                .products(products.stream().map(this::productToGetProductResponse).collect(Collectors.toList()))
+                .build();
+    }
+
+    public GetProductResponse productToGetProductResponse(Product product) {
+        return GetProductResponse.builder()
+                .id(product.getId().getValue())
+                .code(product.getCode())
+                .name(product.getName())
+                .description(product.getDescription())
+                .category(productCategoryDataMapper.productCategoryToGetProductCategoryResponse(product.getProductCategory()))
+                .productImages(productImageDataMapper.productImagesToGetProductImageResponses(product.getProductImages()))
                 .build();
     }
 }

@@ -41,25 +41,25 @@ public class ProductCategoryDataMapper {
                 .build();
     }
 
-    public UpdateProductCategoryResponse updateCategoryToUpdateProductCategoryResponse(ProductCategory productCategory) {
+    public UpdateProductCategoryResponse productCategoryToUpdateProductCategoryResponse(ProductCategory productCategory) {
         return UpdateProductCategoryResponse.builder()
                 .id(productCategory.getId().getValue())
                 .build();
     }
 
-    public GetProductCategoryResponse getCategoryToGetProductCategoryResponse(ProductCategory productCategory) {
+    public GetProductCategoriesResponse productCategoriesToGetProductCategoriesResponse(List<ProductCategory> productCategories) {
+        return GetProductCategoriesResponse.builder()
+                .productCategories(productCategories.stream().map(this::productCategoryToGetProductCategoryResponse).collect(Collectors.toList()))
+                .build();
+    }
+
+    public GetProductCategoryResponse productCategoryToGetProductCategoryResponse(ProductCategory productCategory) {
         return GetProductCategoryResponse.builder()
                 .id(productCategory.getId().getValue())
                 .code(productCategory.getCode())
                 .name(productCategory.getName())
                 .description(productCategory.getDescription())
                 .active(productCategory.getActive())
-                .build();
-    }
-
-    public GetProductCategoriesResponse getCategoriesToGetProductCategoriesResponse(List<ProductCategory> productCategories) {
-        return GetProductCategoriesResponse.builder()
-                .productCategories(productCategories.stream().map(this::getCategoryToGetProductCategoryResponse).collect(Collectors.toList()))
                 .build();
     }
 

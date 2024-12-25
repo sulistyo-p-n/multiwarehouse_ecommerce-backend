@@ -23,7 +23,7 @@ public class ProductCategoryEntity extends BaseEntity {
     private String description;
     private Boolean active;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category")
     private List<ProductEntity> products;
 
     @Override

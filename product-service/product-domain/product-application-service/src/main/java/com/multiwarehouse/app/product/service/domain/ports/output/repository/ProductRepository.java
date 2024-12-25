@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository {
+    List<Product> findAll();
+    List<Product> findByCriteria(Boolean withInactive, Boolean withTrashed, ProductCategoryId productCategoryId);
     Optional<Product> findById(ProductId productId);
-    List<Product> findByProductCategoryId(ProductCategoryId productCategoryId);
-
     Product save(Product product);
+    void hardDelete(Product product);
+    void softDelete(Product product);
 }

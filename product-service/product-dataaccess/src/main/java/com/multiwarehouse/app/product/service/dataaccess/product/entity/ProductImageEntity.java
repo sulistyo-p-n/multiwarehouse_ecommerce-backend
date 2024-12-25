@@ -23,7 +23,7 @@ public class ProductImageEntity extends BaseEntity {
     private String path;
     private Boolean active;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 

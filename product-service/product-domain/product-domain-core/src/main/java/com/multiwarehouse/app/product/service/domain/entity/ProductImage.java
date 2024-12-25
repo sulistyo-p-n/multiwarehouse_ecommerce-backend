@@ -2,27 +2,97 @@ package com.multiwarehouse.app.product.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.ProductId;
-import com.multiwarehouse.app.product.service.domain.exception.ProductDomainException;
+import com.multiwarehouse.app.product.service.domain.exception.ProductCategoryDomainException;
+import com.multiwarehouse.app.product.service.domain.exception.ProductImageDomainException;
 import com.multiwarehouse.app.product.service.domain.valueobject.ProductImageId;
 
 import java.util.UUID;
 
 public class ProductImage extends BaseEntity<ProductImageId> {
-    private final ProductId productId;
-    private final String code;
-    private final String name;
-    private final String description;
+    private ProductId productId;
+    private String code;
+    private String name;
+    private String description;
     private final String path;
-    private final Boolean active;
+    private Boolean active;
 
-    public void initializeProductImage() {
+    public void initialize() {
         setId(new ProductImageId(UUID.randomUUID()));
     }
 
-    public void validationInitialProductImage() {
+    public void validateInitialization() {
+        validateInitialId();
+        validateFields();
+    }
+
+    public void validateInitialId() {
         if (getId() != null) {
-            throw  new ProductDomainException("ProductImage is not in correct state for initialization");
+            throw  new ProductImageDomainException("ProductImage is not in correct state for initialization");
         }
+    }
+
+    public void validate() {
+        validateId();
+        validateFields();
+    }
+
+    public void validateId() {
+        if (getId() == null ) throw new ProductImageDomainException("ProductImage Id cannot be null");
+    }
+
+    public void validateFields() {
+        validateProductId();
+        validateCode();
+        validateName();
+        validatePath();
+        validateActive();
+    }
+
+    public void validateProductId() {
+        if (getProductId() == null) throw new ProductImageDomainException("ProductImage ProductId cannot be null");
+    }
+
+    private void validateCode() {
+        if (getCode() == null || getCode().isEmpty()) throw new ProductImageDomainException("ProductImage Code cannot be empty");
+    }
+
+    private void validateName() {
+        if (getName() == null || getName().isEmpty()) throw new ProductImageDomainException("ProductImage Name cannot be empty");
+    }
+
+    private void validatePath() {
+        if (getName() == null || getName().isEmpty()) throw new ProductImageDomainException("ProductImage Path cannot be empty");
+    }
+
+    private void validateActive() {
+        if (getActive() == null) throw new ProductImageDomainException("ProductImage Active cannot be null");
+    }
+
+    public void setProductId(ProductId value) {
+        if (value == null) return;
+        productId = value;
+    }
+
+    public void setCode(String value) {
+        if (value == null) return;
+        if (value.isEmpty()) throw new ProductImageDomainException("ProductImage Code cannot be empty");
+        code = value;
+    }
+
+    public void setName(String value) {
+        if (value == null) return;
+        if (value.isEmpty()) throw new ProductImageDomainException("ProductImage Name cannot be empty");
+        name = value;
+    }
+
+    public void setDescription(String value) {
+        if (value == null) return;
+        description = value;
+    }
+
+    public void setActive(Boolean value) {
+        if (value == null) return;
+        active = value;
     }
 
     private ProductImage(Builder builder) {

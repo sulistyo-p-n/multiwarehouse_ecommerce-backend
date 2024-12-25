@@ -1,10 +1,7 @@
 package com.multiwarehouse.app.product.service.domain;
 
-import com.multiwarehouse.app.domain.valueobject.ProductCategoryId;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoriesCommand;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoriesResponse;
-import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoryCommand;
-import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoryResponse;
 import com.multiwarehouse.app.product.service.domain.entity.ProductCategory;
 import com.multiwarehouse.app.product.service.domain.mapper.ProductCategoryDataMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +22,10 @@ public class ProductCategoriesGetCommandHandler {
         this.productCategoryHelper = productCategoryHelper;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public GetProductCategoriesResponse getProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
         List<ProductCategory> productCategories = productCategoryHelper.findProductCategories(getProductCategoriesCommand);
         log.info("Product category is selected with total: {}", productCategories.size());
-        return productCategoryDataMapper.getCategoriesToGetProductCategoriesResponse(productCategories);
+        return productCategoryDataMapper.productCategoriesToGetProductCategoriesResponse(productCategories);
     }
 }
