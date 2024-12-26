@@ -10,9 +10,6 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class CreateProductImageCommand {
-    @NotNull(message = "Code {jakarta.validation.constraints.NotNull.message}")
-    @Size(min = 2, max = 50, message = "Code {jakarta.validation.constraints.Size.message}")
-    private final String code;
     @NotNull(message = "Name {jakarta.validation.constraints.NotNull.message}")
     @Size(min = 2, max = 50, message = "Name {jakarta.validation.constraints.Size.message}")
     private final String name;

@@ -13,10 +13,12 @@ public class Product extends AggregateRoot<ProductId> {
     private String name;
     private String description;
     private Money price;
-    private final ProductCategory productCategory;
-    private final List<ProductImage> productImages;
-    private final ProductStock productStock;
+    private ProductCategory productCategory;
+    private List<ProductImage> productImages;
     private Boolean active;
+
+    private final ProductStock productStock;
+    private final Boolean isSoftDeleted;
 
     public void initialize() {
         setId(new ProductId(UUID.randomUUID()));
@@ -103,7 +105,13 @@ public class Product extends AggregateRoot<ProductId> {
 
     public void setProductCategory(ProductCategory value) {
         if (value == null) return;
+        productCategory = value;
+    }
 
+    public void setProductImages(List<ProductImage> values) {
+        if (values == null) return;
+        productImages = values;
+        initializeProductImages();
     }
 
     public void setActive(Boolean value) {
@@ -143,6 +151,10 @@ public class Product extends AggregateRoot<ProductId> {
         return active;
     }
 
+    public Boolean getIsSoftDeleted() {
+        return isSoftDeleted;
+    }
+
     private Product(Builder builder) {
         super.setId(builder.id);
         code = builder.code;
@@ -153,6 +165,7 @@ public class Product extends AggregateRoot<ProductId> {
         productImages = builder.productImages;
         productStock = builder.productStock;
         active = builder.active;
+        isSoftDeleted = builder.isSoftDeleted;
     }
 
     public static Builder builder() {
@@ -169,6 +182,7 @@ public class Product extends AggregateRoot<ProductId> {
         private List<ProductImage> productImages;
         private ProductStock productStock;
         private Boolean active;
+        private Boolean isSoftDeleted;
 
         private Builder() {
         }
@@ -215,6 +229,11 @@ public class Product extends AggregateRoot<ProductId> {
 
         public Builder withActive(Boolean val) {
             active = val;
+            return this;
+        }
+
+        public Builder withIsSoftDeleted(Boolean val) {
+            isSoftDeleted = val;
             return this;
         }
 

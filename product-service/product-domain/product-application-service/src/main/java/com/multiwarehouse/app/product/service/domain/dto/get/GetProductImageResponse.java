@@ -13,8 +13,6 @@ import java.util.UUID;
 public class GetProductImageResponse {
     @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
     private final UUID id;
-    @NotNull(message = "Code {jakarta.validation.constraints.NotNull.message}")
-    private final String code;
     @NotNull(message = "Name {jakarta.validation.constraints.NotNull.message}")
     private final String name;
     private final String description;

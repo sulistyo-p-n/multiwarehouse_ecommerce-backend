@@ -4,13 +4,11 @@ import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.ProductId;
 import com.multiwarehouse.app.domain.valueobject.StockId;
 
-public class ProductStock extends BaseEntity<StockId> {
-    private final ProductId productId;
+public class ProductStock extends BaseEntity<ProductId> {
     private final Integer quantity;
 
     private ProductStock(Builder builder) {
         super.setId(builder.id);
-        productId = builder.productId;
         quantity = builder.quantity;
     }
 
@@ -18,29 +16,19 @@ public class ProductStock extends BaseEntity<StockId> {
         return new Builder();
     }
 
-    public ProductId getProductId() {
-        return productId;
-    }
-
     public Integer getQuantity() {
         return quantity;
     }
 
     public static final class Builder {
-        private StockId id;
-        private ProductId productId;
+        private ProductId id;
         private Integer quantity;
 
         private Builder() {
         }
 
-        public Builder withId(StockId val) {
+        public Builder withId(ProductId val) {
             id = val;
-            return this;
-        }
-
-        public Builder withProductId(ProductId val) {
-            productId = val;
             return this;
         }
 

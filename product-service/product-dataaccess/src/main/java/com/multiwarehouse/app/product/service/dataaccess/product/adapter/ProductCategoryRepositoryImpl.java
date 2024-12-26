@@ -3,9 +3,7 @@ package com.multiwarehouse.app.product.service.dataaccess.product.adapter;
 import com.multiwarehouse.app.domain.valueobject.ProductCategoryId;
 import com.multiwarehouse.app.product.service.dataaccess.product.entity.ProductCategoryEntity;
 import com.multiwarehouse.app.product.service.dataaccess.product.mapper.ProductCategoryDataAccessMapper;
-import com.multiwarehouse.app.product.service.dataaccess.product.mapper.ProductDataAccessMapper;
 import com.multiwarehouse.app.product.service.dataaccess.product.repository.ProductCategoryJpaRepository;
-import com.multiwarehouse.app.product.service.dataaccess.product.repository.ProductJpaRepository;
 import com.multiwarehouse.app.product.service.domain.entity.ProductCategory;
 import com.multiwarehouse.app.product.service.domain.ports.output.repository.ProductCategoryRepository;
 import org.springframework.stereotype.Component;
@@ -33,13 +31,13 @@ public class ProductCategoryRepositoryImpl implements ProductCategoryRepository 
     }
 
     @Override
-    public List<ProductCategory> findByCriteria(Boolean withInactive, Boolean withTrashed) {
-        return productCategoryJpaRepository.findByCriteria(withInactive, withTrashed).stream().map(productCategoryDataAccessMapper::productCategoryEntityToProductCategory).collect(Collectors.toList());
+    public List<ProductCategory> findByCriteria(Boolean withInactive, Boolean withTrashed, String search) {
+        return productCategoryJpaRepository.findByCriteria(withInactive, withTrashed, search).stream().map(productCategoryDataAccessMapper::productCategoryEntityToProductCategory).collect(Collectors.toList());
     }
 
     @Override
     public Optional<ProductCategory> findById(ProductCategoryId productCategoryId) {
-        return productCategoryJpaRepository.findNotDeletedById(productCategoryId.getValue()).map(productCategoryDataAccessMapper::productCategoryEntityToProductCategory);
+        return productCategoryJpaRepository.findById(productCategoryId.getValue()).map(productCategoryDataAccessMapper::productCategoryEntityToProductCategory);
     }
 
     @Override

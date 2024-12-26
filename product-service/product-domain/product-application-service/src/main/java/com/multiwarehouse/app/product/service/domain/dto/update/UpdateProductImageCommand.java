@@ -14,7 +14,6 @@ import java.util.UUID;
 public class UpdateProductImageCommand {
     @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
     private final UUID id;
-    private final String code;
     private final String name;
     private final String description;
     private final String path;

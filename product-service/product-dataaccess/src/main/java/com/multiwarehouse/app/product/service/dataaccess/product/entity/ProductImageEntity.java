@@ -17,7 +17,6 @@ import java.util.UUID;
 public class ProductImageEntity extends BaseEntity {
     @Id
     private UUID id;
-    private String code;
     private String name;
     private String description;
     private String path;

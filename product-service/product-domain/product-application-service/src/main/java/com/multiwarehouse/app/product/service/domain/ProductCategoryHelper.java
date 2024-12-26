@@ -26,7 +26,10 @@ public class ProductCategoryHelper {
     }
 
     public List<ProductCategory> findProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
-        return productCategoryRepository.findByCriteria(getProductCategoriesCommand.getWithInactive(), getProductCategoriesCommand.getWithTrashed());
+        return productCategoryRepository.findByCriteria(
+                getProductCategoriesCommand.getWithInactive(),
+                getProductCategoriesCommand.getWithTrashed(),
+                getProductCategoriesCommand.getSearch());
     }
 
     public ProductCategory findProductCategoryById(ProductCategoryId productCategoryId) {

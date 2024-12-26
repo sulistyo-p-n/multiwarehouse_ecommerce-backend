@@ -14,6 +14,7 @@ public class ProductCategoryDataAccessMapper {
                 .withName(productCategoryEntity.getName())
                 .withDescription(productCategoryEntity.getDescription())
                 .withActive(productCategoryEntity.getActive())
+                .withIsSoftDeleted(productCategoryEntity.isSoftDeleted())
                 .build();
     }
 

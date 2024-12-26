@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -22,4 +20,6 @@ public class GetProductCategoryResponse {
     private final String description;
     @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")
     private final Boolean active;
+    @NotNull(message = "IsSoftDeleted {jakarta.validation.constraints.NotNull.message}")
+    private final Boolean isSoftDeleted;
 }

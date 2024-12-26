@@ -13,11 +13,13 @@ import java.util.UUID;
 public interface ProductCategoryJpaRepository extends BaseJpaRepository<ProductCategoryEntity, UUID> {
     @Query("SELECT t FROM #{#entityName} t " +
             "WHERE (:withTrashed = TRUE OR t.deletedAt IS NULL) " +
-            "AND (:withInactive = TRUE OR t.active = TRUE) "
+            "AND (:withInactive = TRUE OR t.active = TRUE) " +
+            "AND (COALESCE(:search, '') = '' OR LOWER(t.name) LIKE LOWER(concat('%', concat(:search, '%')))) "
     )
     List<ProductCategoryEntity> findByCriteria(
             @Param("withInactive") Boolean withInactive,
-            @Param("withTrashed") Boolean withTrashed
+            @Param("withTrashed") Boolean withTrashed,
+            @Param("search") String search
     );
 
 }

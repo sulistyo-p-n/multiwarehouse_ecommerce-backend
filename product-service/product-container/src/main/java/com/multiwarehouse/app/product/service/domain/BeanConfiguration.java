@@ -14,9 +14,4 @@ public class BeanConfiguration {
     public ProductCategoryDomainService productCategoryDomainService() {
         return new ProductCategoryDomainServiceImpl();
     }
-
-    @Bean
-    public ProductImageDomainService productImageDomainService() {
-        return new ProductImageDomainServiceImpl();
-    }
 }

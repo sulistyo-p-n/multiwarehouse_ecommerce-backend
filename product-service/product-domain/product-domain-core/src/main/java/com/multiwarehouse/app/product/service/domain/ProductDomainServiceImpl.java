@@ -29,6 +29,7 @@ public class ProductDomainServiceImpl implements ProductDomainService {
         product.setDescription(newProduct.getDescription());
         product.setPrice(newProduct.getPrice());
         product.setProductCategory(newProduct.getProductCategory());
+        product.setProductImages(newProduct.getProductImages());
         product.setActive(newProduct.getActive());
         return new ProductUpdatedEvent(
                 product,

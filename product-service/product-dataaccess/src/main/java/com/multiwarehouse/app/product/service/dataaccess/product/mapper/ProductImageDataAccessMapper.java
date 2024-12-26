@@ -12,8 +12,6 @@ public class ProductImageDataAccessMapper {
     public ProductImage productImageEntityToProductImage(ProductImageEntity productImageEntity) {
         return ProductImage.builder()
                 .withId(new ProductImageId(productImageEntity.getId()))
-//                .withProductId(new ProductId(productImageEntity.getProduct().getId()))
-                .withCode(productImageEntity.getCode())
                 .withName(productImageEntity.getName())
                 .withDescription(productImageEntity.getDescription())
                 .withPath(productImageEntity.getPath())
@@ -24,8 +22,6 @@ public class ProductImageDataAccessMapper {
     public ProductImageEntity productImageToProductImageEntity(ProductImage productImage) {
         return ProductImageEntity.builder()
                 .id(productImage.getId().getValue())
-//                .product()
-                .code(productImage.getCode())
                 .name(productImage.getName())
                 .description(productImage.getDescription())
                 .path(productImage.getPath())

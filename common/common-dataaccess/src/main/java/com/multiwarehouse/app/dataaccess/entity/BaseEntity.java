@@ -30,4 +30,8 @@ public abstract class BaseEntity {
         if (deletedAt != null) updatedAt = deletedAt;
         else updatedAt = Instant.now();
     }
+
+    public Boolean isSoftDeleted() {
+        return getDeletedAt() != null;
+    }
 }

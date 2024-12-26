@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -22,4 +23,6 @@ public class UpdateProductCommand {
     private final BigDecimal price;
     private final UUID categoryId;
     private final Boolean active;
+
+    private final List<UpdateProductImageCommand> images;
 }

@@ -11,6 +11,7 @@ import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCom
 import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductResponse;
 import com.multiwarehouse.app.product.service.domain.entity.Product;
 import com.multiwarehouse.app.product.service.domain.entity.ProductCategory;
+import com.multiwarehouse.app.product.service.domain.entity.ProductStock;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class ProductDataMapper {
                 .withActive(createProductCommand.getActive())
                 .withCategory(ProductCategory.builder().withId(new ProductCategoryId(createProductCommand.getCategoryId())).build())
                 .withProductImages(productImageDataMapper.createProductImageCommandsToProductImages(createProductCommand.getImages()))
+                .withStock(ProductStock.builder().withQuantity(0).build())
                 .build();
     }
 
@@ -53,6 +55,7 @@ public class ProductDataMapper {
                 .withPrice(new Money(updateProductCommand.getPrice()))
                 .withActive(updateProductCommand.getActive())
                 .withCategory(ProductCategory.builder().withId(new ProductCategoryId(updateProductCommand.getCategoryId())).build())
+                .withProductImages(productImageDataMapper.updateProductImageCommandsToProductImages(updateProductCommand.getImages()))
                 .build();
     }
 
@@ -78,6 +81,8 @@ public class ProductDataMapper {
                 .active(product.getActive())
                 .category(productCategoryDataMapper.productCategoryToGetProductCategoryResponse(product.getProductCategory()))
                 .productImages(productImageDataMapper.productImagesToGetProductImageResponses(product.getProductImages()))
+                .quantity(product.getProductStock().getQuantity())
+                .isSoftDeleted(product.getIsSoftDeleted())
                 .build();
     }
 }

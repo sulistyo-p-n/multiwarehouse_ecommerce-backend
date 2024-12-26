@@ -19,7 +19,7 @@ public class ProductStockEntity {
     private Integer quantity;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", nullable = false)
     private ProductEntity product;
 
     @Override

@@ -10,11 +10,10 @@ import java.util.UUID;
 
 public class ProductImage extends BaseEntity<ProductImageId> {
     private ProductId productId;
-    private String code;
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
     private final String path;
-    private Boolean active;
+    private final Boolean active;
 
     public void initialize() {
         setId(new ProductImageId(UUID.randomUUID()));
@@ -42,7 +41,6 @@ public class ProductImage extends BaseEntity<ProductImageId> {
 
     public void validateFields() {
         validateProductId();
-        validateCode();
         validateName();
         validatePath();
         validateActive();
@@ -50,10 +48,6 @@ public class ProductImage extends BaseEntity<ProductImageId> {
 
     public void validateProductId() {
         if (getProductId() == null) throw new ProductImageDomainException("ProductImage ProductId cannot be null");
-    }
-
-    private void validateCode() {
-        if (getCode() == null || getCode().isEmpty()) throw new ProductImageDomainException("ProductImage Code cannot be empty");
     }
 
     private void validateName() {
@@ -73,32 +67,9 @@ public class ProductImage extends BaseEntity<ProductImageId> {
         productId = value;
     }
 
-    public void setCode(String value) {
-        if (value == null) return;
-        if (value.isEmpty()) throw new ProductImageDomainException("ProductImage Code cannot be empty");
-        code = value;
-    }
-
-    public void setName(String value) {
-        if (value == null) return;
-        if (value.isEmpty()) throw new ProductImageDomainException("ProductImage Name cannot be empty");
-        name = value;
-    }
-
-    public void setDescription(String value) {
-        if (value == null) return;
-        description = value;
-    }
-
-    public void setActive(Boolean value) {
-        if (value == null) return;
-        active = value;
-    }
-
     private ProductImage(Builder builder) {
         super.setId(builder.id);
         productId = builder.productId;
-        code = builder.code;
         name = builder.name;
         description = builder.description;
         path = builder.path;
@@ -111,10 +82,6 @@ public class ProductImage extends BaseEntity<ProductImageId> {
 
     public ProductId getProductId() {
         return productId;
-    }
-
-    public String getCode() {
-        return code;
     }
 
     public String getName() {
@@ -136,7 +103,6 @@ public class ProductImage extends BaseEntity<ProductImageId> {
     public static final class Builder {
         private ProductImageId id;
         private ProductId productId;
-        private String code;
         private String name;
         private String description;
         private String path;
@@ -152,11 +118,6 @@ public class ProductImage extends BaseEntity<ProductImageId> {
 
         public Builder withProductId(ProductId val) {
             productId = val;
-            return this;
-        }
-
-        public Builder withCode(String val) {
-            code = val;
             return this;
         }
 

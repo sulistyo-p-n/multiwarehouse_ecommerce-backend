@@ -24,10 +24,12 @@ public class GetProductResponse {
     private final BigDecimal price;
     @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")
     private final Boolean active;
-
+    @NotNull(message = "Quantity {jakarta.validation.constraints.NotNull.message}")
+    private final Integer quantity;
     @NotNull(message = "Category {jakarta.validation.constraints.NotNull.message}")
     private final GetProductCategoryResponse category;
-
     @NotNull(message = "Product Images {jakarta.validation.constraints.NotNull.message}")
     private final List<GetProductImageResponse> productImages;
+    @NotNull(message = "IsSoftDeleted {jakarta.validation.constraints.NotNull.message}")
+    private final Boolean isSoftDeleted;
 }

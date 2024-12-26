@@ -12,6 +12,8 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
     private String description;
     private Boolean active;
 
+    private final Boolean isSoftDeleted;
+
     public void initialize() {
         setId(new ProductCategoryId(UUID.randomUUID()));
     }
@@ -82,6 +84,7 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
         name = builder.name;
         description = builder.description;
         active = builder.active;
+        isSoftDeleted = builder.isSoftDeleted;
     }
 
     public static Builder builder() {
@@ -104,12 +107,17 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
         return active;
     }
 
+    public Boolean getIsSoftDeleted() {
+        return isSoftDeleted;
+    }
+
     public static final class Builder {
         private ProductCategoryId id;
         private String code;
         private String name;
         private String description;
         private Boolean active;
+        private Boolean isSoftDeleted;
 
         private Builder() {
         }
@@ -136,6 +144,11 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
 
         public Builder withActive(Boolean val) {
             active = val;
+            return this;
+        }
+
+        public Builder withIsSoftDeleted(Boolean val) {
+            isSoftDeleted = val;
             return this;
         }
 

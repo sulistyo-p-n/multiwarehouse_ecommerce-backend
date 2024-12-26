@@ -53,7 +53,6 @@ CREATE TABLE "product".product_images
 (
     id UUID NOT NULL,
     product_id UUID NOT NULL,
-    code CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL UNIQUE,
     name CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     path CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     description TEXT,
@@ -104,7 +103,7 @@ AS
         p.id AS id,
         p.name AS name,
         p.code AS code,
-        SUM(s.quantity) AS quantity
+        COALESCE(SUM(s.quantity), 0) AS quantity
     FROM
         "product".products p
     LEFT JOIN
@@ -127,10 +126,16 @@ BEGIN
 END;
 '  LANGUAGE plpgsql;
 
--- "product".trigger_refresh_product_stocks_m_view
-DROP trigger IF EXISTS trigger_refresh_product_stocks_m_view ON "product".stocks;
+-- "product".trigger_refresh_product_stocks_m_view_on_products
+DROP trigger IF EXISTS trigger_refresh_product_stocks_m_view_on_products ON "product".products;
+CREATE trigger trigger_refresh_product_stocks_m_view_on_products
+after INSERT OR UPDATE OR DELETE OR truncate
+ON "product".products FOR each statement
+EXECUTE PROCEDURE "product".refresh_product_stocks_m_view();
 
-CREATE trigger trigger_refresh_product_stocks_m_view
+-- "product".trigger_refresh_product_stocks_m_view_on_stocks
+DROP trigger IF EXISTS trigger_refresh_product_stocks_m_view_on_stocks ON "product".stocks;
+CREATE trigger trigger_refresh_product_stocks_m_view_on_stocks
 after INSERT OR UPDATE OR DELETE OR truncate
 ON "product".stocks FOR each statement
 EXECUTE PROCEDURE "product".refresh_product_stocks_m_view();

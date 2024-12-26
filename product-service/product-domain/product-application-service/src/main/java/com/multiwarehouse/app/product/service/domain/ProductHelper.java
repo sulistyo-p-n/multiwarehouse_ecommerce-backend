@@ -30,7 +30,8 @@ public class ProductHelper {
         return productRepository.findByCriteria(
                 getProductsCommand.getWithInactive(),
                 getProductsCommand.getWithTrashed(),
-                new ProductCategoryId(getProductsCommand.getProductCategoryId()));
+                new ProductCategoryId(getProductsCommand.getProductCategoryId()),
+                getProductsCommand.getSearch());
     }
 
     public Product findProductById(ProductId productId) {

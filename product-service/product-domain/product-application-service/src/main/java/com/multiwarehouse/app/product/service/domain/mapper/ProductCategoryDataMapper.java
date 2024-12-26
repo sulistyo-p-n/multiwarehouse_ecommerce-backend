@@ -60,6 +60,7 @@ public class ProductCategoryDataMapper {
                 .name(productCategory.getName())
                 .description(productCategory.getDescription())
                 .active(productCategory.getActive())
+                .isSoftDeleted(productCategory.getIsSoftDeleted())
                 .build();
     }
 
