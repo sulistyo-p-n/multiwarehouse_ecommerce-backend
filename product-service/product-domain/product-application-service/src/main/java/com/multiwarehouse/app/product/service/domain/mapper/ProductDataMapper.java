@@ -34,7 +34,7 @@ public class ProductDataMapper {
                 .withPrice(new Money(createProductCommand.getPrice()))
                 .withActive(createProductCommand.getActive())
                 .withCategory(ProductCategory.builder().withId(new ProductCategoryId(createProductCommand.getCategoryId())).build())
-                .withProductImages(productImageDataMapper.createProductImageCommandsToProductImages(createProductCommand.getCreateProductImageCommands()))
+                .withProductImages(productImageDataMapper.createProductImageCommandsToProductImages(createProductCommand.getImages()))
                 .build();
     }
 
@@ -74,6 +74,8 @@ public class ProductDataMapper {
                 .code(product.getCode())
                 .name(product.getName())
                 .description(product.getDescription())
+                .price(product.getPrice().getAmount())
+                .active(product.getActive())
                 .category(productCategoryDataMapper.productCategoryToGetProductCategoryResponse(product.getProductCategory()))
                 .productImages(productImageDataMapper.productImagesToGetProductImageResponses(product.getProductImages()))
                 .build();

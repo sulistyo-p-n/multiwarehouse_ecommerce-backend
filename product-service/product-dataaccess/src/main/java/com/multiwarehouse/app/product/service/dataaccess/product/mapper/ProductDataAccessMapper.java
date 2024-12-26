@@ -23,8 +23,9 @@ public class ProductDataAccessMapper {
     }
 
     public Product productEntityToProduct(ProductEntity productEntity) {
-        return Product.builder()
-                .withId(new ProductId(productEntity.getId()))
+        ProductId productId = new ProductId(productEntity.getId());
+        Product product = Product.builder()
+                .withId(productId)
                 .withCode(productEntity.getCode())
                 .withName(productEntity.getName())
                 .withDescription(productEntity.getDescription())
@@ -33,6 +34,8 @@ public class ProductDataAccessMapper {
                 .withProductImages(productImageEntitiesToProductImages(productEntity.getImages()))
                 .withActive(productEntity.getActive())
                 .build();
+        product.getProductImages().forEach(productImage -> productImage.setProductId(productId));
+        return product;
     }
 
     private List<ProductImage> productImageEntitiesToProductImages(List<ProductImageEntity> productImageEntities) {
@@ -42,7 +45,7 @@ public class ProductDataAccessMapper {
     }
 
     public ProductEntity productToProductEntity(Product product) {
-        return ProductEntity.builder()
+        ProductEntity productEntity = ProductEntity.builder()
                 .id(product.getId().getValue())
                 .code(product.getCode())
                 .name(product.getName())
@@ -52,6 +55,8 @@ public class ProductDataAccessMapper {
                 .images(productImageToProductImageEntities(product.getProductImages()))
                 .active(product.getActive())
                 .build();
+        productEntity.getImages().forEach(productImageEntity -> productImageEntity.setProduct(productEntity));
+        return productEntity;
     }
 
     private List<ProductImageEntity> productImageToProductImageEntities(List<ProductImage> productImages) {

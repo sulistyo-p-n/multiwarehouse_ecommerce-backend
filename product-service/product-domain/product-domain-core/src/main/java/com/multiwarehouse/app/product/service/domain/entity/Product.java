@@ -25,6 +25,7 @@ public class Product extends AggregateRoot<ProductId> {
 
     private void initializeProductImages() {
         for (ProductImage productImage : productImages) {
+            productImage.initialize();
             productImage.setProductId(getId());
         }
     }

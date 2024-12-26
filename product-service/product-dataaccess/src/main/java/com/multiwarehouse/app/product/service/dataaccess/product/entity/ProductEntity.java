@@ -29,7 +29,7 @@ public class ProductEntity extends BaseEntity {
     @JoinColumn(name = "product_category_id")
     private ProductCategoryEntity category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImageEntity> images;
 
     @OneToOne(mappedBy = "product")

@@ -28,5 +28,5 @@ public class CreateProductCommand {
     @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")
     private final Boolean active;
 
-    private final List<CreateProductImageCommand> createProductImageCommands;
+    private final List<CreateProductImageCommand> images;
 }

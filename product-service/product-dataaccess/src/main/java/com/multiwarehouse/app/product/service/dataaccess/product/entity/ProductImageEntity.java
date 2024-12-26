@@ -32,11 +32,11 @@ public class ProductImageEntity extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductImageEntity that = (ProductImageEntity) o;
-        return id.equals(that.id);
+        return id.equals(that.id) && product.equals(that.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, product);
     }
 }

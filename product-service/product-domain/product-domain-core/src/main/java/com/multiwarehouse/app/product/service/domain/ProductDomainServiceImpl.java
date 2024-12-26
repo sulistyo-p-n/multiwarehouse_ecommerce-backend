@@ -29,6 +29,7 @@ public class ProductDomainServiceImpl implements ProductDomainService {
         product.setDescription(newProduct.getDescription());
         product.setPrice(newProduct.getPrice());
         product.setProductCategory(newProduct.getProductCategory());
+        product.setActive(newProduct.getActive());
         return new ProductUpdatedEvent(
                 product,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
