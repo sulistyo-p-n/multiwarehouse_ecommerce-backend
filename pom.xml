@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.5</version>
+        <version>3.4.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -26,6 +26,7 @@
         <module>order-service</module>
         <module>payment-service</module>
         <module>shipping-service</module>
+        <module>authgateway-service</module>
     </modules>
 
     <properties>
@@ -39,6 +40,7 @@
         <org.projectlombok.version>1.18.34</org.projectlombok.version>
         <org.mockito.version>5.11.0</org.mockito.version>
         <org.slf4j.version>2.0.16</org.slf4j.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -299,6 +301,37 @@
             <dependency>
                 <groupId>com.multiwarehouse.app</groupId>
                 <artifactId>shipping-container</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>authgateway-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>authgateway-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>authgateway-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>authgateway-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>authgateway-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>authgateway-container</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
