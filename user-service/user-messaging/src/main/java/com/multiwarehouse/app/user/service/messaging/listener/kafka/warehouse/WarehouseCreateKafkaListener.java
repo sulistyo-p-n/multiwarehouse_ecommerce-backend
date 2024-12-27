@@ -30,7 +30,7 @@ public class WarehouseCreateKafkaListener implements KafkaConsumer<WarehouseCrea
     }
 
     @Override
-    @KafkaListener(id = "${kafka-consumer-config.warehouse-create-consumer-group-id}", topics = "${user-service.warehouse-create-topic-name}")
+//    @KafkaListener(id = "${kafka-consumer-config.warehouse-create-consumer-group-id}", topics = "${user-service.warehouse-create-topic-name}")
     public void receive(
             @Payload List<WarehouseCreateAvroModel> messages,
             @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,

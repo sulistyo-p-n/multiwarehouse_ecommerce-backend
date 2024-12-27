@@ -11,7 +11,6 @@
 
     <artifactId>user-domain</artifactId>
     <packaging>pom</packaging>
-
     <modules>
         <module>user-domain-core</module>
         <module>user-application-service</module>

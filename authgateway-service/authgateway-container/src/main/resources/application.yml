@@ -32,6 +32,13 @@ spring:
       platform: postgres
       mode: always
       schema-locations: classpath:init-schema.sql
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: http://localhost:8184
+          predicates:
+            - Path=/product_categories/**
 
 kafka-config:
   bootstrap-servers: localhost:19092,localhost:29092,localhost:39092

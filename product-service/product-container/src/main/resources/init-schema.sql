@@ -11,13 +11,13 @@ CREATE TABLE "product".product_categories
     code CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL UNIQUE,
     name CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     description TEXT,
-    active BOOLEAN DEFAULT TRUE NOT NULL ,
+    active BOOLEAN DEFAULT TRUE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP,
-    created_by UUID,
-    updated_by UUID,
-    deleted_by UUID,
+--    created_by UUID,
+--    updated_by UUID,
+--    deleted_by UUID,
     CONSTRAINT product_categories_pkey PRIMARY KEY (id)
 );
 
@@ -35,9 +35,9 @@ CREATE TABLE "product".products
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP,
-    created_by UUID,
-    updated_by UUID,
-    deleted_by UUID,
+--    created_by UUID,
+--    updated_by UUID,
+--    deleted_by UUID,
     CONSTRAINT products_pkey PRIMARY KEY (id)
 );
 ALTER TABLE "product".products
@@ -60,9 +60,9 @@ CREATE TABLE "product".product_images
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP,
-    created_by UUID,
-    updated_by UUID,
-    deleted_by UUID,
+--    created_by UUID,
+--    updated_by UUID,
+--    deleted_by UUID,
     CONSTRAINT product_images_pkey PRIMARY KEY (id)
 );
 ALTER TABLE "product".product_images
@@ -82,8 +82,10 @@ CREATE TABLE "product".stocks
     quantity INTEGER NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    created_by UUID,
-    updated_by UUID,
+    deleted_at TIMESTAMP,
+--    created_by UUID,
+--    updated_by UUID,
+--    deleted_by UUID,
     UNIQUE (product_id, warehouse_id),
     CONSTRAINT stocks_pkey PRIMARY KEY (id)
 );

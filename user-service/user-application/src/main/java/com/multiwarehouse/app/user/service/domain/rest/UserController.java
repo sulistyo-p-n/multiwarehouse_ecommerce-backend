@@ -10,19 +10,11 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/users", produces = "application/vnd.api.v1+json")
 public class UserController {
-//    private final UserApplicationService userApplicationService;
-//
-//    public UserController(UserApplicationService userApplicationService) {
-//        this.userApplicationService = userApplicationService;
-//    }
-
-    public UserController() {
-    }
 
     @GetMapping
     public ResponseEntity<String> getWarehouses() {
-        log.info("Getting warehouses");
-        return ResponseEntity.ok("test");
+        log.info("Get users");
+        return ResponseEntity.ok("Get users");
     }
 
 }
