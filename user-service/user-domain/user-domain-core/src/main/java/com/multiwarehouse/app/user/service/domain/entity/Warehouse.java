@@ -1,4 +1,9 @@
 package com.multiwarehouse.app.user.service.domain.entity;
 
-public class Warehouse {
+import com.multiwarehouse.app.domain.entity.AggregateRoot;
+import com.multiwarehouse.app.domain.valueobject.UserId;
+import com.multiwarehouse.app.domain.valueobject.WarehouseId;
+
+public class Warehouse extends AggregateRoot<WarehouseId> {
+//    private final String name;
 }
