@@ -78,8 +78,8 @@ ALTER TABLE "user".user_addresses
         ON DELETE CASCADE
     NOT VALID;
 
-DROP TABLE IF EXISTS "user".admins CASCADE;
-CREATE TABLE "user".admins
+DROP TABLE IF EXISTS "user".user_admin_warehouses CASCADE;
+CREATE TABLE "user".user_admin_warehouses
 (
     id UUID NOT NULL,
     user_id UUID NOT NULL UNIQUE,
@@ -90,13 +90,13 @@ CREATE TABLE "user".admins
     deleted_at TIMESTAMP,
     CONSTRAINT admins_pkey PRIMARY KEY (id)
 );
-ALTER TABLE "user".admins
+ALTER TABLE "user".user_admin_warehouses
     ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id)
         REFERENCES "user".users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE CASCADE
     NOT VALID;
-ALTER TABLE "user".admins
+ALTER TABLE "user".user_admin_warehouses
     ADD CONSTRAINT fk_warehouse_id FOREIGN KEY (warehouse_id)
         REFERENCES "user".warehouses (id) MATCH SIMPLE
         ON UPDATE NO ACTION

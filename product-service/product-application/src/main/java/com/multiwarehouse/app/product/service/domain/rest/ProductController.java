@@ -23,54 +23,54 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/products", produces = "application/vnd.api.v1+json")
 public class ProductController {
-    private final ProductApplicationService ProductApplicationService;
+    private final ProductApplicationService productApplicationService;
 
-    public ProductController(ProductApplicationService ProductApplicationService) {
-        this.ProductApplicationService = ProductApplicationService;
+    public ProductController(ProductApplicationService productApplicationService) {
+        this.productApplicationService = productApplicationService;
     }
 
     @GetMapping
-    public ResponseEntity<List<GetProductResponse>> getProducts(GetProductsCommand getProductsCommand) {
-        log.info("Getting product categories: {}", getProductsCommand);
-        GetProductsResponse getProductsResponse = ProductApplicationService.getProducts(getProductsCommand);
-        log.info("Returning product categories: {}", getProductsResponse.getProducts());
-        return ResponseEntity.ok(getProductsResponse.getProducts());
+    public ResponseEntity<GetProductsResponse> getProducts(GetProductsCommand getProductsCommand) {
+        log.info("Getting products: {}", getProductsCommand);
+        GetProductsResponse getProductsResponse = productApplicationService.getProducts(getProductsCommand);
+        log.info("Returning products: {}", getProductsResponse.getProducts());
+        return ResponseEntity.ok(getProductsResponse);
     }
 
     @GetMapping(path = "{id}")
     public ResponseEntity<GetProductResponse> getProduct(@PathVariable("id") UUID id) {
-        log.info("Getting product category by id: {}", id);
+        log.info("Getting product by id: {}", id);
         GetProductCommand getProductCommand = GetProductCommand.builder().id(id).build();
-        GetProductResponse getProductResponse = ProductApplicationService.getProduct(getProductCommand);
-        log.info("Returning product category: {}", getProductResponse);
+        GetProductResponse getProductResponse = productApplicationService.getProduct(getProductCommand);
+        log.info("Returning product: {}", getProductResponse);
         return ResponseEntity.ok(getProductResponse);
     }
 
     @PostMapping
     public ResponseEntity<CreateProductResponse> createProduct(@RequestBody CreateProductCommand createProductCommand) {
-        log.info("Creating product category: {}", createProductCommand);
-        CreateProductResponse createProductResponse = ProductApplicationService.createProduct(createProductCommand);
-        log.info("Product category created: {}", createProductResponse);
+        log.info("Creating product: {}", createProductCommand);
+        CreateProductResponse createProductResponse = productApplicationService.createProduct(createProductCommand);
+        log.info("Product created: {}", createProductResponse);
         return ResponseEntity.ok(createProductResponse);
 
     }
 
     @PutMapping(path = "{id}")
     public ResponseEntity<UpdateProductResponse> updateProduct(@PathVariable("id") UUID id, @RequestBody UpdateProductCommand updateProductCommand) {
-        log.info("Updating product category with id: {}", id);
+        log.info("Updating product with id: {}", id);
         updateProductCommand.setId(id);
-        UpdateProductResponse updateProductResponse = ProductApplicationService.updateProduct(updateProductCommand);
-        log.info("Product category updated with: {}", updateProductResponse);
+        UpdateProductResponse updateProductResponse = productApplicationService.updateProduct(updateProductCommand);
+        log.info("Product updated with: {}", updateProductResponse);
         return ResponseEntity.ok(updateProductResponse);
     }
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity<DeleteProductResponse> deleteProduct(@PathVariable("id") UUID id, @RequestBody Optional<DeleteProductCommand> deleteProductCommand) {
-        log.info("Deleting product category with id: {}", id);
+        log.info("Deleting product with id: {}", id);
         DeleteProductCommand deleteProductCommandWithId = deleteProductCommand.orElse(DeleteProductCommand.builder().build());
         deleteProductCommandWithId.setId(id);
-        DeleteProductResponse deleteProductResponse = ProductApplicationService.deleteProduct(deleteProductCommandWithId);
-        log.info("Product category deleted with id: {}", id);
+        DeleteProductResponse deleteProductResponse = productApplicationService.deleteProduct(deleteProductCommandWithId);
+        log.info("Product deleted with id: {}", id);
         return ResponseEntity.ok(deleteProductResponse);
     }
 }

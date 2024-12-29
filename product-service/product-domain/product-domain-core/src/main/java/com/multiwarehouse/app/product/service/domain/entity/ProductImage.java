@@ -2,8 +2,7 @@ package com.multiwarehouse.app.product.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.ProductId;
-import com.multiwarehouse.app.product.service.domain.exception.ProductCategoryDomainException;
-import com.multiwarehouse.app.product.service.domain.exception.ProductImageDomainException;
+import com.multiwarehouse.app.product.service.domain.exception.ProductDomainException;
 import com.multiwarehouse.app.product.service.domain.valueobject.ProductImageId;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public class ProductImage extends BaseEntity<ProductImageId> {
 
     public void validateInitialId() {
         if (getId() != null) {
-            throw  new ProductImageDomainException("ProductImage is not in correct state for initialization");
+            throw  new ProductDomainException("ProductImage is not in correct state for initialization");
         }
     }
 
@@ -36,7 +35,7 @@ public class ProductImage extends BaseEntity<ProductImageId> {
     }
 
     public void validateId() {
-        if (getId() == null ) throw new ProductImageDomainException("ProductImage Id cannot be null");
+        if (getId() == null ) throw new ProductDomainException("ProductImage Id cannot be null");
     }
 
     public void validateFields() {
@@ -47,19 +46,19 @@ public class ProductImage extends BaseEntity<ProductImageId> {
     }
 
     public void validateProductId() {
-        if (getProductId() == null) throw new ProductImageDomainException("ProductImage ProductId cannot be null");
+        if (getProductId() == null) throw new ProductDomainException("ProductImage ProductId cannot be null");
     }
 
     private void validateName() {
-        if (getName() == null || getName().isEmpty()) throw new ProductImageDomainException("ProductImage Name cannot be empty");
+        if (getName() == null || getName().isEmpty()) throw new ProductDomainException("ProductImage Name cannot be empty");
     }
 
     private void validatePath() {
-        if (getName() == null || getName().isEmpty()) throw new ProductImageDomainException("ProductImage Path cannot be empty");
+        if (getName() == null || getName().isEmpty()) throw new ProductDomainException("ProductImage Path cannot be empty");
     }
 
     private void validateActive() {
-        if (getActive() == null) throw new ProductImageDomainException("ProductImage Active cannot be null");
+        if (getActive() == null) throw new ProductDomainException("ProductImage Active cannot be null");
     }
 
     public void setProductId(ProductId value) {

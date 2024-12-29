@@ -12,9 +12,9 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "admins")
+@Table(name = "user_admin_warehouses")
 @Entity
-public class AdminEntity extends BaseEntity {
+public class UserAdminWarehouseEntity extends BaseEntity {
     @Id
     private UUID id;
     private UUID warehouseId;
@@ -28,7 +28,7 @@ public class AdminEntity extends BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AdminEntity that = (AdminEntity) o;
+        UserAdminWarehouseEntity that = (UserAdminWarehouseEntity) o;
         return id.equals(that.id);
     }
 

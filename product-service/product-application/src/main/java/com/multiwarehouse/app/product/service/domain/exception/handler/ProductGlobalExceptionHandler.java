@@ -56,26 +56,4 @@ public class ProductGlobalExceptionHandler extends GlobalExceptionHandler {
                 .message(productCategoryNotFoundException.getMessage())
                 .build();
     }
-
-    @ResponseBody
-    @ExceptionHandler(value = {ProductImageDomainException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDTO handleException(ProductImageDomainException productImageDomainException) {
-        log.error(productImageDomainException.getMessage(), productImageDomainException);
-        return ErrorDTO.builder()
-                .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message(productImageDomainException.getMessage())
-                .build();
-    }
-
-    @ResponseBody
-    @ExceptionHandler(value = {ProductImageNotFoundException.class})
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorDTO handleException(ProductImageNotFoundException productImageNotFoundException) {
-        log.error(productImageNotFoundException.getMessage(), productImageNotFoundException);
-        return ErrorDTO.builder()
-                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .message(productImageNotFoundException.getMessage())
-                .build();
-    }
 }

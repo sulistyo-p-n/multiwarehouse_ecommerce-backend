@@ -4,8 +4,8 @@ import com.multiwarehouse.app.domain.valueobject.BaseId;
 
 import java.util.UUID;
 
-public class AdminId extends BaseId<UUID> {
-    public AdminId(UUID value) {
+public class UserAdminWarehouseId extends BaseId<UUID> {
+    public UserAdminWarehouseId(UUID value) {
         super(value);
     }
 }

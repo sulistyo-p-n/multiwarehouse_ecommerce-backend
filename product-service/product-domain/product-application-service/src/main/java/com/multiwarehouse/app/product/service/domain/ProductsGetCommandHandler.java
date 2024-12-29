@@ -24,7 +24,7 @@ public class ProductsGetCommandHandler {
     @Transactional(readOnly = true)
     public GetProductsResponse getProducts(GetProductsCommand getProductsCommand) {
         List<Product> products = productHelper.findProducts(getProductsCommand);
-        log.info("Product is selected with total: {}", products.size());
+        log.info("Products is selected with total: {}", products.size());
         return productDataMapper.productsToGetProductsResponse(products);
     }
 }

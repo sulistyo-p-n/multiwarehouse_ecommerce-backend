@@ -28,13 +28,13 @@ public class UserEntity extends BaseEntity {
     private Boolean enable;
 
     @OneToOne(mappedBy = "user")
-    private UserProfileEntity profile;
+    private UserProfileEntity userProfile;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserAddressEntity> addresses;
+    private List<UserAddressEntity> userAddresses;
 
     @OneToOne(mappedBy = "user")
-    private AdminEntity admin;
+    private UserAdminWarehouseEntity userAdminWarehouse;
 
     @Override
     public boolean equals(Object o) {

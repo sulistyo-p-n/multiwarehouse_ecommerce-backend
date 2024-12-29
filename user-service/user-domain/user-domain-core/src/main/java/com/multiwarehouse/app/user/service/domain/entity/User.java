@@ -1,13 +1,11 @@
 package com.multiwarehouse.app.user.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.AggregateRoot;
-import com.multiwarehouse.app.domain.valueobject.Address;
-import com.multiwarehouse.app.domain.valueobject.UserId;
-import com.multiwarehouse.app.domain.valueobject.UserRole;
-import com.multiwarehouse.app.domain.valueobject.WarehouseId;
+import com.multiwarehouse.app.domain.valueobject.*;
 import com.multiwarehouse.app.user.service.domain.exception.UserDomainException;
 
 import java.util.List;
+import java.util.UUID;
 
 public class User extends AggregateRoot<UserId> {
     private String username;
@@ -16,10 +14,92 @@ public class User extends AggregateRoot<UserId> {
     private Boolean active;
     private Boolean enable;
     private UserRole role;
-    private Admin admin;
+    private UserAdminWarehouse userAdminWarehouse;
     private UserProfile userProfile;
     private List<UserAddress> userAddresses;
+
     private final Boolean isSoftDeleted;
+
+    public void initialize() {
+        setId(new UserId(UUID.randomUUID()));
+        initializeUserProfile();
+        initializeUserAddresses();
+        initializeUserAdminWarehouse();
+    }
+
+    private void initializeUserProfile() {
+        if (getUserProfile() == null) return;
+        userProfile.initialize();
+        userProfile.setUserId(getId());
+    }
+
+    private void initializeUserAddresses() {
+        if (getUserAddresses() == null) return;
+        for (UserAddress userAddress : userAddresses) {
+            userAddress.initialize();
+            userAddress.setUserId(getId());
+        }
+    }
+
+    private void initializeUserAdminWarehouse() {
+        if (getUserAdminWarehouse() == null) return;
+        userAdminWarehouse.initialize();
+        userAdminWarehouse.setUserId(getId());
+    }
+
+    public void validateInitialization() {
+        validateInitialId();
+        validateFields();
+    }
+
+    public void validateInitialId() {
+        if (getId() != null) {
+            throw new UserDomainException("User is not in correct state for initialization");
+        }
+    }
+
+    public void validate() {
+        validateId();
+        validateFields();
+    }
+
+    public void validateId() {
+        if (getId() == null ) throw new UserDomainException("User Id cannot be empty");
+    }
+
+    public void validateFields() {
+        validateUsername();
+        validateEmail();
+        validatePassword();
+        validateActive();
+        validateEnable();
+        validateRole();
+    }
+
+    private void validateUsername() {
+        if (getUsername() == null || getUsername().isEmpty()) throw new UserDomainException("User Username cannot be empty");
+    }
+
+    private void validateEmail() {
+        if (getEmail() == null || getEmail().isEmpty()) throw new UserDomainException("Product Email cannot be empty");
+    }
+
+    private void validatePassword() {
+        if (getPassword() == null || getPassword().isEmpty()) throw new UserDomainException("User Password cannot be empty");
+    }
+
+    private void validateActive() {
+        if (getActive() == null) throw new UserDomainException("User Active cannot be null");
+    }
+
+    private void validateEnable() {
+        if (getEnable() == null) throw new UserDomainException("User Enable cannot be null");
+    }
+
+    private void validateRole() {
+        if (getRole() == null) throw new UserDomainException("User Role cannot be null");
+    }
+
 
     public void setUsername(String username) {
         if (username == null) return;
@@ -54,9 +134,9 @@ public class User extends AggregateRoot<UserId> {
         this.role = role;
     }
 
-    public void setAdmin(Admin admin) {
-        if (admin == null) return;
-        this.admin = admin;
+    public void setUserAdminWarehouse(UserAdminWarehouse userAdminWarehouse) {
+        if (userAdminWarehouse == null) return;
+        this.userAdminWarehouse = userAdminWarehouse;
     }
 
     public void setUserProfile(UserProfile userProfile) {
@@ -93,8 +173,8 @@ public class User extends AggregateRoot<UserId> {
         return role;
     }
 
-    public Admin getAdmin() {
-        return admin;
+    public UserAdminWarehouse getUserAdminWarehouse() {
+        return userAdminWarehouse;
     }
 
     public UserProfile getUserProfile() {
@@ -117,7 +197,7 @@ public class User extends AggregateRoot<UserId> {
         active = builder.active;
         enable = builder.enable;
         role = builder.role;
-        admin = builder.admin;
+        userAdminWarehouse = builder.admin;
         userProfile = builder.userProfile;
         userAddresses = builder.userAddresses;
         isSoftDeleted = builder.isSoftDeleted;
@@ -135,7 +215,7 @@ public class User extends AggregateRoot<UserId> {
         private Boolean active;
         private Boolean enable;
         private UserRole role;
-        private Admin admin;
+        private UserAdminWarehouse admin;
         private UserProfile userProfile;
         private List<UserAddress> userAddresses;
         private Boolean isSoftDeleted;
@@ -178,7 +258,7 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
-        public Builder withAdmin(Admin val) {
+        public Builder withUserAdminWarehouse(UserAdminWarehouse val) {
             admin = val;
             return this;
         }

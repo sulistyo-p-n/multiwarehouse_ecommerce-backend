@@ -20,7 +20,7 @@ public class UserAddressEntity extends BaseEntity {
     private UUID id;
     private String street;
     private String city;
-    private Date postalCode;
+    private String postalCode;
     private Boolean active;
 
     @ManyToOne
