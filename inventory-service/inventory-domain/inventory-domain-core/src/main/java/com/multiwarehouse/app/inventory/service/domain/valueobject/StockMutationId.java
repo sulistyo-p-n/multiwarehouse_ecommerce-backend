@@ -4,8 +4,8 @@ import com.multiwarehouse.app.domain.valueobject.BaseId;
 
 import java.util.UUID;
 
-public class MutationRequestId extends BaseId<UUID> {
-    public MutationRequestId(UUID value) {
+public class StockMutationId extends BaseId<UUID> {
+    public StockMutationId(UUID value) {
         super(value);
     }
 }

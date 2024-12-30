@@ -2,17 +2,17 @@ package com.multiwarehouse.app.inventory.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
-import com.multiwarehouse.app.inventory.service.domain.valueobject.MutationRequestId;
-import com.multiwarehouse.app.inventory.service.domain.valueobject.MutationRequestStatus;
+import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationId;
+import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationStatus;
 
-public class MutationRequest extends BaseEntity<MutationRequestId> {
+public class StockMutation extends BaseEntity<StockMutationId> {
     private final Warehouse sourceWarehouse;
     private final Warehouse targetWarehouse;
     private final Product product;
     private final Integer quantity;
-    private MutationRequestStatus status;
+    private StockMutationStatus status;
 
-    private MutationRequest(Builder builder) {
+    private StockMutation(Builder builder) {
         super.setId(builder.id);
         sourceWarehouse = builder.sourceWarehouse;
         targetWarehouse = builder.targetWarehouse;
@@ -41,36 +41,36 @@ public class MutationRequest extends BaseEntity<MutationRequestId> {
         return quantity;
     }
 
-    public MutationRequestStatus getStatus() {
+    public StockMutationStatus getStatus() {
         return status;
     }
 
     public void approve() {
-        if (getStatus() != MutationRequestStatus.PENDING) {
+        if (getStatus() != StockMutationStatus.PENDING) {
             throw new InventoryDomainException("Transfer request cannot be approved in its current state!");
         }
-        status = MutationRequestStatus.APPROVED;
+        status = StockMutationStatus.APPROVED;
     }
 
     public void reject() {
-        if (getStatus() != MutationRequestStatus.PENDING) {
+        if (getStatus() != StockMutationStatus.PENDING) {
             throw new InventoryDomainException("Transfer request cannot be approved in its current state!");
         }
-        status = MutationRequestStatus.REJECTED;
+        status = StockMutationStatus.REJECTED;
     }
 
     public static final class Builder {
-        private MutationRequestId id;
+        private StockMutationId id;
         private Warehouse sourceWarehouse;
         private Warehouse targetWarehouse;
         private Product product;
         private Integer quantity;
-        private MutationRequestStatus status;
+        private StockMutationStatus status;
 
         private Builder() {
         }
 
-        public Builder withId(MutationRequestId val) {
+        public Builder withId(StockMutationId val) {
             id = val;
             return this;
         }
@@ -95,13 +95,13 @@ public class MutationRequest extends BaseEntity<MutationRequestId> {
             return this;
         }
 
-        public Builder withStatus(MutationRequestStatus val) {
+        public Builder withStatus(StockMutationStatus val) {
             status = val;
             return this;
         }
 
-        public MutationRequest build() {
-            return new MutationRequest(this);
+        public StockMutation build() {
+            return new StockMutation(this);
         }
     }
 }
