@@ -2,6 +2,7 @@ package com.multiwarehouse.app.inventory.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.AggregateRoot;
 import com.multiwarehouse.app.domain.valueobject.InventoryId;
+import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
 
 import java.util.List;
 
@@ -45,9 +46,11 @@ public class Inventory extends AggregateRoot<InventoryId> {
         productStocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst()
-                .ifPresent(stock -> {
+                .ifPresentOrElse(stock -> {
                     stock.decreaseStock(quantity);
                     targetInventory.addStock(product, quantity);
+                }, () -> {
+                    throw new InventoryDomainException("No stock found!");
                 });
     }
 

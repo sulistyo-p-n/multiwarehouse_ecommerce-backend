@@ -2,6 +2,7 @@ package com.multiwarehouse.app.inventory.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.InventoryId;
+import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.ProductStockId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalType;
 
@@ -58,7 +59,7 @@ public class ProductStock extends BaseEntity<ProductStockId> {
     }
 
     public void decreaseStock(int amount) {
-        if (getQuantity() < amount) { throw new IllegalArgumentException("Insufficient stock!"); }
+        if (getQuantity() < amount) { throw new InventoryDomainException("Insufficient stock!"); }
         addReductionStockJournal(amount);
         quantity -= amount;
     }
