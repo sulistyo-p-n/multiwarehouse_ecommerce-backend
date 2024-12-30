@@ -11,7 +11,7 @@ import java.util.List;
 public interface InventoryDomainService {
     void requestStockMutation(StockMutation stockMutation);
     void rejectStockMutation(StockMutation stockMutation);
-    List<InventoryStockChangedEvent> acceptStockMutation(StockMutation stockMutation, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher);
+    void acceptStockMutation(StockMutation stockMutation);
     List<InventoryStockChangedEvent> transferStockMutation(StockMutation stockMutation, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher);
     InventoryStockChangedEvent addStock(Inventory inventory, Product product, Integer quantity, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher);
     InventoryStockChangedEvent reduceStock(Inventory inventory, Product product, Integer quantity, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher);
