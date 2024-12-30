@@ -1,18 +1,20 @@
 server:
-  port: 8190
+  port: 8188
 
 logging:
   level:
     com.multiwarehouse.app: DEBUG
 
-auth-service:
-  auth-register-topic-name: auth-register
+inventory-service:
+  inventory-transfer-topic-name: inventory-transfer-product
+  inventory-add-topic-name: inventory-add-product
+  inventory-sub-topic-name: inventory-sub-product
 
 spring:
   application:
     name: multiwarehouse
   datasource:
-    url: jdbc:postgresql://localhost:5432/multiwarehouse?currentSchema=auth&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    url: jdbc:postgresql://localhost:5432/multiwarehouse?currentSchema=inventory&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
     password: password
     driver-class-name: org.postgresql.Driver
@@ -32,13 +34,6 @@ spring:
       platform: postgres
       mode: always
       schema-locations: classpath:init-schema.sql
-  cloud:
-    gateway:
-      routes:
-        - id: product-service
-          uri: http://localhost:8184
-          predicates:
-            - Path=/product_categories/**
 
 kafka-config:
   bootstrap-servers: localhost:19092,localhost:29092,localhost:39092
@@ -61,9 +56,8 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  #  user-create-consumer-group-id: warehouse-create-consumer
-  #  user-update-consumer-group-id: warehouse-update-consumer
-  #  user-delete-consumer-group-id: warehouse-delete-consumer
+  #  warehouse-create-consumer-group-id: warehouse-create-consumer
+  #  user-assign-response-consumer-group-id: user-assign-response-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

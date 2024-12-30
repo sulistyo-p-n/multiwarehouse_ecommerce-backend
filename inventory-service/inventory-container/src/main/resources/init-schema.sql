@@ -1,0 +1,4 @@
+DROP SCHEMA IF EXISTS "inventory" CASCADE;
+CREATE SCHEMA "inventory";
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

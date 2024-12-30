@@ -27,6 +27,7 @@
         <module>payment-service</module>
         <module>shipping-service</module>
         <module>authgateway-service</module>
+        <module>inventory-service</module>
     </modules>
 
     <properties>
@@ -177,6 +178,37 @@
             <dependency>
                 <groupId>com.multiwarehouse.app</groupId>
                 <artifactId>product-container</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>inventory-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>inventory-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>inventory-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>inventory-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>inventory-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>inventory-container</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
