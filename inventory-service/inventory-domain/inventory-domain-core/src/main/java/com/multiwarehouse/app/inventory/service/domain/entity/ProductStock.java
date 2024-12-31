@@ -8,24 +8,94 @@ import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalT
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ProductStock extends BaseEntity<ProductStockId> {
-    private final InventoryId inventoryId;
+    private InventoryId inventoryId;
     private final Product product;
-    private Integer quantity;
+    private int quantity;
 
-    private List<StockJournal> journals;
+    private List<StockJournal> stockJournals;
 
     private ProductStock(Builder builder) {
         super.setId(builder.id);
         inventoryId = builder.inventoryId;
         product = builder.product;
         quantity = builder.quantity;
-        journals = builder.journals;
+        stockJournals = builder.stockJournals;
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public void initialize(InventoryId inventoryId) {
+        this.inventoryId = inventoryId;
+        setId(new ProductStockId(UUID.randomUUID()));
+        initializeStockJournals();
+    }
+
+    private void initializeStockJournals() {
+        stockJournals.forEach(stockJournal -> stockJournal.initialize(getId()));
+    }
+
+    public void validate() {
+        validateId();
+        validateInventoryId();
+        validateProduct();
+        validateQuantity();
+        validateJournals();
+    }
+
+    private void validateId() {
+        if (getId() == null) throw new InventoryDomainException("ProductStock.Id cannot be null!");
+    }
+
+    private void validateInventoryId() {
+        if (inventoryId == null) throw new InventoryDomainException("ProductStock.InventoryId cannot be null!");
+    }
+
+    private void validateProduct() {
+        if (product == null) throw new InventoryDomainException("ProductStock.Product cannot be null!");
+    }
+
+    private void validateQuantity() {
+        if (quantity < 0) throw new InventoryDomainException("ProductStock.Quantity cannot be negative!");
+        if (isQuantityValid()) throw new InventoryDomainException("ProductStock.Quantity is not valid!");
+    }
+
+    private boolean isQuantityValid() {
+        return quantity == stockJournals.stream().mapToInt(StockJournal::getQuantity).sum();
+    }
+
+    private void validateJournals() {
+        stockJournals.forEach(StockJournal::validate);
+    }
+
+    public void addStock(int amount) {
+        if (amount <= 0) throw new InventoryDomainException("ProductStock.AddStock.Amount must be greater than zero!");
+        addStockJournal(amount);
+        quantity += amount;
+    }
+
+    public void reduceStock(int amount) {
+        if (amount <= 0) throw new InventoryDomainException("ProductStock.ReduceStock.Amount must be greater than zero!");
+        validateAvailableStock(amount);
+        addStockJournal(-amount);
+        quantity -= amount;
+    }
+
+    public void validateAvailableStock(int decreaseAmount) {
+        if (getQuantity() < decreaseAmount) { throw new InventoryDomainException("ProductStock.Quantity is insufficient stock!"); }
+    }
+
+    private void addStockJournal(int amount) {
+        if (stockJournals == null) stockJournals = new ArrayList<>();
+        stockJournals.add(StockJournal.builder()
+                .withProductStockId(getId())
+                .withQuantity(amount)
+                .withType((amount > 0) ? StockJournalType.ADDICTION : StockJournalType.REDUCTION)
+                .build());
     }
 
     public InventoryId getInventoryId() {
@@ -36,49 +106,20 @@ public class ProductStock extends BaseEntity<ProductStockId> {
         return product;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public List<StockJournal> getJournals() {
-        return journals;
-    }
-
-    public void increaseStock(int amount) {
-        addAddictionStockJournal(amount);
-        quantity += amount;
-    }
-
-    private void addAddictionStockJournal(int amount) {
-        if (journals == null) journals = new ArrayList<>();
-        journals.add(StockJournal.builder()
-                .withProductStockId(getId())
-                .withQuantity(amount)
-                .withType(StockJournalType.ADDICTION)
-                .build());
-    }
-
-    public void decreaseStock(int amount) {
-        if (getQuantity() < amount) { throw new InventoryDomainException("Insufficient stock!"); }
-        addReductionStockJournal(amount);
-        quantity -= amount;
-    }
-
-    private void addReductionStockJournal(int amount) {
-        if (journals == null) journals = new ArrayList<>();
-        journals.add(StockJournal.builder()
-                .withProductStockId(getId())
-                .withQuantity(amount)
-                .withType(StockJournalType.REDUCTION)
-                .build());
+    public List<StockJournal> getStockJournals() {
+        return stockJournals;
     }
 
     public static final class Builder {
         private ProductStockId id;
         private InventoryId inventoryId;
         private Product product;
-        private Integer quantity;
-        private List<StockJournal> journals;
+        private int quantity;
+        private List<StockJournal> stockJournals;
 
         private Builder() {
         }
@@ -98,13 +139,13 @@ public class ProductStock extends BaseEntity<ProductStockId> {
             return this;
         }
 
-        public Builder withQuantity(Integer val) {
+        public Builder withQuantity(int val) {
             quantity = val;
             return this;
         }
 
-        public Builder withJournals(List<StockJournal> val) {
-            journals = val;
+        public Builder withStockJournals(List<StockJournal> val) {
+            stockJournals = val;
             return this;
         }
 

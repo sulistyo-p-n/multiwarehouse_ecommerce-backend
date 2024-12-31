@@ -1,13 +1,16 @@
 package com.multiwarehouse.app.inventory.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.BaseEntity;
+import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.ProductStockId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalType;
 
+import java.util.UUID;
+
 public class StockJournal extends BaseEntity<StockJournalId> {
-    private final ProductStockId productStockId;
-    private final Integer quantity;
+    private ProductStockId productStockId;
+    private final int quantity;
     private final StockJournalType type;
 
     private StockJournal(Builder builder) {
@@ -21,11 +24,39 @@ public class StockJournal extends BaseEntity<StockJournalId> {
         return new Builder();
     }
 
+    public void initialize(ProductStockId productStockId) {
+        this.productStockId = productStockId;
+        setId(new StockJournalId(UUID.randomUUID()));
+    }
+
+    public void validate() {
+        validateId();
+        validateProductStockId();
+        validateQuantity();
+        validateType();
+    }
+
+    private void validateId() {
+        if (getId() == null) throw new InventoryDomainException("StockJournal.Id cannot be null!");
+    }
+
+    private void validateProductStockId() {
+        if (productStockId == null) throw new InventoryDomainException("StockJournal.ProductStockId cannot be null!");
+    }
+
+    private void validateQuantity() {
+        if (quantity == 0) throw new InventoryDomainException("StockJournal.Quantity cannot be zero!");
+    }
+
+    private void validateType() {
+        if (type == null) throw new InventoryDomainException("StockJournal.Type cannot be null!");
+    }
+
     public ProductStockId getProductStockId() {
         return productStockId;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -36,7 +67,7 @@ public class StockJournal extends BaseEntity<StockJournalId> {
     public static final class Builder {
         private StockJournalId id;
         private ProductStockId productStockId;
-        private Integer quantity;
+        private int quantity;
         private StockJournalType type;
 
         private Builder() {

@@ -6,16 +6,16 @@ import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutation
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationStatus;
 
 public class StockMutation extends BaseEntity<StockMutationId> {
-    private final Warehouse sourceWarehouse;
-    private final Warehouse targetWarehouse;
+    private final Inventory sourceInventory;
+    private final Inventory targetInventory;
     private final Product product;
-    private final Integer quantity;
+    private final int quantity;
     private StockMutationStatus status;
 
     private StockMutation(Builder builder) {
         super.setId(builder.id);
-        sourceWarehouse = builder.sourceWarehouse;
-        targetWarehouse = builder.targetWarehouse;
+        sourceInventory = builder.sourceInventory;
+        targetInventory = builder.targetInventory;
         product = builder.product;
         quantity = builder.quantity;
         status = builder.status;
@@ -25,19 +25,65 @@ public class StockMutation extends BaseEntity<StockMutationId> {
         return new Builder();
     }
 
-    public Warehouse getSourceWarehouse() {
-        return sourceWarehouse;
+    public void validateStatus() {
+        if (status != StockMutationStatus.APPROVED) {
+            throw new InventoryDomainException("Stock Mutation cannot be processed in its current state!");
+        }
     }
 
-    public Warehouse getTargetWarehouse() {
-        return targetWarehouse;
+    public void validateQuantity() {
+        if (quantity == 0) {
+            throw new InventoryDomainException("Stock Mutation quantity must be greater than zero!");
+        }
+    }
+
+    public void validateSourceInventoryAvailableStock() {
+        sourceInventory.validateAvailableStock(product, quantity);
+    }
+
+    public void validateInventory() {
+        sourceInventory.validate();
+        targetInventory.validate();
+    }
+
+    public void request() {
+        if (getStatus() != StockMutationStatus.APPROVED || getStatus() != StockMutationStatus.REJECTED) {
+            throw new InventoryDomainException("Stock Mutation cannot be requested in its current state!");
+        }
+        status = StockMutationStatus.PENDING;
+    }
+
+    public void reject() {
+        if (getStatus() != StockMutationStatus.PENDING) {
+            throw new InventoryDomainException("Stock Mutation cannot be rejected in its current state!");
+        }
+        status = StockMutationStatus.REJECTED;
+    }
+
+    public void approve() {
+        if (getStatus() != StockMutationStatus.PENDING) {
+            throw new InventoryDomainException("Stock Mutation cannot be approved in its current state!");
+        }
+        status = StockMutationStatus.APPROVED;
+    }
+
+    public void transferStock() {
+        sourceInventory.transferStock(targetInventory, product, quantity);
+    }
+
+    public Inventory getSourceInventory() {
+        return sourceInventory;
+    }
+
+    public Inventory getTargetInventory() {
+        return targetInventory;
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -45,26 +91,12 @@ public class StockMutation extends BaseEntity<StockMutationId> {
         return status;
     }
 
-    public void approve() {
-        if (getStatus() != StockMutationStatus.PENDING) {
-            throw new InventoryDomainException("Transfer request cannot be approved in its current state!");
-        }
-        status = StockMutationStatus.APPROVED;
-    }
-
-    public void reject() {
-        if (getStatus() != StockMutationStatus.PENDING) {
-            throw new InventoryDomainException("Transfer request cannot be approved in its current state!");
-        }
-        status = StockMutationStatus.REJECTED;
-    }
-
     public static final class Builder {
         private StockMutationId id;
-        private Warehouse sourceWarehouse;
-        private Warehouse targetWarehouse;
+        private Inventory sourceInventory;
+        private Inventory targetInventory;
         private Product product;
-        private Integer quantity;
+        private int quantity;
         private StockMutationStatus status;
 
         private Builder() {
@@ -75,13 +107,13 @@ public class StockMutation extends BaseEntity<StockMutationId> {
             return this;
         }
 
-        public Builder withSourceWarehouse(Warehouse val) {
-            sourceWarehouse = val;
+        public Builder withSourceInventory(Inventory val) {
+            sourceInventory = val;
             return this;
         }
 
-        public Builder withTargetWarehouse(Warehouse val) {
-            targetWarehouse = val;
+        public Builder withTargetInventory(Inventory val) {
+            targetInventory = val;
             return this;
         }
 
@@ -90,7 +122,7 @@ public class StockMutation extends BaseEntity<StockMutationId> {
             return this;
         }
 
-        public Builder withQuantity(Integer val) {
+        public Builder withQuantity(int val) {
             quantity = val;
             return this;
         }
