@@ -1,10 +1,11 @@
-package com.multiwarehouse.app.stockMutation.service.dataaccess.stockMutation.adapter;
+package com.multiwarehouse.app.inventory.service.dataaccess.inventory.adapter;
 
 import com.multiwarehouse.app.domain.valueobject.WarehouseId;
 import com.multiwarehouse.app.inventory.service.dataaccess.inventory.entity.StockMutationEntity;
 import com.multiwarehouse.app.inventory.service.dataaccess.inventory.mapper.StockMutationDataAccessMapper;
 import com.multiwarehouse.app.inventory.service.dataaccess.inventory.repository.StockMutationJpaRepository;
 import com.multiwarehouse.app.inventory.service.domain.entity.StockMutation;
+import com.multiwarehouse.app.inventory.service.domain.ports.ouput.repository.StockMutationRepository;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationId;
 import org.springframework.stereotype.Component;
 
