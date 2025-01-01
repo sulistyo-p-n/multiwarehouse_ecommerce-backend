@@ -27,13 +27,13 @@ public class StockMutation extends BaseEntity<StockMutationId> {
 
     public void validateStatus() {
         if (status != StockMutationStatus.APPROVED) {
-            throw new InventoryDomainException("Stock Mutation cannot be processed in its current state!");
+            throw new InventoryDomainException("StockMutation.Status cannot be processed in its current state!");
         }
     }
 
     public void validateQuantity() {
         if (quantity == 0) {
-            throw new InventoryDomainException("Stock Mutation quantity must be greater than zero!");
+            throw new InventoryDomainException("StockMutation.Quantity must be greater than zero!");
         }
     }
 
@@ -48,21 +48,21 @@ public class StockMutation extends BaseEntity<StockMutationId> {
 
     public void request() {
         if (getStatus() != StockMutationStatus.APPROVED || getStatus() != StockMutationStatus.REJECTED) {
-            throw new InventoryDomainException("Stock Mutation cannot be requested in its current state!");
+            throw new InventoryDomainException("StockMutation.Request cannot be requested in its current state!");
         }
         status = StockMutationStatus.PENDING;
     }
 
     public void reject() {
         if (getStatus() != StockMutationStatus.PENDING) {
-            throw new InventoryDomainException("Stock Mutation cannot be rejected in its current state!");
+            throw new InventoryDomainException("StockMutation.Request cannot be rejected in its current state!");
         }
         status = StockMutationStatus.REJECTED;
     }
 
     public void approve() {
         if (getStatus() != StockMutationStatus.PENDING) {
-            throw new InventoryDomainException("Stock Mutation cannot be approved in its current state!");
+            throw new InventoryDomainException("StockMutation.Request cannot be approved in its current state!");
         }
         status = StockMutationStatus.APPROVED;
     }

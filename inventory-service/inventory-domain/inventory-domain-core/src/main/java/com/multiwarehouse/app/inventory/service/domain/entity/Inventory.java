@@ -4,8 +4,6 @@ import com.multiwarehouse.app.domain.entity.AggregateRoot;
 import com.multiwarehouse.app.domain.valueobject.InventoryId;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +26,7 @@ public class Inventory extends AggregateRoot<InventoryId> {
     }
 
     private void validateInitialId() {
-        if (getId() != null) throw new InventoryDomainException("Inventory is not in correct state for initialization!");
+        if (getId() != null) throw new InventoryDomainException("Inventory.Id is not in correct state for initialization!");
     }
 
     public void initialize() {
@@ -60,21 +58,21 @@ public class Inventory extends AggregateRoot<InventoryId> {
     }
 
     public void validateAvailableStock(Product product, int quantity) {
-        if (product == null) throw new InventoryDomainException("Product cannot be null!");
-        if (quantity == 0) throw new InventoryDomainException("Stock compare quantity must be greater than zero!");
+        if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
+        if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
         productStocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst()
                 .ifPresentOrElse(stock -> {
                     stock.validateAvailableStock(quantity);
                 }, () -> {
-                    throw new InventoryDomainException("No stock found!");
+                    throw new InventoryDomainException("Inventory.ProductStock No stock found!");
                 });
     }
 
     public void transferStock(Inventory targetInventory, Product product, int quantity) {
-        if (product == null) throw new InventoryDomainException("Product cannot be null!");
-        if (quantity == 0) throw new InventoryDomainException("Stock transfer quantity must be greater than zero!");
+        if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
+        if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
         productStocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst()
@@ -82,13 +80,13 @@ public class Inventory extends AggregateRoot<InventoryId> {
                     stock.reduceStock(quantity);
                     targetInventory.addStock(product, quantity);
                 }, () -> {
-                    throw new InventoryDomainException("No stock found!");
+                    throw new InventoryDomainException("Inventory.ProductStock No stock found!");
                 });
     }
 
     public void addStock(Product product, int quantity) {
-        if (product == null) throw new InventoryDomainException("Product cannot be null!");
-        if (quantity == 0) throw new InventoryDomainException("Stock add quantity must be greater than zero!");
+        if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
+        if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
         productStocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst()
@@ -103,15 +101,15 @@ public class Inventory extends AggregateRoot<InventoryId> {
     }
 
     public void reduceStock(Product product, int quantity) {
-        if (product == null) throw new InventoryDomainException("Product cannot be null!");
-        if (quantity == 0) throw new InventoryDomainException("Stock reduce quantity must be greater than zero!");
+        if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
+        if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
         productStocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst()
                 .ifPresentOrElse(
                         stock -> stock.reduceStock(quantity),
                         () -> {
-                            throw new InventoryDomainException("No stock found!");
+                            throw new InventoryDomainException("Inventory.ProductStock No stock found!");
                         });
     }
 

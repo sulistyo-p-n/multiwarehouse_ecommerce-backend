@@ -64,6 +64,10 @@ public class StockJournal extends BaseEntity<StockJournalId> {
         return type;
     }
 
+    public void setProductStockId(ProductStockId productStockId) {
+        this.productStockId = productStockId;
+    }
+
     public static final class Builder {
         private StockJournalId id;
         private ProductStockId productStockId;

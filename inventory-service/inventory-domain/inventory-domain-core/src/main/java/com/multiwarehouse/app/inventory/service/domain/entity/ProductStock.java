@@ -4,6 +4,7 @@ import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.InventoryId;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.ProductStockId;
+import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalType;
 
 import java.util.ArrayList;
@@ -92,9 +93,9 @@ public class ProductStock extends BaseEntity<ProductStockId> {
     private void addStockJournal(int amount) {
         if (stockJournals == null) stockJournals = new ArrayList<>();
         stockJournals.add(StockJournal.builder()
+                .withId(new StockJournalId(UUID.randomUUID()))
                 .withProductStockId(getId())
-                .withQuantity(amount)
-                .withType((amount > 0) ? StockJournalType.ADDICTION : StockJournalType.REDUCTION)
+                .withQuantity(amount).withType((amount > 0) ? StockJournalType.ADDICTION : StockJournalType.REDUCTION)
                 .build());
     }
 
@@ -112,6 +113,10 @@ public class ProductStock extends BaseEntity<ProductStockId> {
 
     public List<StockJournal> getStockJournals() {
         return stockJournals;
+    }
+
+    public void setInventoryId(InventoryId inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
     public static final class Builder {
