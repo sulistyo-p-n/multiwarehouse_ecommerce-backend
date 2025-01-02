@@ -1,9 +1,6 @@
 package com.multiwarehouse.app.inventory.service.domain.mapper;
 
-import com.multiwarehouse.app.inventory.service.domain.dto.InventoryResponse;
-import com.multiwarehouse.app.inventory.service.domain.dto.ProductResponse;
-import com.multiwarehouse.app.inventory.service.domain.dto.ProductStockResponse;
-import com.multiwarehouse.app.inventory.service.domain.dto.StockJournalResponse;
+import com.multiwarehouse.app.inventory.service.domain.dto.*;
 import com.multiwarehouse.app.inventory.service.domain.entity.Inventory;
 import com.multiwarehouse.app.inventory.service.domain.entity.Product;
 import com.multiwarehouse.app.inventory.service.domain.entity.ProductStock;
@@ -53,6 +50,18 @@ public class InventoryDataMapper {
                 .quantity(stockJournal.getQuantity())
                 .type(stockJournal.getType())
                 .createdAt(stockJournal.getCreatedAt())
+                .build();
+    }
+
+    public AddStockToInventoryResponse addStockToInventoryResponseFromInventory(Inventory inventory) {
+        return AddStockToInventoryResponse.builder()
+                .id(inventory.getId().getValue())
+                .build();
+    }
+
+    public ReduceStockFromInventoryResponse reduceStockFromInventoryResponseFromInventory(Inventory inventory) {
+        return ReduceStockFromInventoryResponse.builder()
+                .id(inventory.getId().getValue())
                 .build();
     }
 }

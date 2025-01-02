@@ -12,43 +12,63 @@ import java.util.List;
 @Service
 @Validated
 public class InventoryApplicationServiceImpl implements InventoryService {
+    private final InventoryGetCommandHandler inventoryGetCommandHandler;
+    private final InventoryAddStockCommandHandler inventoryAddStockCommandHandler;
+    private final InventoryReduceStockCommandHandler inventoryReduceStockCommandHandler;
+    private final StockMutationsGetCommandHandler stockMutationsGetCommandHandler;
+    private final StockMutationGetCommandHandler stockMutationGetCommandHandler;
+    private final StockMutationRequestCommandHandler stockMutationRequestCommandHandler;
+    private final StockMutationRejectCommandHandler stockMutationRejectCommandHandler;
+    private final StockMutationApproveCommandHandler stockMutationApproveCommandHandler;
+
+    public InventoryApplicationServiceImpl(InventoryGetCommandHandler inventoryGetCommandHandler, InventoryAddStockCommandHandler inventoryAddStockCommandHandler, InventoryReduceStockCommandHandler inventoryReduceStockCommandHandler, StockMutationsGetCommandHandler stockMutationsGetCommandHandler, StockMutationGetCommandHandler stockMutationGetCommandHandler, StockMutationRequestCommandHandler stockMutationRequestCommandHandler, StockMutationRejectCommandHandler stockMutationRejectCommandHandler, StockMutationApproveCommandHandler stockMutationApproveCommandHandler) {
+        this.inventoryGetCommandHandler = inventoryGetCommandHandler;
+        this.inventoryAddStockCommandHandler = inventoryAddStockCommandHandler;
+        this.inventoryReduceStockCommandHandler = inventoryReduceStockCommandHandler;
+        this.stockMutationsGetCommandHandler = stockMutationsGetCommandHandler;
+        this.stockMutationGetCommandHandler = stockMutationGetCommandHandler;
+        this.stockMutationRequestCommandHandler = stockMutationRequestCommandHandler;
+        this.stockMutationRejectCommandHandler = stockMutationRejectCommandHandler;
+        this.stockMutationApproveCommandHandler = stockMutationApproveCommandHandler;
+    }
+
     @Override
     public InventoryResponse getInventory(GetInventoryCommand getInventoryCommand) {
-        return null;
+        return inventoryGetCommandHandler.getInventory(getInventoryCommand);
     }
 
     @Override
     public AddStockToInventoryResponse addStockToInventory(AddStockToInventoryCommand addStockToInventoryCommand) {
-        return null;
+        return inventoryAddStockCommandHandler.addStockToInventory(addStockToInventoryCommand);
     }
 
     @Override
     public ReduceStockFromInventoryResponse reduceStockFromInventory(ReduceStockFromInventoryCommand reduceStockFromInventoryCommand) {
-        return null;
+        return inventoryReduceStockCommandHandler.reduceStockFromInventory(reduceStockFromInventoryCommand);
     }
 
     @Override
     public List<StockMutationResponse> getStockMutations(GetStockMutationsCommand getStockMutationsCommand) {
-        return List.of();
+        return stockMutationsGetCommandHandler.getStockMutations(getStockMutationsCommand);
     }
 
     @Override
     public StockMutationResponse getStockMutation(GetStockMutationCommand getStockMutationCommand) {
-        return null;
+        return stockMutationGetCommandHandler.getStockMutation(getStockMutationCommand);
     }
 
     @Override
     public RequestStockMutationResponse requestStockMutation(RequestStockMutationCommand requestStockMutationCommand) {
-        return null;
+        return stockMutationRequestCommandHandler.requestStockMutation(requestStockMutationCommand);
     }
 
     @Override
     public RejectStockMutationResponse rejectStockMutation(RejectStockMutationCommand rejectStockMutationCommand) {
-        return null;
+        return stockMutationRejectCommandHandler.rejectStockMutation(rejectStockMutationCommand);
     }
 
     @Override
-    public AcceptStockMutationResponse acceptStockMutation(AcceptStockMutationCommand acceptStockMutationCommand) {
-        return null;
+    public ApproveStockMutationResponse acceptStockMutation(ApproveStockMutationCommand approveStockMutationCommand) {
+        return stockMutationApproveCommandHandler.approveStockMutation(approveStockMutationCommand);
     }
 }

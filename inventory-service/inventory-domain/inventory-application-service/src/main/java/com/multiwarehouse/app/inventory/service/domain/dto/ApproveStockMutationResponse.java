@@ -9,6 +9,6 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class AcceptStockMutationResponse {
+public class ApproveStockMutationResponse {
     private final UUID id;
 }

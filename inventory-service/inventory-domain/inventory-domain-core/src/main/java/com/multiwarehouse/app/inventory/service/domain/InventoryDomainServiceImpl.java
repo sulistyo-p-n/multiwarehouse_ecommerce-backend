@@ -54,30 +54,31 @@ public class InventoryDomainServiceImpl implements InventoryDomainService {
     }
 
     @Override
-    public void requestStockMutation(StockMutation stockMutation) {
-        stockMutation.validateQuantity();
-        stockMutation.validateSourceInventoryAvailableStock();
-        stockMutation.validateInventory();
+    public StockMutation requestStockMutation(StockMutation stockMutation) {
+        stockMutation.validateInitialization();
+        stockMutation.initialize();
+        stockMutation.validate();
         stockMutation.request();
+        return stockMutation;
     }
 
     @Override
-    public void rejectStockMutation(StockMutation stockMutation) {
+    public StockMutation rejectStockMutation(StockMutation stockMutation) {
         stockMutation.reject();
+        return stockMutation;
     }
 
     @Override
-    public void approveStockMutation(StockMutation stockMutation) {
-        stockMutation.validateQuantity();
-        stockMutation.validateSourceInventoryAvailableStock();
-        stockMutation.validateInventory();
+    public StockMutation approveStockMutation(StockMutation stockMutation) {
+        stockMutation.validate();
         stockMutation.approve();
+        return stockMutation;
     }
 
     @Override
     public List<InventoryStockChangedEvent> transferStockMutation(StockMutation stockMutation, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher) {
-        stockMutation.validateStatus();
-        stockMutation.validateQuantity();
+        stockMutation.validate();
+        stockMutation.validateStatusApproved();
         stockMutation.validateSourceInventoryAvailableStock();
         stockMutation.transferStock();
         stockMutation.validateInventory();

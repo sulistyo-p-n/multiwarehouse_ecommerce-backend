@@ -13,5 +13,5 @@ public interface InventoryService {
     public StockMutationResponse getStockMutation(GetStockMutationCommand getStockMutationCommand);
     public RequestStockMutationResponse requestStockMutation(RequestStockMutationCommand requestStockMutationCommand);
     public RejectStockMutationResponse rejectStockMutation(RejectStockMutationCommand rejectStockMutationCommand);
-    public AcceptStockMutationResponse acceptStockMutation(AcceptStockMutationCommand acceptStockMutationCommand);
+    public ApproveStockMutationResponse acceptStockMutation(ApproveStockMutationCommand approveStockMutationCommand);
 }

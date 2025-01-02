@@ -1,9 +1,12 @@
 package com.multiwarehouse.app.inventory.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.BaseEntity;
+import com.multiwarehouse.app.domain.valueobject.InventoryId;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationStatus;
+
+import java.util.UUID;
 
 public class StockMutation extends BaseEntity<StockMutationId> {
     private final Inventory sourceInventory;
@@ -25,25 +28,58 @@ public class StockMutation extends BaseEntity<StockMutationId> {
         return new Builder();
     }
 
-    public void validateStatus() {
-        if (status != StockMutationStatus.APPROVED) {
-            throw new InventoryDomainException("StockMutation.Status cannot be processed in its current state!");
-        }
+    public void validateInitialization() {
+        validateInitialId();
+    }
+
+    private void validateInitialId() {
+        if (getId() != null) throw new InventoryDomainException("StockMutation.Id is not in correct state for initialization!");
+    }
+
+    public void initialize() {
+        setId(new StockMutationId(UUID.randomUUID()));
+        status = StockMutationStatus.PENDING;
+    }
+
+    public void validate() {
+        validateId();
+        validateInventory();
+        validateProduct();
+        validateQuantity();
+        validateStatus();
+    }
+
+    private void validateId() {
+        if (getId() == null) throw new InventoryDomainException("StockMutation.Id cannot be null!");
+    }
+
+    public void validateInventory() {
+        sourceInventory.validate();
+        targetInventory.validate();
+    }
+
+    private void validateProduct() {
+        if (product == null) throw new InventoryDomainException("StockMutation.Product cannot be null!");
     }
 
     public void validateQuantity() {
-        if (quantity == 0) {
+        if (quantity <= 0) {
             throw new InventoryDomainException("StockMutation.Quantity must be greater than zero!");
         }
+    }
+
+    private void validateStatus() {
+        if (status == null) throw new InventoryDomainException("StockMutation.Status cannot be null!");
     }
 
     public void validateSourceInventoryAvailableStock() {
         sourceInventory.validateAvailableStock(product, quantity);
     }
 
-    public void validateInventory() {
-        sourceInventory.validate();
-        targetInventory.validate();
+    public void validateStatusApproved() {
+        if (status != StockMutationStatus.APPROVED) {
+            throw new InventoryDomainException("StockMutation.Status cannot be processed in its current state!");
+        }
     }
 
     public void request() {

@@ -14,8 +14,8 @@ public interface InventoryDomainService {
     InventoryCreatedEvent validateAndInitializeInventory(Inventory inventory, DomainEventPublisher<InventoryCreatedEvent> inventoryStockCreatedEventDomainEventPublisher);
     InventoryStockChangedEvent addStock(Inventory inventory, Product product, int quantity, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher);
     InventoryStockChangedEvent reduceStock(Inventory inventory, Product product, int quantity, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher);
-    void requestStockMutation(StockMutation stockMutation);
-    void rejectStockMutation(StockMutation stockMutation);
-    void approveStockMutation(StockMutation stockMutation);
+    StockMutation requestStockMutation(StockMutation stockMutation);
+    StockMutation rejectStockMutation(StockMutation stockMutation);
+    StockMutation approveStockMutation(StockMutation stockMutation);
     List<InventoryStockChangedEvent> transferStockMutation(StockMutation stockMutation, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher);
 }

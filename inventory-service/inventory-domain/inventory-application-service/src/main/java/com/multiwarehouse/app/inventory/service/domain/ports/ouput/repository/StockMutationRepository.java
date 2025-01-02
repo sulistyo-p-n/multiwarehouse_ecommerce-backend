@@ -5,10 +5,11 @@ import com.multiwarehouse.app.inventory.service.domain.entity.StockMutation;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationId;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 public interface StockMutationRepository {
-    Optional<StockMutation> findByWarehouseId(WarehouseId warehouseId);
+    List<StockMutation> findByWarehouseId(WarehouseId warehouseId);
     Optional<StockMutation> findById(StockMutationId stockMutationId);
     StockMutation save(StockMutation stockMutation);
     void hardDelete(StockMutation stockMutation);

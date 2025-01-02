@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class AcceptStockMutationCommand {
+public class ApproveStockMutationCommand {
     @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
     private final UUID id;
 }

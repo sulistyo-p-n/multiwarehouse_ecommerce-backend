@@ -10,7 +10,9 @@ import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutation
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class StockMutationRepositoryImpl implements StockMutationRepository {
@@ -25,8 +27,10 @@ public class StockMutationRepositoryImpl implements StockMutationRepository {
     }
 
     @Override
-    public Optional<StockMutation> findByWarehouseId(WarehouseId warehouseId) {
-        return stockMutationJpaRepository.findByWarehouseId(warehouseId.getValue()).map(stockMutationDataAccessMapper::stockMutationFromStockMutationEntity);
+    public List<StockMutation> findByWarehouseId(WarehouseId warehouseId) {
+        return stockMutationJpaRepository.findByWarehouseId(warehouseId.getValue()).stream()
+                .map(stockMutationDataAccessMapper::stockMutationFromStockMutationEntity)
+                .collect(Collectors.toList());
     }
 
     @Override

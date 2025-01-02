@@ -5,10 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.UUID;
+
 @Getter
 @Builder
 @AllArgsConstructor
 public class StockMutationResponse {
+    private final UUID id;
     private final WarehouseResponse sourceWarehouse;
     private final WarehouseResponse targetWarehouse;
     private final ProductResponse product;
