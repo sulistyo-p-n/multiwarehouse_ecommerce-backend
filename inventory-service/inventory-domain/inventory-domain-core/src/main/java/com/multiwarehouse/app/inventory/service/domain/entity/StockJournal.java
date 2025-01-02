@@ -6,18 +6,21 @@ import com.multiwarehouse.app.inventory.service.domain.valueobject.ProductStockI
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalType;
 
+import java.time.Instant;
 import java.util.UUID;
 
 public class StockJournal extends BaseEntity<StockJournalId> {
     private ProductStockId productStockId;
     private final int quantity;
     private final StockJournalType type;
+    private final Instant createdAt;
 
     private StockJournal(Builder builder) {
         super.setId(builder.id);
         productStockId = builder.productStockId;
         quantity = builder.quantity;
         type = builder.type;
+        createdAt = builder.createdAt;
     }
 
     public static Builder builder() {
@@ -64,6 +67,10 @@ public class StockJournal extends BaseEntity<StockJournalId> {
         return type;
     }
 
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
     public void setProductStockId(ProductStockId productStockId) {
         this.productStockId = productStockId;
     }
@@ -73,6 +80,7 @@ public class StockJournal extends BaseEntity<StockJournalId> {
         private ProductStockId productStockId;
         private int quantity;
         private StockJournalType type;
+        private Instant createdAt;
 
         private Builder() {
         }
@@ -94,6 +102,11 @@ public class StockJournal extends BaseEntity<StockJournalId> {
 
         public Builder withType(StockJournalType val) {
             type = val;
+            return this;
+        }
+
+        public Builder createdAt(Instant val) {
+            createdAt = val;
             return this;
         }
 
