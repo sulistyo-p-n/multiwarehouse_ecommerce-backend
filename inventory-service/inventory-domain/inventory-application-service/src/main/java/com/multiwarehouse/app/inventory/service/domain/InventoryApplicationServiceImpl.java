@@ -1,7 +1,7 @@
 package com.multiwarehouse.app.inventory.service.domain;
 
 import com.multiwarehouse.app.inventory.service.domain.dto.*;
-import com.multiwarehouse.app.inventory.service.domain.ports.input.service.InventoryService;
+import com.multiwarehouse.app.inventory.service.domain.ports.input.service.InventoryApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -11,7 +11,7 @@ import java.util.List;
 @Slf4j
 @Service
 @Validated
-public class InventoryApplicationServiceImpl implements InventoryService {
+public class InventoryApplicationServiceImpl implements InventoryApplicationService {
     private final InventoryGetCommandHandler inventoryGetCommandHandler;
     private final InventoryAddStockCommandHandler inventoryAddStockCommandHandler;
     private final InventoryReduceStockCommandHandler inventoryReduceStockCommandHandler;
@@ -68,7 +68,7 @@ public class InventoryApplicationServiceImpl implements InventoryService {
     }
 
     @Override
-    public ApproveStockMutationResponse acceptStockMutation(ApproveStockMutationCommand approveStockMutationCommand) {
+    public ApproveStockMutationResponse approveStockMutation(ApproveStockMutationCommand approveStockMutationCommand) {
         return stockMutationApproveCommandHandler.approveStockMutation(approveStockMutationCommand);
     }
 }

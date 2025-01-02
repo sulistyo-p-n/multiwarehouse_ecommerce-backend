@@ -4,7 +4,7 @@ import com.multiwarehouse.app.inventory.service.domain.dto.*;
 
 import java.util.List;
 
-public interface InventoryService {
+public interface InventoryApplicationService {
     public InventoryResponse getInventory(GetInventoryCommand getInventoryCommand);
     public AddStockToInventoryResponse addStockToInventory(AddStockToInventoryCommand addStockToInventoryCommand);
     public ReduceStockFromInventoryResponse reduceStockFromInventory(ReduceStockFromInventoryCommand reduceStockFromInventoryCommand);
@@ -13,5 +13,5 @@ public interface InventoryService {
     public StockMutationResponse getStockMutation(GetStockMutationCommand getStockMutationCommand);
     public RequestStockMutationResponse requestStockMutation(RequestStockMutationCommand requestStockMutationCommand);
     public RejectStockMutationResponse rejectStockMutation(RejectStockMutationCommand rejectStockMutationCommand);
-    public ApproveStockMutationResponse acceptStockMutation(ApproveStockMutationCommand approveStockMutationCommand);
+    public ApproveStockMutationResponse approveStockMutation(ApproveStockMutationCommand approveStockMutationCommand);
 }

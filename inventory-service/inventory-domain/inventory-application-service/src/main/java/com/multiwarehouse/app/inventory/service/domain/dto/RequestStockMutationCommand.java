@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -13,8 +14,9 @@ import java.util.UUID;
 public class RequestStockMutationCommand {
     @NotNull(message = "SourceWarehouseId {jakarta.validation.constraints.NotNull.message}")
     private final UUID sourceWarehouseId;
+    @Setter
     @NotNull(message = "TargeteWarehouseId {jakarta.validation.constraints.NotNull.message}")
-    private final UUID targetWarehouseId;
+    private UUID targetWarehouseId;
     @NotNull(message = "ProductId {jakarta.validation.constraints.NotNull.message}")
     private final UUID productId;
     @NotNull(message = "Quantity {jakarta.validation.constraints.NotNull.message}")
