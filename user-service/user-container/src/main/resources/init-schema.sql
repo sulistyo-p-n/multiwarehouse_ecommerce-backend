@@ -11,13 +11,17 @@ DROP TABLE IF EXISTS "user".warehouses CASCADE;
 CREATE TABLE "user".warehouses
 (
     id uuid NOT NULL,
-    name character varying COLLATE pg_catalog."default" NOT NULL,
+    code CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL UNIQUE,
+    name CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     active BOOLEAN DEFAULT TRUE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP,
     CONSTRAINT warehouses_pkey PRIMARY KEY (id)
 );
+
+INSERT INTO "user".warehouses (id, code, name, active)
+VALUES ('552b88da-b8a0-48fd-b9cb-ebb235bc0948', 'IKIAEKBP', 'Ikiae Kota Baru Parayangan', true);
 
 DROP TABLE IF EXISTS "user".users CASCADE;
 CREATE TABLE "user".users
@@ -27,7 +31,6 @@ CREATE TABLE "user".users
     email CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL UNIQUE,
     password CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     role user_role NOT NULL,
-    enable BOOLEAN DEFAULT FALSE NOT NULL,
     active BOOLEAN DEFAULT TRUE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -39,15 +42,12 @@ DROP TABLE IF EXISTS "user".user_profiles CASCADE;
 CREATE TABLE "user".user_profiles
 (
     id UUID NOT NULL,
-    user_id UUID NOT NULL UNIQUE,
+    user_id UUID NOT NULL,
     firstname CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     lastname CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     date_of_birth DATE NOT NULL,
     phone_number CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     profile_picture CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    deleted_at TIMESTAMP,
     CONSTRAINT user_profiles_pkey PRIMARY KEY (id)
 );
 ALTER TABLE "user".user_profiles
@@ -65,10 +65,8 @@ CREATE TABLE "user".user_addresses
     street CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     city CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     postal_code CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
-    active BOOLEAN DEFAULT TRUE NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    deleted_at TIMESTAMP,
+    latitude FLOAT NOT NULL,
+    longitude FLOAT NOT NULL,
     CONSTRAINT user_addresses_pkey PRIMARY KEY (id)
 );
 ALTER TABLE "user".user_addresses
@@ -82,12 +80,8 @@ DROP TABLE IF EXISTS "user".user_admin_warehouses CASCADE;
 CREATE TABLE "user".user_admin_warehouses
 (
     id UUID NOT NULL,
-    user_id UUID NOT NULL UNIQUE,
-    warehouse_id UUID NOT NULL UNIQUE,
-    active BOOLEAN DEFAULT TRUE NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    deleted_at TIMESTAMP,
+    user_id UUID NOT NULL,
+    warehouse_id UUID NOT NULL,
     CONSTRAINT admins_pkey PRIMARY KEY (id)
 );
 ALTER TABLE "user".user_admin_warehouses

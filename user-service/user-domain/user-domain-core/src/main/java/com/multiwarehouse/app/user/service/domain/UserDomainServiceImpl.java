@@ -29,8 +29,7 @@ public class UserDomainServiceImpl implements UserDomainService {
         user.setUsername(newUser.getUsername());
         user.setEmail(newUser.getEmail());
         user.setPassword(newUser.getPassword());
-        user.setActive(newUser.getActive());
-        user.setEnable(newUser.getEnable());
+        user.setActive(newUser.isActive());
         user.setRole(newUser.getRole());
         user.setUserAdminWarehouse(newUser.getUserAdminWarehouse());
         user.setUserProfile(newUser.getUserProfile());

@@ -11,11 +11,14 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "warehouses")
+@Table(name = "warehouse_addresses")
 @Entity
 public class WarehouseAddressEntity {
     @Id
-    private UUID id;
+    @OneToOne
+    @JoinColumn(name = "id")
+    private WarehouseEntity warehouse;
+
     private String street;
     private String city;
     @Column(name = "postal_code")
@@ -23,20 +26,16 @@ public class WarehouseAddressEntity {
     private Float latitude;
     private Float longitude;
 
-    @ManyToOne
-    @JoinColumn(name = "warehouse_id")
-    private WarehouseEntity warehouse;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WarehouseAddressEntity that = (WarehouseAddressEntity) o;
-        return id.equals(that.id);
+        return warehouse.equals(that.warehouse);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(warehouse);
     }
 }

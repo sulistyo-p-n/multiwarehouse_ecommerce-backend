@@ -23,7 +23,6 @@ DROP TABLE IF EXISTS "warehouse".warehouse_addresses CASCADE;
 CREATE TABLE "warehouse".warehouse_addresses
 (
     id uuid NOT NULL,
-    warehouse_id uuid NOT NULL,
     street CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     city CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
     postal_code CHARACTER VARYING COLLATE pg_catalog."default" NOT NULL,
@@ -32,7 +31,7 @@ CREATE TABLE "warehouse".warehouse_addresses
     CONSTRAINT warehouse_addresses_pkey PRIMARY KEY (id)
 );
 ALTER TABLE "warehouse".warehouse_addresses
-    ADD CONSTRAINT fk_warehouse_id FOREIGN KEY (warehouse_id)
+    ADD CONSTRAINT fk_warehouse_id FOREIGN KEY (id)
         REFERENCES "warehouse".warehouses (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE CASCADE

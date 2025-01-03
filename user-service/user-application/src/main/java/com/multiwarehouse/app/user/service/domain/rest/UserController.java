@@ -7,7 +7,6 @@ import com.multiwarehouse.app.user.service.domain.dto.delete.DeleteUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUsersCommand;
-import com.multiwarehouse.app.user.service.domain.dto.get.GetUsersResponse;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserResponse;
 import com.multiwarehouse.app.user.service.domain.ports.input.service.UserApplicationService;
@@ -15,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,10 +29,10 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<GetUsersResponse> getUsers(GetUsersCommand getUsersCommand) {
+    public ResponseEntity<List<GetUserResponse>> getUsers(GetUsersCommand getUsersCommand) {
         log.info("Getting Users: {}", getUsersCommand);
-        GetUsersResponse getUsersResponse = userApplicationService.getUsers(getUsersCommand);
-        log.info("Returning Users: {}", getUsersResponse.getUsers());
+        List<GetUserResponse> getUsersResponse = userApplicationService.getUsers(getUsersCommand);
+        log.info("Returning Users size: {}", getUsersResponse.size());
         return ResponseEntity.ok(getUsersResponse);
     }
 

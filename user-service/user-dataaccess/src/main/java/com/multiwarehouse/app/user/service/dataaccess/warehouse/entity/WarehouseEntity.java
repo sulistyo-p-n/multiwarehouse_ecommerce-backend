@@ -19,6 +19,7 @@ import java.util.UUID;
 public class WarehouseEntity extends BaseEntity {
     @Id
     private UUID id;
+    private String code;
     private String name;
     private Boolean active;
 

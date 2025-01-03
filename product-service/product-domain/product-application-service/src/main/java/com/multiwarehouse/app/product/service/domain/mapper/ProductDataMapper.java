@@ -14,7 +14,6 @@ import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductRes
 import com.multiwarehouse.app.product.service.domain.entity.Product;
 import com.multiwarehouse.app.product.service.domain.entity.ProductCategory;
 import com.multiwarehouse.app.product.service.domain.entity.ProductImage;
-import com.multiwarehouse.app.product.service.domain.entity.ProductStock;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -37,7 +36,6 @@ public class ProductDataMapper {
                 .withActive(createProductCommand.getActive())
                 .withCategory(ProductCategory.builder().withId(new ProductCategoryId(createProductCommand.getCategoryId())).build())
                 .withImages(this.productImagesFromCreateProductImageCommands(createProductCommand.getImages()))
-                .withStock(ProductStock.builder().withQuantity(0).build())
                 .build();
     }
 
@@ -68,10 +66,10 @@ public class ProductDataMapper {
                 .withCode(updateProductCommand.getCode())
                 .withName(updateProductCommand.getName())
                 .withDescription(updateProductCommand.getDescription())
-                .withPrice(new Money(updateProductCommand.getPrice()))
+                .withPrice(updateProductCommand.getPrice() == null ? null : new Money(updateProductCommand.getPrice()))
                 .withActive(updateProductCommand.getActive())
-                .withCategory(ProductCategory.builder().withId(new ProductCategoryId(updateProductCommand.getCategoryId())).build())
-                .withImages(this.productImagesFromUpdateProductImageCommands(updateProductCommand.getImages()))
+                .withCategory(updateProductCommand.getCategoryId() == null ? null : ProductCategory.builder().withId(new ProductCategoryId(updateProductCommand.getCategoryId())).build())
+                .withImages(updateProductCommand.getCategoryId() == null ? null : this.productImagesFromUpdateProductImageCommands(updateProductCommand.getImages()))
                 .build();
     }
 
@@ -107,7 +105,6 @@ public class ProductDataMapper {
                 .active(product.isActive())
                 .category(productCategoryDataMapper.getProductCategoryResponseFromProductCategory(product.getCategory()))
                 .images(this.getProductImageResponsesFromProductImages(product.getImages()))
-                .quantity(product.getProductStock().getQuantity())
                 .softDeleted(product.isSoftDeleted())
                 .build();
     }

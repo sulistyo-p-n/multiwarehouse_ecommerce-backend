@@ -15,13 +15,16 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "user_profiles")
 @Entity
-public class UserProfileEntity extends BaseEntity {
+public class UserProfileEntity {
     @Id
     private UUID id;
     private String firstname;
     private String lastname;
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "profile_picture")
     private String profilePicture;
 
     @OneToOne

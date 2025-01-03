@@ -21,6 +21,8 @@ public class UserAddress {
     @NotNull(message = "PostalCode {jakarta.validation.constraints.NotNull.message}")
     @Size(min = 2, max = 50, message = "PostalCode {jakarta.validation.constraints.Size.message}")
     private final String postalCode;
-    @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")
-    private final Boolean active;
+    @NotNull(message = "Latitude {jakarta.validation.constraints.NotNull.message}")
+    private final Float latitude;
+    @NotNull(message = "Longitude {jakarta.validation.constraints.NotNull.message}")
+    private final Float longitude;
 }

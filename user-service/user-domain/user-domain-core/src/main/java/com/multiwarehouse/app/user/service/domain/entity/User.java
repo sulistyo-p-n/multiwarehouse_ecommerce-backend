@@ -12,13 +12,12 @@ public class User extends AggregateRoot<UserId> {
     private String email;
     private String password;
     private Boolean active;
-    private Boolean enable;
     private UserRole role;
     private UserAdminWarehouse userAdminWarehouse;
     private UserProfile userProfile;
     private List<UserAddress> userAddresses;
 
-    private final Boolean isSoftDeleted;
+    private final Boolean softDeleted;
 
     public void initialize() {
         setId(new UserId(UUID.randomUUID()));
@@ -72,28 +71,23 @@ public class User extends AggregateRoot<UserId> {
         validateEmail();
         validatePassword();
         validateActive();
-        validateEnable();
         validateRole();
     }
 
     private void validateUsername() {
-        if (getUsername() == null || getUsername().isEmpty()) throw new UserDomainException("User Username cannot be empty");
+        if (username == null || getUsername().isEmpty()) throw new UserDomainException("User Username cannot be empty");
     }
 
     private void validateEmail() {
-        if (getEmail() == null || getEmail().isEmpty()) throw new UserDomainException("Product Email cannot be empty");
+        if (email == null || getEmail().isEmpty()) throw new UserDomainException("Product Email cannot be empty");
     }
 
     private void validatePassword() {
-        if (getPassword() == null || getPassword().isEmpty()) throw new UserDomainException("User Password cannot be empty");
+        if (password == null || getPassword().isEmpty()) throw new UserDomainException("User Password cannot be empty");
     }
 
     private void validateActive() {
-        if (getActive() == null) throw new UserDomainException("User Active cannot be null");
-    }
-
-    private void validateEnable() {
-        if (getEnable() == null) throw new UserDomainException("User Enable cannot be null");
+        if (active == null) throw new UserDomainException("User Active cannot be null");
     }
 
     private void validateRole() {
@@ -124,11 +118,6 @@ public class User extends AggregateRoot<UserId> {
         this.active = active;
     }
 
-    public void setEnable(Boolean enable) {
-        if (enable == null) return;
-        this.enable = enable;
-    }
-
     public void setRole(UserRole role) {
         if (role == null) return;
         this.role = role;
@@ -137,16 +126,19 @@ public class User extends AggregateRoot<UserId> {
     public void setUserAdminWarehouse(UserAdminWarehouse userAdminWarehouse) {
         if (userAdminWarehouse == null) return;
         this.userAdminWarehouse = userAdminWarehouse;
+        initializeUserAdminWarehouse();
     }
 
     public void setUserProfile(UserProfile userProfile) {
         if (userProfile == null) return;
         this.userProfile = userProfile;
+        initializeUserProfile();
     }
 
     public void setUserAddresses(List<UserAddress> userAddresses) {
         if (userAddresses == null) return;
         this.userAddresses = userAddresses;
+        initializeUserAddresses();
     }
 
     public String getUsername() {
@@ -161,12 +153,8 @@ public class User extends AggregateRoot<UserId> {
         return password;
     }
 
-    public Boolean getActive() {
+    public Boolean isActive() {
         return active;
-    }
-
-    public Boolean getEnable() {
-        return enable;
     }
 
     public UserRole getRole() {
@@ -185,8 +173,8 @@ public class User extends AggregateRoot<UserId> {
         return userAddresses;
     }
 
-    public Boolean getSoftDeleted() {
-        return isSoftDeleted;
+    public Boolean isSoftDeleted() {
+        return softDeleted;
     }
 
     private User(Builder builder) {
@@ -195,12 +183,11 @@ public class User extends AggregateRoot<UserId> {
         email = builder.email;
         password = builder.password;
         active = builder.active;
-        enable = builder.enable;
         role = builder.role;
         userAdminWarehouse = builder.admin;
         userProfile = builder.userProfile;
         userAddresses = builder.userAddresses;
-        isSoftDeleted = builder.isSoftDeleted;
+        softDeleted = builder.softDeleted;
     }
 
     public static Builder builder() {
@@ -213,12 +200,11 @@ public class User extends AggregateRoot<UserId> {
         private String email;
         private String password;
         private Boolean active;
-        private Boolean enable;
         private UserRole role;
         private UserAdminWarehouse admin;
         private UserProfile userProfile;
         private List<UserAddress> userAddresses;
-        private Boolean isSoftDeleted;
+        private Boolean softDeleted;
 
         private Builder() {
         }
@@ -248,11 +234,6 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
-        public Builder withEnable(Boolean val) {
-            enable = val;
-            return this;
-        }
-
         public Builder withRole(UserRole val) {
             role = val;
             return this;
@@ -273,8 +254,8 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
-        public Builder withIsSoftDeleted(Boolean val) {
-            isSoftDeleted = val;
+        public Builder withSoftDeleted(Boolean val) {
+            softDeleted = val;
             return this;
         }
 

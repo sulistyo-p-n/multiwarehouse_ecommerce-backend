@@ -4,7 +4,6 @@ import com.multiwarehouse.app.domain.valueobject.*;
 import com.multiwarehouse.app.user.service.domain.dto.create.CreateUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.create.CreateUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserResponse;
-import com.multiwarehouse.app.user.service.domain.dto.get.GetUsersResponse;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserResponse;
 import com.multiwarehouse.app.user.service.domain.entity.UserAdminWarehouse;
@@ -82,14 +81,12 @@ public class UserDataMapper {
 
     private UserAddress userAddressEntityFromUserAddress(com.multiwarehouse.app.user.service.domain.dto.UserAddress userAddress) {
         return UserAddress.builder()
-                .withAddress(new Address(userAddress.getStreet(), userAddress.getCity(), userAddress.getPostalCode()))
-                .withActive(userAddress.getActive())
-                .build();
-    }
-
-    public GetUsersResponse getUsersResponseFromUsers(List<User> users) {
-        return GetUsersResponse.builder()
-                .users(users.stream().map(this::getUserResponseFromUser).collect(Collectors.toList()))
+                .withAddress(new Address(
+                        userAddress.getStreet(),
+                        userAddress.getCity(),
+                        userAddress.getPostalCode(),
+                        userAddress.getLatitude(),
+                        userAddress.getLongitude()))
                 .build();
     }
 
@@ -98,12 +95,12 @@ public class UserDataMapper {
                 .id(user.getId().getValue())
                 .username(user.getUsername())
                 .email(user.getEmail())
-                .active(user.getActive())
+                .active(user.isActive())
                 .role(user.getRole())
                 .adminWarehouse(userAdminWarehouseFromUserAdminWarehouseEntity(user.getUserAdminWarehouse()))
                 .profile(userProfileFromUserProfileEntity(user.getUserProfile()))
                 .addresses(userAddressesFromUserAddressEntities(user.getUserAddresses()))
-                .isSoftDeleted(user.getSoftDeleted())
+                .isSoftDeleted(user.isSoftDeleted())
                 .build();
     }
 
@@ -134,7 +131,8 @@ public class UserDataMapper {
                 .street(userAddress.getAddress().getStreet())
                 .city(userAddress.getAddress().getCity())
                 .postalCode(userAddress.getAddress().getPostalCode())
-                .active(userAddress.getActive())
+                .latitude(userAddress.getAddress().getLatitude())
+                .longitude(userAddress.getAddress().getLongitude())
                 .build();
     }
 }

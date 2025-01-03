@@ -75,12 +75,6 @@ CREATE TABLE "product".stocks
     UNIQUE (product_id, warehouse_id),
     CONSTRAINT stocks_pkey PRIMARY KEY (id)
 );
-ALTER TABLE "product".stocks
-    ADD CONSTRAINT fk_product_id FOREIGN KEY (product_id)
-        REFERENCES "product".products (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE CASCADE
-    NOT VALID;
 
 -- "product".product_stocks_m_view
 DROP MATERIALIZED VIEW IF EXISTS "product".product_stocks_m_view;

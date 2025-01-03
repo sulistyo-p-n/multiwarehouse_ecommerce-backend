@@ -12,6 +12,9 @@ import com.multiwarehouse.app.user.service.domain.entity.User;
 import com.multiwarehouse.app.user.service.domain.entity.UserAddress;
 import com.multiwarehouse.app.user.service.domain.entity.UserAdminWarehouse;
 import com.multiwarehouse.app.user.service.domain.entity.UserProfile;
+import com.multiwarehouse.app.user.service.domain.valueobject.UserAddressId;
+import com.multiwarehouse.app.user.service.domain.valueobject.UserAdminWarehouseId;
+import com.multiwarehouse.app.user.service.domain.valueobject.UserProfileId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -26,28 +29,23 @@ public class UserDataAccessMapper {
                 .withUsername(userEntity.getUsername())
                 .withEmail(userEntity.getEmail())
                 .withPassword(userEntity.getPassword())
-                .withActive(userEntity.getActive())
                 .withRole(userEntity.getRole())
-                .withUserAdminWarehouse(userAdminWarehouseFromUserAdminWarehouseEntity(userEntity.getUserAdminWarehouse()))
+                .withActive(userEntity.getActive())
                 .withUserProfile(userProfileFromUserProfileEntity(userEntity.getUserProfile()))
                 .withUserAddresses(userAddressesFromUserAddressEntities(userEntity.getUserAddresses()))
+                .withUserAdminWarehouse(userAdminWarehouseFromUserAdminWarehouseEntity(userEntity.getUserAdminWarehouse()))
+                .withSoftDeleted(userEntity.isSoftDeleted())
                 .build();
-        if (user.getUserAdminWarehouse() != null) user.getUserAdminWarehouse().setUserId(userId);
         if (user.getUserProfile() != null) user.getUserProfile().setUserId(userId);
         if (user.getUserAddresses() != null) user.getUserAddresses().forEach(userAddress -> userAddress.setUserId(userId));
+        if (user.getUserAdminWarehouse() != null) user.getUserAdminWarehouse().setUserId(userId);
         return user;
-    }
-
-    private UserAdminWarehouse userAdminWarehouseFromUserAdminWarehouseEntity(UserAdminWarehouseEntity userAdminWarehouseEntity) {
-        if (userAdminWarehouseEntity == null) return null;
-        return UserAdminWarehouse.builder()
-                .withWarehouseId(new WarehouseId(userAdminWarehouseEntity.getWarehouseId()))
-                .build();
     }
 
     private UserProfile userProfileFromUserProfileEntity(UserProfileEntity userProfileEntity) {
         if (userProfileEntity == null) return  null;
         return UserProfile.builder()
+                .withId(new UserProfileId(userProfileEntity.getId()))
                 .withPerson(new Person(userProfileEntity.getFirstname(), userProfileEntity.getLastname(), userProfileEntity.getDateOfBirth()))
                 .withPhoneNumber(userProfileEntity.getPhoneNumber())
                 .withProfilePicture(userProfileEntity.getProfilePicture())
@@ -61,8 +59,21 @@ public class UserDataAccessMapper {
 
     private UserAddress userAddressFromUserAddressEntity(UserAddressEntity userAddressEntity) {
         return UserAddress.builder()
-                .withAddress(new Address(userAddressEntity.getStreet(), userAddressEntity.getCity(), userAddressEntity.getPostalCode()))
-                .withActive(userAddressEntity.getActive())
+                .withId(new UserAddressId(userAddressEntity.getId()))
+                .withAddress(new Address(
+                        userAddressEntity.getStreet(),
+                        userAddressEntity.getCity(),
+                        userAddressEntity.getPostalCode(),
+                        userAddressEntity.getLatitude(),
+                        userAddressEntity.getLongitude()))
+                .build();
+    }
+
+    private UserAdminWarehouse userAdminWarehouseFromUserAdminWarehouseEntity(UserAdminWarehouseEntity userAdminWarehouseEntity) {
+        if (userAdminWarehouseEntity == null) return null;
+        return UserAdminWarehouse.builder()
+                .withId(new UserAdminWarehouseId(userAdminWarehouseEntity.getId()))
+                .withWarehouseId(new WarehouseId(userAdminWarehouseEntity.getWarehouseId()))
                 .build();
     }
 
@@ -72,7 +83,7 @@ public class UserDataAccessMapper {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .password(user.getPassword())
-                .active(user.getActive())
+                .active(user.isActive())
                 .role(user.getRole())
                 .userAdminWarehouse(userAdminWarehouseEntityFromUserAdminWarehouse(user.getUserAdminWarehouse()))
                 .userProfile(userProfileEntityFromUserProfile(user.getUserProfile()))
@@ -87,6 +98,7 @@ public class UserDataAccessMapper {
     private UserAdminWarehouseEntity userAdminWarehouseEntityFromUserAdminWarehouse(UserAdminWarehouse userAdminWarehouse) {
         if (userAdminWarehouse == null) return null;
         return UserAdminWarehouseEntity.builder()
+                .id(userAdminWarehouse.getId().getValue())
                 .warehouseId(userAdminWarehouse.getWarehouseId().getValue())
                 .build();
     }
@@ -94,6 +106,7 @@ public class UserDataAccessMapper {
     private UserProfileEntity userProfileEntityFromUserProfile(UserProfile userProfile) {
         if (userProfile == null) return null;
         return UserProfileEntity.builder()
+                .id(userProfile.getId().getValue())
                 .firstname(userProfile.getPerson().getFirstname())
                 .lastname(userProfile.getPerson().getLastname())
                 .dateOfBirth(userProfile.getPerson().getDateOfBirth())
@@ -109,10 +122,12 @@ public class UserDataAccessMapper {
 
     private UserAddressEntity userAddressEntityFromUserAddress(UserAddress userAddress) {
         return UserAddressEntity.builder()
+                .id(userAddress.getId().getValue())
                 .street(userAddress.getAddress().getStreet())
                 .city(userAddress.getAddress().getCity())
                 .postalCode(userAddress.getAddress().getPostalCode())
-                .active(userAddress.getActive())
+                .latitude(userAddress.getAddress().getLatitude())
+                .longitude(userAddress.getAddress().getLongitude())
                 .build();
     }
 }

@@ -29,6 +29,9 @@ public class UserCreateCommandHandler {
     public CreateUserResponse createUser(CreateUserCommand createUserCommand) {
         User user = userDataMapper.userFromCreateUserCommand(createUserCommand);
         UserCreatedEvent userCreatedEvent = userDomainService.validateAndInitializeUser(user, userCreatedMessagePublisher);
+        userCreatedEvent.getUser().getUserAddresses().forEach(userAddress -> {
+            log.info("user address id : {}",userAddress.getUserId().getValue());
+        });
         User userSaved = userHelper.saveUser(userCreatedEvent.getUser());
         log.info("User is created with id: {}", userSaved.getId().getValue());
         return userDataMapper.createUserResponseFromUser(user);

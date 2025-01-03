@@ -7,10 +7,11 @@ import com.multiwarehouse.app.user.service.domain.dto.delete.DeleteUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUsersCommand;
-import com.multiwarehouse.app.user.service.domain.dto.get.GetUsersResponse;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserResponse;
 import jakarta.validation.Valid;
+
+import java.util.List;
 
 public interface UserApplicationService {
     public CreateUserResponse createUser(@Valid CreateUserCommand createUserCommand);
@@ -19,7 +20,7 @@ public interface UserApplicationService {
 
     public DeleteUserResponse deleteUser(@Valid DeleteUserCommand deleteUserCommand);
 
-    public GetUserResponse getUser(@Valid GetUserCommand getUserCommand);
+    public List<GetUserResponse> getUsers(@Valid GetUsersCommand getUsersCommand);
 
-    public GetUsersResponse getUsers(@Valid GetUsersCommand getUsersCommand);
+    public GetUserResponse getUser(@Valid GetUserCommand getUserCommand);
 }

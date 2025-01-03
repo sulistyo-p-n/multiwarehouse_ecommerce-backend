@@ -16,12 +16,10 @@ public class ProductDataAccessMapper {
 
     private final ProductCategoryDataAccessMapper productCategoryDataAccessMapper;
     private final ProductImageDataAccessMapper productImageDataAccessMapper;
-    private final ProductStockDataAccessMapper productStockDataAccessMapper;
 
-    public ProductDataAccessMapper(ProductCategoryDataAccessMapper productCategoryDataAccessMapper, ProductImageDataAccessMapper productImageDataAccessMapper, ProductStockDataAccessMapper productStockDataAccessMapper) {
+    public ProductDataAccessMapper(ProductCategoryDataAccessMapper productCategoryDataAccessMapper, ProductImageDataAccessMapper productImageDataAccessMapper) {
         this.productCategoryDataAccessMapper = productCategoryDataAccessMapper;
         this.productImageDataAccessMapper = productImageDataAccessMapper;
-        this.productStockDataAccessMapper = productStockDataAccessMapper;
     }
 
     public Product productEntityToProduct(ProductEntity productEntity) {
@@ -34,12 +32,10 @@ public class ProductDataAccessMapper {
                 .withPrice(new Money(productEntity.getPrice()))
                 .withCategory(productCategoryDataAccessMapper.productCategoryEntityToProductCategory(productEntity.getCategory()))
                 .withImages(productImageEntitiesToProductImages(productEntity.getImages()))
-                .withStock(productStockDataAccessMapper.productStockEntityToProductStock(productEntity.getStock()))
                 .withActive(productEntity.getActive())
                 .withSoftDeleted(productEntity.isSoftDeleted())
                 .build();
         product.getImages().forEach(productImage -> productImage.setProductId(productId));
-        product.getProductStock().setId(productId);
         return product;
     }
 

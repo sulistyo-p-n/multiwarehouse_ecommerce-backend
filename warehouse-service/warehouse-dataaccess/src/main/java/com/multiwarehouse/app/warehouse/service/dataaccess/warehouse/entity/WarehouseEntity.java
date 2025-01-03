@@ -1,13 +1,9 @@
 package com.multiwarehouse.app.warehouse.service.dataaccess.warehouse.entity;
 
 import com.multiwarehouse.app.dataaccess.entity.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -26,7 +22,7 @@ public class WarehouseEntity extends BaseEntity {
     private String description;
     private Boolean active;
 
-    @OneToOne(mappedBy = "warehouse")
+    @OneToOne(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
     private WarehouseAddressEntity address;
 
     @Override

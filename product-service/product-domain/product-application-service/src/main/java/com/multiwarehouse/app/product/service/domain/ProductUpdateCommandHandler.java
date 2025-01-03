@@ -35,8 +35,10 @@ public class ProductUpdateCommandHandler {
         ProductId productId = new ProductId(updateProductCommand.getId());
         Product product = productHelper.findProductById(productId);
         Product newProduct = productDataMapper.productFromUpdateProductCommand(updateProductCommand);
-        ProductCategory productCategory = productCategoryHelper.findProductCategoryById(new ProductCategoryId(updateProductCommand.getCategoryId()));
-        newProduct.setCategory(productCategory);
+        if (updateProductCommand.getCategoryId() != null) {
+            ProductCategory productCategory = productCategoryHelper.findProductCategoryById(new ProductCategoryId(updateProductCommand.getCategoryId()));
+            newProduct.setCategory(productCategory);
+        }
         ProductUpdatedEvent productUpdatedEvent = productDomainService.validateAndSetProduct(product, newProduct, productUpdatedMessagePublisher);
         Product productSaved = productHelper.saveProduct(productUpdatedEvent.getProduct());
         log.info("Product is updated with id: {}", productSaved.getId().getValue());

@@ -7,13 +7,14 @@ import com.multiwarehouse.app.user.service.domain.dto.delete.DeleteUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUsersCommand;
-import com.multiwarehouse.app.user.service.domain.dto.get.GetUsersResponse;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserResponse;
 import com.multiwarehouse.app.user.service.domain.ports.input.service.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -49,12 +50,12 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public GetUserResponse getUser(GetUserCommand getUserCommand) {
-        return userGetCommandHandler.getUser(getUserCommand);
+    public List<GetUserResponse> getUsers(GetUsersCommand getUsersCommand) {
+        return usersGetCommandHandler.getUsers(getUsersCommand);
     }
 
     @Override
-    public GetUsersResponse getUsers(GetUsersCommand getUsersCommand) {
-        return usersGetCommandHandler.getUsers(getUsersCommand);
+    public GetUserResponse getUser(GetUserCommand getUserCommand) {
+        return userGetCommandHandler.getUser(getUserCommand);
     }
 }

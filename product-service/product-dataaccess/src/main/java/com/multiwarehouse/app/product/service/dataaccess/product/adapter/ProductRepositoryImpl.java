@@ -54,7 +54,8 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void hardDelete(Product product) {
-        productJpaRepository.delete(productDataAccessMapper.productToProductEntity(product));
+        ProductEntity productEntity =productJpaRepository.findById(product.getId().getValue()).get(); // productDataAccessMapper.productToProductEntity(product);
+        productJpaRepository.delete(productEntity);
     }
 
     @Override

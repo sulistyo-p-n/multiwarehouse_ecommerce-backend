@@ -32,7 +32,7 @@ public class WarehouseCreateCommandHandler {
         WarehouseCreatedEvent warehouseCreatedEvent = warehouseDomainService.validateAndInitiateWarehouse(warehouse, warehouseCreatedMessagePublisher);
         Warehouse warehouseSaved = warehouseHelper.saveWarehouse(warehouseCreatedEvent.getWarehouse());
         log.info("Warehouse is created with id: {}", warehouseSaved.getId().getValue());
-        warehouseCreatedMessagePublisher.publish(warehouseCreatedEvent);
+//        warehouseCreatedMessagePublisher.publish(warehouseCreatedEvent);
         return warehouseDataMapper.createWarehouseResponseFromWarehouse(warehouseSaved);
     }
 }

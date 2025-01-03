@@ -57,7 +57,7 @@ public class WarehouseDataMapper {
     }
 
     private Address addressFromUpdateWarehouseCommand(UpdateWarehouseAddressCommand updateWarehouseAddressCommand) {
-        return new Address(
+        return updateWarehouseAddressCommand == null ? null : new Address(
                 updateWarehouseAddressCommand.getStreet(),
                 updateWarehouseAddressCommand.getCity(),
                 updateWarehouseAddressCommand.getPostalCode(),

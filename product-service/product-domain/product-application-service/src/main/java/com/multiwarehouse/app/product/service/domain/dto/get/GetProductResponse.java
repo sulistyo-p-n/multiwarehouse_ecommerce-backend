@@ -19,7 +19,6 @@ public class GetProductResponse {
     private final String description;
     private final BigDecimal price;
     private final Boolean active;
-    private final Integer quantity;
 
     private final GetProductCategoryResponse category;
     private final List<GetProductImageResponse> images;

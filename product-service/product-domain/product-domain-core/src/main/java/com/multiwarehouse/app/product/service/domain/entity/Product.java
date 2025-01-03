@@ -17,7 +17,6 @@ public class Product extends AggregateRoot<ProductId> {
     private List<ProductImage> images;
     private Boolean active;
 
-    private final ProductStock stock;
     private final Boolean softDeleted;
 
     private Product(Builder builder) {
@@ -28,7 +27,6 @@ public class Product extends AggregateRoot<ProductId> {
         price = builder.price;
         category = builder.category;
         images = builder.images;
-        stock = builder.stock;
         active = builder.active;
         softDeleted = builder.softDeleted;
     }
@@ -160,10 +158,6 @@ public class Product extends AggregateRoot<ProductId> {
         return images;
     }
 
-    public ProductStock getProductStock() {
-        return stock;
-    }
-
     public Boolean isActive() {
         return active;
     }
@@ -180,7 +174,6 @@ public class Product extends AggregateRoot<ProductId> {
         private Money price;
         private ProductCategory category;
         private List<ProductImage> images;
-        private ProductStock stock;
         private Boolean active;
         private Boolean softDeleted;
 
@@ -219,11 +212,6 @@ public class Product extends AggregateRoot<ProductId> {
 
         public Builder withImages(List<ProductImage> val) {
             images = val;
-            return this;
-        }
-
-        public Builder withStock(ProductStock val) {
-            stock = val;
             return this;
         }
 

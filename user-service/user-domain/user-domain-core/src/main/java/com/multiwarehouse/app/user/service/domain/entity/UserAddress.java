@@ -11,7 +11,6 @@ import java.util.UUID;
 public class UserAddress extends BaseEntity<UserAddressId> {
     private UserId userId;
     private final Address address;
-    private final Boolean active;
 
     public void initialize() {
         setId(new UserAddressId(UUID.randomUUID()));
@@ -40,19 +39,14 @@ public class UserAddress extends BaseEntity<UserAddressId> {
     public void validateFields() {
         validateUserId();
         validateAddress();
-        validateActive();
     }
 
     public void validateUserId() {
-        if (getUserId() == null) throw new UserDomainException("UserAddress UserId cannot be null");
+        if (userId == null) throw new UserDomainException("UserAddress UserId cannot be null");
     }
 
     public void validateAddress() {
-        if (getAddress() == null) throw new UserDomainException("UserAddress Address cannot be null");
-    }
-
-    private void validateActive() {
-        if (getActive() == null) throw new UserDomainException("UserAddress Active cannot be null");
+        if (address == null) throw new UserDomainException("UserAddress Address cannot be null");
     }
 
     public void setUserId(UserId userId) {
@@ -68,15 +62,10 @@ public class UserAddress extends BaseEntity<UserAddressId> {
         return address;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
     private UserAddress(Builder builder) {
         super.setId(builder.id);
         userId = builder.userId;
         address = builder.address;
-        active = builder.active;
     }
 
     public static Builder builder() {
@@ -88,7 +77,6 @@ public class UserAddress extends BaseEntity<UserAddressId> {
         private UserAddressId id;
         private UserId userId;
         private Address address;
-        private Boolean active;
 
         private Builder() {
         }
@@ -105,11 +93,6 @@ public class UserAddress extends BaseEntity<UserAddressId> {
 
         public Builder withAddress(Address val) {
             address = val;
-            return this;
-        }
-
-        public Builder withActive(Boolean val) {
-            active = val;
             return this;
         }
 

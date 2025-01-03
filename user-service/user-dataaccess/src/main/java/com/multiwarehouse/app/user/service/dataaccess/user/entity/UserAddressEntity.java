@@ -15,13 +15,15 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "user_addresses")
 @Entity
-public class UserAddressEntity extends BaseEntity {
+public class UserAddressEntity {
     @Id
     private UUID id;
     private String street;
     private String city;
+    @Column(name = "postal_code")
     private String postalCode;
-    private Boolean active;
+    private Float latitude;
+    private Float longitude;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

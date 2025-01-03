@@ -42,11 +42,11 @@ public class UserAdminWarehouse extends BaseEntity<UserAdminWarehouseId> {
     }
 
     public void validateUserId() {
-        if (getUserId() == null) throw new UserDomainException("Admin UserId cannot be null");
+        if (userId == null) throw new UserDomainException("Admin UserId cannot be null");
     }
 
     public void validateWarehouseId() {
-        if (getWarehouseId() == null) throw new UserDomainException("Admin WarehouseId cannot be null");
+        if (warehouseId == null) throw new UserDomainException("Admin WarehouseId cannot be null");
     }
 
     public void setUserId(UserId userId) {
