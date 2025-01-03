@@ -5,7 +5,6 @@ import com.multiwarehouse.app.product.service.domain.dto.create.CreateProductRes
 import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductCommand;
 import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductResponse;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductsCommand;
-import com.multiwarehouse.app.product.service.domain.dto.get.GetProductsResponse;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCommand;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductResponse;
 import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCommand;
@@ -14,6 +13,8 @@ import com.multiwarehouse.app.product.service.domain.ports.input.service.Product
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -50,7 +51,7 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
     }
 
     @Override
-    public GetProductsResponse getProducts(GetProductsCommand getProductsCommand) {
+    public List<GetProductResponse> getProducts(GetProductsCommand getProductsCommand) {
         return ProductsGetCommandHandler.getProducts(getProductsCommand);
     }
 

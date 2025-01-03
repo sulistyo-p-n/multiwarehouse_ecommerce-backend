@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanConfiguration {
-//    @Bean
-//    public InventoryDomainService inventoryDomainService() {
-//        return new InventoryDomainServiceImpl();
-//    }
+    @Bean
+    public InventoryDomainService inventoryDomainService() {
+        return new InventoryDomainServiceImpl();
+    }
 }

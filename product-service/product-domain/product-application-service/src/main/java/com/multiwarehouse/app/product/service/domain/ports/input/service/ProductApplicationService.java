@@ -7,10 +7,11 @@ import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductRes
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCommand;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductResponse;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductsCommand;
-import com.multiwarehouse.app.product.service.domain.dto.get.GetProductsResponse;
 import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCommand;
 import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductResponse;
 import jakarta.validation.Valid;
+
+import java.util.List;
 
 public interface ProductApplicationService {
     public CreateProductResponse createProduct(@Valid CreateProductCommand createProductCommand);
@@ -19,7 +20,7 @@ public interface ProductApplicationService {
 
     public DeleteProductResponse deleteProduct(@Valid DeleteProductCommand deleteProductCommand);
 
-    public GetProductsResponse getProducts(@Valid GetProductsCommand getProductsCommand);
+    public List<GetProductResponse> getProducts(@Valid GetProductsCommand getProductsCommand);
 
     public GetProductResponse getProduct(@Valid GetProductCommand getProductCommand);
 }

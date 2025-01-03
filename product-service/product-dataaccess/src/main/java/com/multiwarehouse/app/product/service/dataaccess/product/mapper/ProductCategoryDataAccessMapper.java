@@ -14,7 +14,7 @@ public class ProductCategoryDataAccessMapper {
                 .withName(productCategoryEntity.getName())
                 .withDescription(productCategoryEntity.getDescription())
                 .withActive(productCategoryEntity.getActive())
-                .withIsSoftDeleted(productCategoryEntity.isSoftDeleted())
+                .withSoftDeleted(productCategoryEntity.isSoftDeleted())
                 .build();
     }
 
@@ -24,7 +24,7 @@ public class ProductCategoryDataAccessMapper {
                 .code(productCategory.getCode())
                 .name(productCategory.getName())
                 .description(productCategory.getDescription())
-                .active(productCategory.getActive())
+                .active(productCategory.isActive())
                 .build();
     }
 }

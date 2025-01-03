@@ -13,12 +13,29 @@ public class Product extends AggregateRoot<ProductId> {
     private String name;
     private String description;
     private Money price;
-    private ProductCategory productCategory;
-    private List<ProductImage> productImages;
+    private ProductCategory category;
+    private List<ProductImage> images;
     private Boolean active;
 
-    private final ProductStock productStock;
-    private final Boolean isSoftDeleted;
+    private final ProductStock stock;
+    private final Boolean softDeleted;
+
+    private Product(Builder builder) {
+        super.setId(builder.id);
+        code = builder.code;
+        name = builder.name;
+        description = builder.description;
+        price = builder.price;
+        category = builder.category;
+        images = builder.images;
+        stock = builder.stock;
+        active = builder.active;
+        softDeleted = builder.softDeleted;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public void initialize() {
         setId(new ProductId(UUID.randomUUID()));
@@ -26,9 +43,9 @@ public class Product extends AggregateRoot<ProductId> {
     }
 
     private void initializeProductImages() {
-        for (ProductImage productImage : productImages) {
-            productImage.initialize();
-            productImage.setProductId(getId());
+        for (ProductImage image : images) {
+            image.initialize();
+            image.setProductId(getId());
         }
     }
 
@@ -56,28 +73,28 @@ public class Product extends AggregateRoot<ProductId> {
         validateCode();
         validateName();
         validatePrice();
-        validateProductCategory();
+        validateCategory();
         validateActive();
     }
 
     private void validateCode() {
-        if (getCode() == null || getCode().isEmpty()) throw new ProductDomainException("Product Code cannot be empty");
+        if (code == null || getCode().isEmpty()) throw new ProductDomainException("Product Code cannot be empty");
     }
 
     private void validateName() {
-        if (getName() == null || getName().isEmpty()) throw new ProductDomainException("Product Name cannot be empty");
+        if (name == null || getName().isEmpty()) throw new ProductDomainException("Product Name cannot be empty");
     }
 
     private void validatePrice() {
-        if (getPrice() == null || !getPrice().isGreaterThanZero()) throw new ProductDomainException("Product Price must be greater than zero");
+        if (price == null || !getPrice().isGreaterThanZero()) throw new ProductDomainException("Product Price must be greater than zero");
     }
 
-    private void validateProductCategory() {
-        if (getProductCategory() == null) throw new ProductDomainException("Product Active cannot be null");
+    private void validateCategory() {
+        if (category == null) throw new ProductDomainException("Product Active cannot be null");
     }
 
     private void validateActive() {
-        if (getActive() == null) throw new ProductDomainException("Product Active cannot be null");
+        if (active == null) throw new ProductDomainException("Product Active cannot be null");
     }
 
     public void setCode(String value) {
@@ -103,14 +120,14 @@ public class Product extends AggregateRoot<ProductId> {
         price = value;
     }
 
-    public void setProductCategory(ProductCategory value) {
+    public void setCategory(ProductCategory value) {
         if (value == null) return;
-        productCategory = value;
+        category = value;
     }
 
-    public void setProductImages(List<ProductImage> values) {
+    public void setImages(List<ProductImage> values) {
         if (values == null) return;
-        productImages = values;
+        images = values;
         initializeProductImages();
     }
 
@@ -135,41 +152,24 @@ public class Product extends AggregateRoot<ProductId> {
         return price;
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
+    public ProductCategory getCategory() {
+        return category;
     }
 
-    public List<ProductImage> getProductImages() {
-        return productImages;
+    public List<ProductImage> getImages() {
+        return images;
     }
 
     public ProductStock getProductStock() {
-        return productStock;
+        return stock;
     }
 
-    public Boolean getActive() {
+    public Boolean isActive() {
         return active;
     }
 
-    public Boolean getIsSoftDeleted() {
-        return isSoftDeleted;
-    }
-
-    private Product(Builder builder) {
-        super.setId(builder.id);
-        code = builder.code;
-        name = builder.name;
-        description = builder.description;
-        price = builder.price;
-        productCategory = builder.productCategory;
-        productImages = builder.productImages;
-        productStock = builder.productStock;
-        active = builder.active;
-        isSoftDeleted = builder.isSoftDeleted;
-    }
-
-    public static Builder builder() {
-        return new Builder();
+    public Boolean isSoftDeleted() {
+        return softDeleted;
     }
 
     public static final class Builder {
@@ -178,11 +178,11 @@ public class Product extends AggregateRoot<ProductId> {
         private String name;
         private String description;
         private Money price;
-        private ProductCategory productCategory;
-        private List<ProductImage> productImages;
-        private ProductStock productStock;
+        private ProductCategory category;
+        private List<ProductImage> images;
+        private ProductStock stock;
         private Boolean active;
-        private Boolean isSoftDeleted;
+        private Boolean softDeleted;
 
         private Builder() {
         }
@@ -213,17 +213,17 @@ public class Product extends AggregateRoot<ProductId> {
         }
 
         public Builder withCategory(ProductCategory val) {
-            productCategory = val;
+            category = val;
             return this;
         }
 
-        public Builder withProductImages(List<ProductImage> val) {
-            productImages = val;
+        public Builder withImages(List<ProductImage> val) {
+            images = val;
             return this;
         }
 
         public Builder withStock(ProductStock val) {
-            productStock = val;
+            stock = val;
             return this;
         }
 
@@ -232,8 +232,8 @@ public class Product extends AggregateRoot<ProductId> {
             return this;
         }
 
-        public Builder withIsSoftDeleted(Boolean val) {
-            isSoftDeleted = val;
+        public Builder withSoftDeleted(Boolean val) {
+            softDeleted = val;
             return this;
         }
 

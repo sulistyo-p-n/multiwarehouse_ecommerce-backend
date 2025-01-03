@@ -5,7 +5,6 @@ import com.multiwarehouse.app.product.service.domain.dto.create.CreateProductRes
 import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductCommand;
 import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductResponse;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductsCommand;
-import com.multiwarehouse.app.product.service.domain.dto.get.GetProductsResponse;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCommand;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductResponse;
 import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCommand;
@@ -30,10 +29,10 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<GetProductsResponse> getProducts(GetProductsCommand getProductsCommand) {
+    public ResponseEntity<List<GetProductResponse>> getProducts(GetProductsCommand getProductsCommand) {
         log.info("Getting products: {}", getProductsCommand);
-        GetProductsResponse getProductsResponse = productApplicationService.getProducts(getProductsCommand);
-        log.info("Returning products: {}", getProductsResponse.getProducts());
+        List<GetProductResponse> getProductsResponse = productApplicationService.getProducts(getProductsCommand);
+        log.info("Returning products size: {}", getProductsResponse.size());
         return ResponseEntity.ok(getProductsResponse);
     }
 

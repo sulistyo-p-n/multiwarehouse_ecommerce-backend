@@ -11,6 +11,5 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class DeleteProductResponse {
-    @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
     private final UUID id;
 }

@@ -2,11 +2,13 @@ package com.multiwarehouse.app.warehouse.service.domain.mapper;
 
 import com.multiwarehouse.app.domain.valueobject.Address;
 import com.multiwarehouse.app.domain.valueobject.WarehouseId;
+import com.multiwarehouse.app.warehouse.service.domain.dto.create.CreateWarehouseAddressCommand;
 import com.multiwarehouse.app.warehouse.service.domain.dto.create.CreateWarehouseCommand;
 import com.multiwarehouse.app.warehouse.service.domain.dto.create.CreateWarehouseResponse;
 import com.multiwarehouse.app.warehouse.service.domain.dto.delete.DeleteWarehouseResponse;
+import com.multiwarehouse.app.warehouse.service.domain.dto.get.GetWarehouseAddressResponse;
 import com.multiwarehouse.app.warehouse.service.domain.dto.get.GetWarehouseResponse;
-import com.multiwarehouse.app.warehouse.service.domain.dto.get.GetWarehousesResponse;
+import com.multiwarehouse.app.warehouse.service.domain.dto.update.UpdateWarehouseAddressCommand;
 import com.multiwarehouse.app.warehouse.service.domain.dto.update.UpdateWarehouseCommand;
 import com.multiwarehouse.app.warehouse.service.domain.dto.update.UpdateWarehouseResponse;
 import com.multiwarehouse.app.warehouse.service.domain.entity.Warehouse;
@@ -17,75 +19,82 @@ import java.util.List;
 @Component
 public class WarehouseDataMapper {
 
-    public Warehouse createWarehouseCommandToWarehouse(CreateWarehouseCommand createWarehouseCommand) {
+    public Warehouse warehouseFromCreateWarehouseCommand(CreateWarehouseCommand createWarehouseCommand) {
         return Warehouse.builder()
+                .withCode(createWarehouseCommand.getCode())
                 .withName(createWarehouseCommand.getName())
-                .withAddress(createWarehouseCommandToAddress(createWarehouseCommand))
+                .withDescription(createWarehouseCommand.getDescription())
+                .withAddress(addressFromCreateWarehouseCommand(createWarehouseCommand.getAddress()))
+                .withActive(createWarehouseCommand.getActive())
                 .build();
     }
 
-    private Address createWarehouseCommandToAddress(CreateWarehouseCommand createWarehouseCommand) {
+    private Address addressFromCreateWarehouseCommand(CreateWarehouseAddressCommand createWarehouseAddressCommand) {
         return new Address(
-                createWarehouseCommand.getAddressStreet(),
-                createWarehouseCommand.getAddressCity(),
-                createWarehouseCommand.getAddressPostalCode()
+                createWarehouseAddressCommand.getStreet(),
+                createWarehouseAddressCommand.getCity(),
+                createWarehouseAddressCommand.getPostalCode(),
+                createWarehouseAddressCommand.getLatitude(),
+                createWarehouseAddressCommand.getLongitude()
         );
     }
 
-    public CreateWarehouseResponse warehouseToCreateWarehouseResponse(Warehouse warehouse) {
+    public CreateWarehouseResponse createWarehouseResponseFromWarehouse(Warehouse warehouse) {
         return CreateWarehouseResponse.builder()
                 .id(warehouse.getId().getValue())
-                .name(warehouse.getName())
-                .addressStreet(warehouse.getAddress().getStreet())
-                .addressCity(warehouse.getAddress().getCity())
-                .addressPostalCode(warehouse.getAddress().getPostalCode())
                 .build();
     }
 
-    public Warehouse updateWarehouseCommandToWarehouse(UpdateWarehouseCommand updateWarehouseCommand) {
+    public Warehouse warehouseFromUpdateWarehouseCommand(UpdateWarehouseCommand updateWarehouseCommand) {
         return Warehouse.builder()
                 .withId(new WarehouseId(updateWarehouseCommand.getId()))
+                .withCode(updateWarehouseCommand.getCode())
                 .withName(updateWarehouseCommand.getName())
-                .withAddress(updateWarehouseCommandToAddress(updateWarehouseCommand))
+                .withDescription(updateWarehouseCommand.getDescription())
+                .withAddress(addressFromUpdateWarehouseCommand(updateWarehouseCommand.getAddress()))
+                .withActive(updateWarehouseCommand.getActive())
                 .build();
     }
 
-    private Address updateWarehouseCommandToAddress(UpdateWarehouseCommand updateWarehouseCommand) {
+    private Address addressFromUpdateWarehouseCommand(UpdateWarehouseAddressCommand updateWarehouseAddressCommand) {
         return new Address(
-                updateWarehouseCommand.getAddressStreet(),
-                updateWarehouseCommand.getAddressCity(),
-                updateWarehouseCommand.getAddressPostalCode()
+                updateWarehouseAddressCommand.getStreet(),
+                updateWarehouseAddressCommand.getCity(),
+                updateWarehouseAddressCommand.getPostalCode(),
+                updateWarehouseAddressCommand.getLatitude(),
+                updateWarehouseAddressCommand.getLongitude()
         );
     }
 
-    public UpdateWarehouseResponse warehouseToUpdateWarehouseResponse(Warehouse warehouse) {
+    public UpdateWarehouseResponse updateWarehouseResponseFromWarehouse(Warehouse warehouse) {
         return UpdateWarehouseResponse.builder()
                 .id(warehouse.getId().getValue())
-                .name(warehouse.getName())
-                .addressStreet(warehouse.getAddress().getStreet())
-                .addressCity(warehouse.getAddress().getCity())
-                .addressPostalCode(warehouse.getAddress().getPostalCode())
                 .build();
     }
 
-    public GetWarehouseResponse warehouseToGetWarehouseResponse(Warehouse warehouse) {
+    public GetWarehouseResponse getWarehouseResponseFromWarehouse(Warehouse warehouse) {
         return GetWarehouseResponse.builder()
                 .id(warehouse.getId().getValue())
+                .code(warehouse.getCode())
                 .name(warehouse.getName())
-                .addressStreet(warehouse.getAddress().getStreet())
-                .addressCity(warehouse.getAddress().getCity())
-                .addressPostalCode(warehouse.getAddress().getPostalCode())
+                .description(warehouse.getDescription())
+                .address(getWarehouseAddressResponseFromAddress(warehouse.getAddress()))
+                .active(warehouse.isActive())
+                .softDeleted(warehouse.isSoftDeleted())
                 .build();
     }
 
-    public GetWarehousesResponse warehousesToGetWarehousesResponse(List<Warehouse> warehouses) {
-        return  GetWarehousesResponse.builder()
-                .warehouses(
-                        warehouses.stream().map(this::warehouseToGetWarehouseResponse).toList())
+    public GetWarehouseAddressResponse getWarehouseAddressResponseFromAddress(Address address) {
+        return GetWarehouseAddressResponse.builder()
+                .street(address.getStreet())
+                .city(address.getCity())
+                .postalCode(address.getPostalCode())
+                .latitude(address.getLatitude())
+                .longitude(address.getLongitude())
                 .build();
     }
 
-    public DeleteWarehouseResponse warehouseToDeleteWarehouseResponse(Warehouse warehouse) {
+    public DeleteWarehouseResponse deleteWarehouseResponseFromWarehouse(Warehouse warehouse) {
         return DeleteWarehouseResponse.builder()
                 .id(warehouse.getId().getValue())
                 .build();

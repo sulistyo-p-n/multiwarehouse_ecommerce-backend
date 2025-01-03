@@ -1,6 +1,5 @@
 package com.multiwarehouse.app.product.service.dataaccess.product.mapper;
 
-import com.multiwarehouse.app.domain.valueobject.ProductId;
 import com.multiwarehouse.app.product.service.dataaccess.product.entity.ProductImageEntity;
 import com.multiwarehouse.app.product.service.domain.entity.ProductImage;
 import com.multiwarehouse.app.product.service.domain.valueobject.ProductImageId;
@@ -15,6 +14,7 @@ public class ProductImageDataAccessMapper {
                 .withName(productImageEntity.getName())
                 .withDescription(productImageEntity.getDescription())
                 .withPath(productImageEntity.getPath())
+                .withFront(productImageEntity.getFront())
                 .withActive(productImageEntity.getActive())
                 .build();
     }
@@ -25,7 +25,8 @@ public class ProductImageDataAccessMapper {
                 .name(productImage.getName())
                 .description(productImage.getDescription())
                 .path(productImage.getPath())
-                .active(productImage.getActive())
+                .front(productImage.isFront())
+                .active(productImage.isActive())
                 .build();
     }
 }

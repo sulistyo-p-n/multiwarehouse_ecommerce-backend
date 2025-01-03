@@ -15,6 +15,7 @@ public class ProductDomainServiceImpl implements ProductDomainService {
     public ProductCreatedEvent validateAndInitializeProduct(Product product, DomainEventPublisher<ProductCreatedEvent> productCreatedEventDomainEventPublisher) {
         product.validateInitialization();
         product.initialize();
+        product.validate();
         return new ProductCreatedEvent(
                 product,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
@@ -28,9 +29,10 @@ public class ProductDomainServiceImpl implements ProductDomainService {
         product.setName(newProduct.getName());
         product.setDescription(newProduct.getDescription());
         product.setPrice(newProduct.getPrice());
-        product.setProductCategory(newProduct.getProductCategory());
-        product.setProductImages(newProduct.getProductImages());
-        product.setActive(newProduct.getActive());
+        product.setCategory(newProduct.getCategory());
+        product.setImages(newProduct.getImages());
+        product.setActive(newProduct.isActive());
+        product.validate();
         return new ProductUpdatedEvent(
                 product,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
@@ -38,7 +40,7 @@ public class ProductDomainServiceImpl implements ProductDomainService {
     }
 
     @Override
-    public ProductDeletedEvent removeProduct(Product product, DomainEventPublisher<ProductDeletedEvent> productDeletedEventDomainEventPublisher) {
+    public ProductDeletedEvent validateAndRemoveProduct(Product product, DomainEventPublisher<ProductDeletedEvent> productDeletedEventDomainEventPublisher) {
         product.validate();
         return new ProductDeletedEvent(
                 product,

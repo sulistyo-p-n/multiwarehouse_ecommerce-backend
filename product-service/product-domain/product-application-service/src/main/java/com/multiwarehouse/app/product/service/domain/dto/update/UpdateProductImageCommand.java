@@ -17,5 +17,6 @@ public class UpdateProductImageCommand {
     private final String name;
     private final String description;
     private final String path;
+    private final Boolean front;
     private final Boolean active;
 }

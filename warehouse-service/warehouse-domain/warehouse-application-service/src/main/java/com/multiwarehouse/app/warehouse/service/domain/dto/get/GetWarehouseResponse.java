@@ -1,6 +1,8 @@
 package com.multiwarehouse.app.warehouse.service.domain.dto.get;
 
+import com.multiwarehouse.app.warehouse.service.domain.dto.create.CreateWarehouseAddressCommand;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,14 +13,13 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class GetWarehouseResponse {
-    @NotNull
-    private final UUID id;
-    @NotNull
+    private UUID id;
+    private final String code;
     private final String name;
-    @NotNull
-    private final String addressStreet;
-    @NotNull
-    private final String addressCity;
-    @NotNull
-    private final String addressPostalCode;
+    private final String description;
+    private final Boolean active;
+
+    private final GetWarehouseAddressResponse address;
+
+    private final Boolean softDeleted;
 }

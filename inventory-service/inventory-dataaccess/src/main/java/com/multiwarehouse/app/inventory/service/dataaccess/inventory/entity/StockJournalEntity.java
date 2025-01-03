@@ -4,6 +4,7 @@ import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalT
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "inventories")
+@Table(name = "stock_journals")
 @Entity
 public class StockJournalEntity {
     @Id
@@ -24,6 +25,14 @@ public class StockJournalEntity {
 
     private int quantity;
     private StockJournalType type;
+
+    @Column(name = "created_at", updatable = false)
+    private Instant createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = Instant.now();
+    }
 
     @Override
     public boolean equals(Object o) {

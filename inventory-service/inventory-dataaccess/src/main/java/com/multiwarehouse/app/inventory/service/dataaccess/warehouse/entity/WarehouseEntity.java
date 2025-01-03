@@ -20,11 +20,8 @@ import java.util.UUID;
 public class WarehouseEntity extends BaseEntity {
     @Id
     private UUID id;
-    private UUID categoryId;
     private String code;
     private String name;
-    private String description;
-    private BigDecimal price;
     private Boolean active;
 
     @Override

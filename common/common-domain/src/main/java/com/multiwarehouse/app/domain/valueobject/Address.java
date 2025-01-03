@@ -7,11 +7,19 @@ public class Address {
     private final String street;
     private final String city;
     private final String postalCode;
+    private final Float latitude;
+    private final Float longitude;
 
-    public Address(String street, String city, String postalCode) {
+    public Address(String street, String city, String postalCode, Float latitude, Float longitude) {
+        this.street = street;
         this.city = city;
         this.postalCode = postalCode;
-        this.street = street;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public String getStreet() {
+        return street;
     }
 
     public String getCity() {
@@ -22,8 +30,12 @@ public class Address {
         return postalCode;
     }
 
-    public String getStreet() {
-        return street;
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
     }
 
     @Override

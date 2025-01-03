@@ -6,6 +6,8 @@ import com.multiwarehouse.app.product.service.domain.dto.get.GetProductsCommand;
 import com.multiwarehouse.app.product.service.domain.entity.Product;
 import com.multiwarehouse.app.product.service.domain.exception.ProductCategoryDomainException;
 import com.multiwarehouse.app.product.service.domain.exception.ProductCategoryNotFoundException;
+import com.multiwarehouse.app.product.service.domain.exception.ProductDomainException;
+import com.multiwarehouse.app.product.service.domain.exception.ProductNotFoundException;
 import com.multiwarehouse.app.product.service.domain.ports.output.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -38,7 +40,7 @@ public class ProductHelper {
         Optional<Product> productCategory = productRepository.findById(productId);
         if (productCategory.isEmpty()) {
             log.warn("Couldn't find Product with id: {} ", productId.getValue());
-            throw new ProductCategoryNotFoundException("Couldn't find Product with id: " + productId.getValue());
+            throw new ProductNotFoundException("Couldn't find Product with id: " + productId.getValue());
         }
         return productCategory.get();
     }
@@ -47,7 +49,7 @@ public class ProductHelper {
         Product productCategoryResult = productRepository.save(product);
         if (productCategoryResult == null) {
             log.error("Couldn't save Product Category!");
-            throw new ProductCategoryDomainException("Cloud not save Product!");
+            throw new ProductDomainException("Cloud not save Product!");
         }
         log.info("Product is saved with id : {}", productCategoryResult.getId().getValue());
         return productCategoryResult;
@@ -61,7 +63,7 @@ public class ProductHelper {
                 productRepository.softDelete(product);
             }
         } catch (Exception e) {
-            throw new ProductCategoryDomainException("Cloud not delete Product!");
+            throw new ProductDomainException("Cloud not delete Product!");
         }
         log.info("Product is deleted with id : {}", product.getId().getValue());
     }

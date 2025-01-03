@@ -1,10 +1,11 @@
 package com.multiwarehouse.app.warehouse.service.domain.dto.update;
 
-import jakarta.validation.constraints.Max;
+import com.multiwarehouse.app.warehouse.service.domain.dto.create.CreateWarehouseAddressCommand;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -12,18 +13,13 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class UpdateWarehouseCommand {
-    @NotNull
-    private final UUID id;
-    @NotNull
-    @Max(value = 50)
+    @Setter
+    @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
+    private UUID id;
+    private final String code;
     private final String name;
-    @NotNull
-    @Max(value = 50)
-    private final String addressStreet;
-    @NotNull
-    @Max(value = 50)
-    private final String addressCity;
-    @NotNull
-    @Max(value = 10)
-    private final String addressPostalCode;
+    private final String description;
+    private final Boolean active;
+
+    private final UpdateWarehouseAddressCommand address;
 }

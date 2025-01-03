@@ -12,6 +12,7 @@ public class ProductImage extends BaseEntity<ProductImageId> {
     private final String name;
     private final String description;
     private final String path;
+    private final Boolean front;
     private final Boolean active;
 
     public void initialize() {
@@ -42,23 +43,28 @@ public class ProductImage extends BaseEntity<ProductImageId> {
         validateProductId();
         validateName();
         validatePath();
+        validateFront();
         validateActive();
     }
 
     public void validateProductId() {
-        if (getProductId() == null) throw new ProductDomainException("ProductImage ProductId cannot be null");
+        if (productId == null) throw new ProductDomainException("ProductImage ProductId cannot be null");
     }
 
     private void validateName() {
-        if (getName() == null || getName().isEmpty()) throw new ProductDomainException("ProductImage Name cannot be empty");
+        if (name == null || getName().isEmpty()) throw new ProductDomainException("ProductImage Name cannot be empty");
     }
 
     private void validatePath() {
-        if (getName() == null || getName().isEmpty()) throw new ProductDomainException("ProductImage Path cannot be empty");
+        if (path == null || getName().isEmpty()) throw new ProductDomainException("ProductImage Path cannot be empty");
+    }
+
+    private void validateFront() {
+        if (front == null) throw new ProductDomainException("ProductImage Front cannot be null");
     }
 
     private void validateActive() {
-        if (getActive() == null) throw new ProductDomainException("ProductImage Active cannot be null");
+        if (active == null) throw new ProductDomainException("ProductImage Active cannot be null");
     }
 
     public void setProductId(ProductId value) {
@@ -72,6 +78,7 @@ public class ProductImage extends BaseEntity<ProductImageId> {
         name = builder.name;
         description = builder.description;
         path = builder.path;
+        front = builder.front;
         active = builder.active;
     }
 
@@ -95,7 +102,11 @@ public class ProductImage extends BaseEntity<ProductImageId> {
         return path;
     }
 
-    public Boolean getActive() {
+    public Boolean isFront() {
+        return front;
+    }
+
+    public Boolean isActive() {
         return active;
     }
 
@@ -105,6 +116,7 @@ public class ProductImage extends BaseEntity<ProductImageId> {
         private String name;
         private String description;
         private String path;
+        private Boolean front;
         private Boolean active;
 
         private Builder() {
@@ -132,6 +144,11 @@ public class ProductImage extends BaseEntity<ProductImageId> {
 
         public Builder withPath(String val) {
             path = val;
+            return this;
+        }
+
+        public Builder withFront(Boolean val) {
+            front = val;
             return this;
         }
 

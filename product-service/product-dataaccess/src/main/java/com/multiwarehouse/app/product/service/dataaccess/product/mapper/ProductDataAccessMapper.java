@@ -33,12 +33,12 @@ public class ProductDataAccessMapper {
                 .withDescription(productEntity.getDescription())
                 .withPrice(new Money(productEntity.getPrice()))
                 .withCategory(productCategoryDataAccessMapper.productCategoryEntityToProductCategory(productEntity.getCategory()))
-                .withProductImages(productImageEntitiesToProductImages(productEntity.getImages()))
+                .withImages(productImageEntitiesToProductImages(productEntity.getImages()))
                 .withStock(productStockDataAccessMapper.productStockEntityToProductStock(productEntity.getStock()))
                 .withActive(productEntity.getActive())
-                .withIsSoftDeleted(productEntity.isSoftDeleted())
+                .withSoftDeleted(productEntity.isSoftDeleted())
                 .build();
-        product.getProductImages().forEach(productImage -> productImage.setProductId(productId));
+        product.getImages().forEach(productImage -> productImage.setProductId(productId));
         product.getProductStock().setId(productId);
         return product;
     }
@@ -56,9 +56,9 @@ public class ProductDataAccessMapper {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice().getAmount())
-                .category(productCategoryDataAccessMapper.productCategoryToProductCategoryEntity(product.getProductCategory()))
-                .images(productImageToProductImageEntities(product.getProductImages()))
-                .active(product.getActive())
+                .category(productCategoryDataAccessMapper.productCategoryToProductCategoryEntity(product.getCategory()))
+                .images(productImageToProductImageEntities(product.getImages()))
+                .active(product.isActive())
                 .build();
         productEntity.getImages().forEach(productImageEntity -> productImageEntity.setProduct(productEntity));
         return productEntity;

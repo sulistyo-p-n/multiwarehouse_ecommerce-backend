@@ -25,6 +25,6 @@ public class ProductGetCommandHandler {
         ProductId productId = new ProductId(getProductCommand.getId());
         Product product = productHelper.findProductById(productId);
         log.info("Product is selected with id: {}", product.getId().getValue());
-        return productDataMapper.productToGetProductResponse(product);
+        return productDataMapper.getProductResponseFromProduct(product);
     }
 }

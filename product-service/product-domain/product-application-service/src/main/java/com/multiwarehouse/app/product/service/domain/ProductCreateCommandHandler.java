@@ -28,10 +28,10 @@ public class ProductCreateCommandHandler {
 
     @Transactional
     public CreateProductResponse createProduct(CreateProductCommand createProductCommand) {
-        Product product = productDataMapper.createProductCommandToProduct(createProductCommand);
+        Product product = productDataMapper.productFromCreateProductCommand(createProductCommand);
         ProductCreatedEvent productCreatedEvent = productDomainService.validateAndInitializeProduct(product, productCreatedMessagePublisher);
         Product productSaved = productHelper.saveProduct(productCreatedEvent.getProduct());
         log.info("Product is created with id: {}", productSaved.getId().getValue());
-        return productDataMapper.productToCreateProductResponse(productSaved);
+        return productDataMapper.createProductResponseFromProduct(productSaved);
     }
 }

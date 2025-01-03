@@ -5,7 +5,6 @@ import com.multiwarehouse.app.product.service.domain.dto.create.CreateProductCat
 import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductCategoryCommand;
 import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductCategoryResponse;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoriesCommand;
-import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoriesResponse;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoryCommand;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoryResponse;
 import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCategoryCommand;
@@ -32,9 +31,9 @@ public class ProductCategoryController {
     @GetMapping
     public ResponseEntity<List<GetProductCategoryResponse>> getProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
         log.info("Getting product categories: {}", getProductCategoriesCommand);
-        GetProductCategoriesResponse getProductCategoriesResponse = productCategoryApplicationService.getProductCategories(getProductCategoriesCommand);
-        log.info("Returning product categories: {}", getProductCategoriesResponse.getProductCategories());
-        return ResponseEntity.ok(getProductCategoriesResponse.getProductCategories());
+        List<GetProductCategoryResponse> getProductCategoriesResponse = productCategoryApplicationService.getProductCategories(getProductCategoriesCommand);
+        log.info("Returning product categories size: {}", getProductCategoriesResponse.size());
+        return ResponseEntity.ok(getProductCategoriesResponse);
     }
 
     @GetMapping(path = "{id}")

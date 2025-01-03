@@ -4,7 +4,7 @@ import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.UserId;
 import com.multiwarehouse.app.domain.valueobject.WarehouseId;
 import com.multiwarehouse.app.user.service.domain.exception.UserDomainException;
-import com.multiwarehouse.app.user.service.domain.valuobject.UserAdminWarehouseId;
+import com.multiwarehouse.app.user.service.domain.valueobject.UserAdminWarehouseId;
 
 import java.util.UUID;
 

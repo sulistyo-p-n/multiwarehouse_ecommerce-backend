@@ -12,7 +12,7 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
     private String description;
     private Boolean active;
 
-    private final Boolean isSoftDeleted;
+    private final Boolean softDeleted;
 
     public void initialize() {
         setId(new ProductCategoryId(UUID.randomUUID()));
@@ -45,15 +45,15 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
     }
 
     private void validateCode() {
-        if (getCode() == null || getCode().isEmpty()) throw new ProductCategoryDomainException("ProductCategory Code cannot be empty");
+        if (code == null || getCode().isEmpty()) throw new ProductCategoryDomainException("ProductCategory Code cannot be empty");
     }
 
     private void validateName() {
-        if (getName() == null || getName().isEmpty()) throw new ProductCategoryDomainException("ProductCategory Name cannot be empty");
+        if (name == null || getName().isEmpty()) throw new ProductCategoryDomainException("ProductCategory Name cannot be empty");
     }
 
     private void validateActive() {
-        if (getActive() == null) throw new ProductCategoryDomainException("ProductCategory Active cannot be null");
+        if (active == null) throw new ProductCategoryDomainException("ProductCategory Active cannot be null");
     }
 
     public void setCode(String value) {
@@ -84,7 +84,7 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
         name = builder.name;
         description = builder.description;
         active = builder.active;
-        isSoftDeleted = builder.isSoftDeleted;
+        softDeleted = builder.softDeleted;
     }
 
     public static Builder builder() {
@@ -103,12 +103,12 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
         return description;
     }
 
-    public Boolean getActive() {
+    public Boolean isActive() {
         return active;
     }
 
-    public Boolean getIsSoftDeleted() {
-        return isSoftDeleted;
+    public Boolean isSoftDeleted() {
+        return softDeleted;
     }
 
     public static final class Builder {
@@ -117,7 +117,7 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
         private String name;
         private String description;
         private Boolean active;
-        private Boolean isSoftDeleted;
+        private Boolean softDeleted;
 
         private Builder() {
         }
@@ -147,8 +147,8 @@ public class ProductCategory extends BaseEntity<ProductCategoryId> {
             return this;
         }
 
-        public Builder withIsSoftDeleted(Boolean val) {
-            isSoftDeleted = val;
+        public Builder withSoftDeleted(Boolean val) {
+            softDeleted = val;
             return this;
         }
 

@@ -11,6 +11,5 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class DeleteWarehouseResponse {
-    @NotNull
     private final UUID id;
 }

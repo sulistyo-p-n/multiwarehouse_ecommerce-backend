@@ -4,7 +4,6 @@ import com.multiwarehouse.app.application.handler.ErrorDTO;
 import com.multiwarehouse.app.application.handler.GlobalExceptionHandler;
 import com.multiwarehouse.app.warehouse.service.domain.exception.WarehouseDomainException;
 import com.multiwarehouse.app.warehouse.service.domain.exception.WarehouseNotFoundException;
-import com.multiwarehouse.app.warehouse.service.domain.exception.WarehouseUnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,17 +33,6 @@ public class WarehouseGlobalExceptionHandler extends GlobalExceptionHandler {
         return ErrorDTO.builder()
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(warehouseNotFoundException.getMessage())
-                .build();
-    }
-
-    @ResponseBody
-    @ExceptionHandler(value = {WarehouseUnauthorizedException.class})
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ErrorDTO handleException(WarehouseUnauthorizedException warehouseUnauthorizedException) {
-        log.error(warehouseUnauthorizedException.getMessage(), warehouseUnauthorizedException);
-        return ErrorDTO.builder()
-                .code(HttpStatus.UNAUTHORIZED.getReasonPhrase())
-                .message(warehouseUnauthorizedException.getMessage())
                 .build();
     }
 }

@@ -5,7 +5,6 @@ import com.multiwarehouse.app.product.service.domain.dto.create.CreateProductCat
 import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductCategoryCommand;
 import com.multiwarehouse.app.product.service.domain.dto.delete.DeleteProductCategoryResponse;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoriesCommand;
-import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoriesResponse;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoryCommand;
 import com.multiwarehouse.app.product.service.domain.dto.get.GetProductCategoryResponse;
 import com.multiwarehouse.app.product.service.domain.dto.update.UpdateProductCategoryCommand;
@@ -14,6 +13,8 @@ import com.multiwarehouse.app.product.service.domain.ports.input.service.Product
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -50,7 +51,7 @@ public class ProductCategoryApplicationServiceImpl implements ProductCategoryApp
     }
 
     @Override
-    public GetProductCategoriesResponse getProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
+    public List<GetProductCategoryResponse> getProductCategories(GetProductCategoriesCommand getProductCategoriesCommand) {
         return productCategoriesGetCommandHandler.getProductCategories(getProductCategoriesCommand);
     }
 

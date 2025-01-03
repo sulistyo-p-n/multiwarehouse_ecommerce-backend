@@ -105,7 +105,7 @@ public class StockJournal extends BaseEntity<StockJournalId> {
             return this;
         }
 
-        public Builder createdAt(Instant val) {
+        public Builder withCreatedAt(Instant val) {
             createdAt = val;
             return this;
         }

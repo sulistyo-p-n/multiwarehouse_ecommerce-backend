@@ -34,12 +34,12 @@ public class ProductUpdateCommandHandler {
     public UpdateProductResponse updateProduct(UpdateProductCommand updateProductCommand) {
         ProductId productId = new ProductId(updateProductCommand.getId());
         Product product = productHelper.findProductById(productId);
-        Product newProduct = productDataMapper.updateProductCommandToProduct(updateProductCommand);
+        Product newProduct = productDataMapper.productFromUpdateProductCommand(updateProductCommand);
         ProductCategory productCategory = productCategoryHelper.findProductCategoryById(new ProductCategoryId(updateProductCommand.getCategoryId()));
-        newProduct.setProductCategory(productCategory);
+        newProduct.setCategory(productCategory);
         ProductUpdatedEvent productUpdatedEvent = productDomainService.validateAndSetProduct(product, newProduct, productUpdatedMessagePublisher);
         Product productSaved = productHelper.saveProduct(productUpdatedEvent.getProduct());
         log.info("Product is updated with id: {}", productSaved.getId().getValue());
-        return productDataMapper.productToUpdateProductResponse(productSaved);
+        return productDataMapper.updateProductResponseFromProduct(productSaved);
     }
 }

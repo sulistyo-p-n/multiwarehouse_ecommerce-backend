@@ -11,6 +11,5 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateProductCategoryResponse {
-    @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
     private final UUID id;
 }

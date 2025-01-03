@@ -16,6 +16,8 @@ public class CreateProductImageCommand {
     private final String description;
     @NotNull(message = "Path {jakarta.validation.constraints.NotNull.message}")
     private final String path;
+    @NotNull(message = "Front {jakarta.validation.constraints.NotNull.message}")
+    private final Boolean front;
     @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")
     private final Boolean active;
 }

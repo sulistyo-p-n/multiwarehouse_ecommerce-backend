@@ -1,30 +1,22 @@
 package com.multiwarehouse.app.warehouse.service.domain;
 
 import com.multiwarehouse.app.domain.event.publisher.DomainEventPublisher;
-import com.multiwarehouse.app.domain.valueobject.WarehouseId;
-import com.multiwarehouse.app.warehouse.service.domain.entity.User;
 import com.multiwarehouse.app.warehouse.service.domain.entity.Warehouse;
 import com.multiwarehouse.app.warehouse.service.domain.event.WarehouseCreatedEvent;
 import com.multiwarehouse.app.warehouse.service.domain.event.WarehouseDeletedEvent;
 import com.multiwarehouse.app.warehouse.service.domain.event.WarehouseUpdatedEvent;
 
 public interface WarehouseDomainService {
-    WarehouseCreatedEvent validationAndInitiateWarehouse(
+    WarehouseCreatedEvent validateAndInitiateWarehouse(
             Warehouse warehouse,
-            User user,
             DomainEventPublisher<WarehouseCreatedEvent> warehouseCreatedEventDomainEventPublisher);
 
-    WarehouseUpdatedEvent validationToUpdateWarehouse(
+    WarehouseUpdatedEvent validateAndSetWarehouse(
             Warehouse warehouse,
-            User user,
+            Warehouse newWarehouse,
             DomainEventPublisher<WarehouseUpdatedEvent> warehouseUpdatedEventDomainEventPublisher);
 
-    WarehouseDeletedEvent validationToDeleteWarehouse(
+    WarehouseDeletedEvent validateAndRemoveWarehouse(
             Warehouse warehouse,
-            User user,
             DomainEventPublisher<WarehouseDeletedEvent> warehouseDeletedEventDomainEventPublisher);
-
-    void validationToGetWarehouse(WarehouseId warehouseId, User user);
-
-    void validationToGetAllWarehouse(User user);
 }

@@ -1,10 +1,13 @@
 package com.multiwarehouse.app.warehouse.service.dataaccess.warehouse.entity;
 
+import com.multiwarehouse.app.dataaccess.entity.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -14,14 +17,17 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "warehouses")
-@Entity(name = "warehouses")
-public class WarehouseEntity {
+@Entity
+public class WarehouseEntity extends BaseEntity {
     @Id
     private UUID id;
+    private String code;
     private String name;
-    private String addressStreet;
-    private String addressCity;
-    private String addressPostalCode;
+    private String description;
+    private Boolean active;
+
+    @OneToOne(mappedBy = "warehouse")
+    private WarehouseAddressEntity address;
 
     @Override
     public boolean equals(Object o) {

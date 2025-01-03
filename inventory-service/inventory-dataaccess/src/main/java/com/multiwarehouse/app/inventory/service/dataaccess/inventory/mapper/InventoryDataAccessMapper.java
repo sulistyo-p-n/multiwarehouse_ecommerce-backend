@@ -66,6 +66,7 @@ public class InventoryDataAccessMapper {
                 .withId(new StockJournalId(stockJournalEntity.getId()))
                 .withQuantity(stockJournalEntity.getQuantity())
                 .withType(stockJournalEntity.getType())
+                .withCreatedAt(stockJournalEntity.getCreatedAt())
                 .build();
     }
 

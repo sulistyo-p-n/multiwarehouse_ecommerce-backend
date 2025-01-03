@@ -2,8 +2,6 @@ package com.multiwarehouse.app.warehouse.service.domain;
 
 import com.multiwarehouse.app.domain.constant.DomainConstants;
 import com.multiwarehouse.app.domain.event.publisher.DomainEventPublisher;
-import com.multiwarehouse.app.domain.valueobject.WarehouseId;
-import com.multiwarehouse.app.warehouse.service.domain.entity.User;
 import com.multiwarehouse.app.warehouse.service.domain.entity.Warehouse;
 import com.multiwarehouse.app.warehouse.service.domain.event.WarehouseCreatedEvent;
 import com.multiwarehouse.app.warehouse.service.domain.event.WarehouseDeletedEvent;
@@ -16,11 +14,10 @@ import java.time.ZonedDateTime;
 @Slf4j
 public class WarehouseDomainServiceImpl implements WarehouseDomainService {
     @Override
-    public WarehouseCreatedEvent validationAndInitiateWarehouse(Warehouse warehouse, User user, DomainEventPublisher<WarehouseCreatedEvent> warehouseCreatedEventDomainEventPublisher) {
-        user.validateUserIsSuperAdmin();
-        warehouse.validationInitialWarehouse();
-        warehouse.initializeWarehouse();
-
+    public WarehouseCreatedEvent validateAndInitiateWarehouse(Warehouse warehouse, DomainEventPublisher<WarehouseCreatedEvent> warehouseCreatedEventDomainEventPublisher) {
+        warehouse.validateInitialization();
+        warehouse.initialize();
+        warehouse.validate();
         return new WarehouseCreatedEvent(
                 warehouse,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
@@ -28,9 +25,14 @@ public class WarehouseDomainServiceImpl implements WarehouseDomainService {
     }
 
     @Override
-    public WarehouseUpdatedEvent validationToUpdateWarehouse(Warehouse warehouse, User user, DomainEventPublisher<WarehouseUpdatedEvent> warehouseUpdatedEventDomainEventPublisher) {
-        user.validateUserCanManageWarehouse(warehouse.getId());
-
+    public WarehouseUpdatedEvent validateAndSetWarehouse(Warehouse warehouse, Warehouse newWarehouse, DomainEventPublisher<WarehouseUpdatedEvent> warehouseUpdatedEventDomainEventPublisher) {
+        warehouse.validateId();
+        warehouse.setCode(newWarehouse.getCode());
+        warehouse.setName(newWarehouse.getName());
+        warehouse.setDescription(newWarehouse.getDescription());
+        warehouse.setAddress(newWarehouse.getAddress());
+        warehouse.setActive(newWarehouse.isActive());
+        warehouse.validate();
         return new WarehouseUpdatedEvent(
                 warehouse,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
@@ -38,22 +40,11 @@ public class WarehouseDomainServiceImpl implements WarehouseDomainService {
     }
 
     @Override
-    public WarehouseDeletedEvent validationToDeleteWarehouse(Warehouse warehouse, User user, DomainEventPublisher<WarehouseDeletedEvent> warehouseDeletedEventDomainEventPublisher) {
-        user.validateUserCanManageWarehouse(warehouse.getId());
-
+    public WarehouseDeletedEvent validateAndRemoveWarehouse(Warehouse warehouse, DomainEventPublisher<WarehouseDeletedEvent> warehouseDeletedEventDomainEventPublisher) {
+        warehouse.validate();
         return new WarehouseDeletedEvent(
                 warehouse,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
                 warehouseDeletedEventDomainEventPublisher);
-    }
-
-    @Override
-    public void validationToGetWarehouse(WarehouseId warehouseId, User user) {
-        user.validateUserCanManageWarehouse(warehouseId);
-    }
-
-    @Override
-    public void validationToGetAllWarehouse(User user) {
-        user.validateUserIsSuperAdmin();
     }
 }

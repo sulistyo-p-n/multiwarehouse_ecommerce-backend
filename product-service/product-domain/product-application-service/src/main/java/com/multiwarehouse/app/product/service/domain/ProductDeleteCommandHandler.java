@@ -27,7 +27,7 @@ public class ProductDeleteCommandHandler {
     public DeleteProductResponse deleteProduct(DeleteProductCommand deleteProductCommand) {
         ProductId productId = new ProductId(deleteProductCommand.getId());
         Product product = productHelper.findProductById(productId);
-        ProductDeletedEvent productDeletedEvent = productDomainService.removeProduct(product, productDeletedMessagePublisher);
+        ProductDeletedEvent productDeletedEvent = productDomainService.validateAndRemoveProduct(product, productDeletedMessagePublisher);
         productHelper.deleteProduct(productDeletedEvent.getProduct(),deleteProductCommand.getForceDelete());
         log.info("Product is deleted with id: {}", productDeletedEvent.getProduct().getId().getValue());
         return  DeleteProductResponse.builder().id(productDeletedEvent.getProduct().getId().getValue()).build();

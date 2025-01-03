@@ -16,7 +16,7 @@ public class ProductCategoryDomainServiceImpl implements ProductCategoryDomainSe
         productCategory.setCode(newProductCategory.getCode());
         productCategory.setName(newProductCategory.getName());
         productCategory.setDescription(newProductCategory.getDescription());
-        productCategory.setActive(newProductCategory.getActive());
+        productCategory.setActive(newProductCategory.isActive());
         return productCategory;
     }
 }

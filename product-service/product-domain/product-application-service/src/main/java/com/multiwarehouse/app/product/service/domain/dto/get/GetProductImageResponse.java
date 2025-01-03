@@ -11,13 +11,10 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class GetProductImageResponse {
-    @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
     private final UUID id;
-    @NotNull(message = "Name {jakarta.validation.constraints.NotNull.message}")
     private final String name;
     private final String description;
-    @NotNull(message = "Path {jakarta.validation.constraints.NotNull.message}")
     private final String path;
-    @NotNull(message = "Active {jakarta.validation.constraints.NotNull.message}")
+    private final Boolean front;
     private final Boolean active;
 }

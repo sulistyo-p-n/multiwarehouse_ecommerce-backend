@@ -26,6 +26,6 @@ public class ProductCategoryGetCommandHandler {
         ProductCategoryId productCategoryId = new ProductCategoryId(getProductCategoryCommand.getId());
         ProductCategory productCategory = productCategoryHelper.findProductCategoryById(productCategoryId);
         log.info("Product category is selected with id: {}", productCategory.getId().getValue());
-        return productCategoryDataMapper.productCategoryToGetProductCategoryResponse(productCategory);
+        return productCategoryDataMapper.getProductCategoryResponseFromProductCategory(productCategory);
     }
 }

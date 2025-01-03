@@ -11,14 +11,5 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateWarehouseResponse {
-    @NotNull
     private final UUID id;
-    @NotNull
-    private final String name;
-    @NotNull
-    private final String addressStreet;
-    @NotNull
-    private final String addressCity;
-    @NotNull
-    private final String addressPostalCode;
 }
