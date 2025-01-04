@@ -83,7 +83,7 @@ public class StockMutation extends BaseEntity<StockMutationId> {
     }
 
     public void request() {
-        if (getStatus() != StockMutationStatus.APPROVED || getStatus() != StockMutationStatus.REJECTED) {
+        if ((getStatus() == StockMutationStatus.APPROVED) || (getStatus() == StockMutationStatus.REJECTED)) {
             throw new InventoryDomainException("StockMutation.Request cannot be requested in its current state!");
         }
         status = StockMutationStatus.PENDING;

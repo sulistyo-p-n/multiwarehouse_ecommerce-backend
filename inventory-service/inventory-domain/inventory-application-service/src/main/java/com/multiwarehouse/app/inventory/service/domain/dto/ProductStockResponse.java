@@ -14,5 +14,6 @@ import java.util.UUID;
 public class ProductStockResponse {
     private final UUID id;
     private final ProductResponse product;
+    private final Integer quantity;
     private final List<StockJournalResponse> stockJournals;
 }

@@ -16,7 +16,7 @@ public class ProductStock extends BaseEntity<ProductStockId> {
     private final Product product;
     private int quantity;
 
-    private List<StockJournal> stockJournals;
+    private final List<StockJournal> stockJournals;
 
     private ProductStock(Builder builder) {
         super.setId(builder.id);
@@ -62,7 +62,7 @@ public class ProductStock extends BaseEntity<ProductStockId> {
 
     private void validateQuantity() {
         if (quantity < 0) throw new InventoryDomainException("ProductStock.Quantity cannot be negative!");
-        if (isQuantityValid()) throw new InventoryDomainException("ProductStock.Quantity is not valid!");
+        if (!isQuantityValid()) throw new InventoryDomainException("ProductStock.Quantity is not valid!");
     }
 
     private boolean isQuantityValid() {
@@ -91,7 +91,6 @@ public class ProductStock extends BaseEntity<ProductStockId> {
     }
 
     private void addStockJournal(int amount) {
-        if (stockJournals == null) stockJournals = new ArrayList<>();
         stockJournals.add(StockJournal.builder()
                 .withId(new StockJournalId(UUID.randomUUID()))
                 .withProductStockId(getId())
@@ -123,8 +122,8 @@ public class ProductStock extends BaseEntity<ProductStockId> {
         private ProductStockId id;
         private InventoryId inventoryId;
         private Product product;
-        private int quantity;
-        private List<StockJournal> stockJournals;
+        private int quantity = 0;
+        private List<StockJournal> stockJournals = new ArrayList<>();;
 
         private Builder() {
         }

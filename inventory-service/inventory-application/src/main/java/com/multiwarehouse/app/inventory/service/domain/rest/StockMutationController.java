@@ -44,7 +44,7 @@ public class StockMutationController {
         return ResponseEntity.ok(requestStockMutationResponse);
     }
 
-    @PutMapping(path = "{id}/accept")
+    @PutMapping(path = "{id}/approve")
     public ResponseEntity<ApproveStockMutationResponse> approveStockMutation(@PathVariable("id") UUID id) {
         log.info("Accepting StockMutation by id: {}", id);
         ApproveStockMutationCommand approveStockMutationCommand = ApproveStockMutationCommand.builder().id(id).build();

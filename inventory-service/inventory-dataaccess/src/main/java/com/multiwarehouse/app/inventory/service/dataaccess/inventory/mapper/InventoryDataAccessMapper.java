@@ -30,6 +30,7 @@ public class InventoryDataAccessMapper {
         InventoryId inventoryId = new InventoryId(inventoryEntity.getId());
         Inventory inventory = Inventory.builder()
                 .withId(inventoryId)
+                .withActive(inventoryEntity.getActive())
                 .withWarehouse(warehouseDataAccessMapper.warehouseFromWarehouseEntity(inventoryEntity.getWarehouse()))
                 .withProductStocks(productStocksFromProductStockEntities(inventoryEntity.getProductStocks()))
                 .build();
@@ -73,6 +74,7 @@ public class InventoryDataAccessMapper {
     public InventoryEntity inventoryEntityFromInventory(Inventory inventory) {
         InventoryEntity inventoryEntity = InventoryEntity.builder()
                 .id(inventory.getId().getValue())
+                .active(inventory.isActive())
                 .warehouse(warehouseDataAccessMapper.warehouseEntityFromWarehouse(inventory.getWarehouse()))
                 .productStocks(productStockEntitiesFromProductStocks(inventory.getProductStocks()))
                 .build();

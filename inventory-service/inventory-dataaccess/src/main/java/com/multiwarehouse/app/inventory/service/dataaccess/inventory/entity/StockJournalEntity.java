@@ -24,6 +24,8 @@ public class StockJournalEntity {
     private ProductStockEntity productStock;
 
     private int quantity;
+
+    @Enumerated(EnumType.STRING)
     private StockJournalType type;
 
     @Column(name = "created_at", updatable = false)

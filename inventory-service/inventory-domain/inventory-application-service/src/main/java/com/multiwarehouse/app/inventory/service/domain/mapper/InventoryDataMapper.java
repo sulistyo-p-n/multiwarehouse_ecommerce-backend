@@ -21,6 +21,7 @@ public class InventoryDataMapper {
     public InventoryResponse inventoryResponseFromInventory(Inventory inventory) {
         return InventoryResponse.builder()
                 .id(inventory.getId().getValue())
+                .active(inventory.isActive())
                 .productStocks(productStockResponsesFromProductStocks(inventory.getProductStocks()))
                 .build();
     }
@@ -34,6 +35,7 @@ public class InventoryDataMapper {
     private ProductStockResponse productStockResponseFromProductStock(ProductStock productStock) {
         return ProductStockResponse.builder()
                 .id(productStock.getId().getValue())
+                .quantity(productStock.getQuantity())
                 .product(productDataMapper.productResponseFromProduct(productStock.getProduct()))
                 .stockJournals(stockJournalResponsesFromStockJournals(productStock.getStockJournals()))
                 .build();

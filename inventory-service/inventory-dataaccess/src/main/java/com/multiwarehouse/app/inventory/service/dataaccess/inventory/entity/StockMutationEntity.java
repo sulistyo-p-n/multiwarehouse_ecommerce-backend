@@ -33,6 +33,8 @@ public class StockMutationEntity extends BaseEntity {
     private ProductEntity product;
 
     private int quantity;
+
+    @Enumerated(EnumType.STRING)
     private StockMutationStatus status;
 
     @Override
