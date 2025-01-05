@@ -9,11 +9,21 @@ public class ProductDeletedEvent extends ProductEvent {
 
     private final DomainEventPublisher<ProductDeletedEvent> productDeletedEventDomainEventPublisher;
 
+    private boolean forceDeleted;
+
     public ProductDeletedEvent(Product product,
                                ZonedDateTime createdAt,
                                DomainEventPublisher<ProductDeletedEvent> productDeletedEventDomainEventPublisher) {
         super(product, createdAt);
         this.productDeletedEventDomainEventPublisher = productDeletedEventDomainEventPublisher;
+    }
+
+    public boolean isForceDeleted() {
+        return forceDeleted;
+    }
+
+    public void setForceDeleted(boolean forceDeleted) {
+        this.forceDeleted = forceDeleted;
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.multiwarehouse.app.domain.valueobject.ProductId;
 import com.multiwarehouse.app.inventory.service.domain.entity.Product;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryNotFoundException;
-import com.multiwarehouse.app.inventory.service.domain.ports.ouput.repository.ProductRepository;
+import com.multiwarehouse.app.inventory.service.domain.ports.output.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

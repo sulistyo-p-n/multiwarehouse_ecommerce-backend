@@ -9,11 +9,21 @@ public class UserDeletedEvent extends UserEvent {
 
     private final DomainEventPublisher<UserDeletedEvent> userDeletedEventDomainEventPublisher;
 
+    private boolean forceDeleted;
+
     public UserDeletedEvent(User user,
                             ZonedDateTime createdAt,
                             DomainEventPublisher<UserDeletedEvent> userDeletedEventDomainEventPublisher) {
         super(user, createdAt);
         this.userDeletedEventDomainEventPublisher = userDeletedEventDomainEventPublisher;
+    }
+
+    public boolean isForceDeleted() {
+        return forceDeleted;
+    }
+
+    public void setForceDeleted(boolean forceDeleted) {
+        this.forceDeleted = forceDeleted;
     }
 
     @Override

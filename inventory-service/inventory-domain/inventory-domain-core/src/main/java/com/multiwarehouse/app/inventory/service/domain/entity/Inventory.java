@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Inventory extends AggregateRoot<InventoryId> {
     private final Warehouse warehouse;
     private final List<ProductStock> productStocks;
-    private final Boolean active;
+    private Boolean active;
 
     private Inventory(Builder builder) {
         super.setId(builder.id);
@@ -126,6 +126,11 @@ public class Inventory extends AggregateRoot<InventoryId> {
 
         ProductStock productStock = filteredProductStock.get();
         productStock.reduceStock(quantity);
+    }
+
+    public void setActive(Boolean active) {
+        if (active == null) return;
+        this.active = active;
     }
 
     public Boolean isActive() {

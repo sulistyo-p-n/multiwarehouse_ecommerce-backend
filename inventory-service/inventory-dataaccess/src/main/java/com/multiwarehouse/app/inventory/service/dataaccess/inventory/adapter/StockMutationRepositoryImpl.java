@@ -5,7 +5,7 @@ import com.multiwarehouse.app.inventory.service.dataaccess.inventory.entity.Stoc
 import com.multiwarehouse.app.inventory.service.dataaccess.inventory.mapper.StockMutationDataAccessMapper;
 import com.multiwarehouse.app.inventory.service.dataaccess.inventory.repository.StockMutationJpaRepository;
 import com.multiwarehouse.app.inventory.service.domain.entity.StockMutation;
-import com.multiwarehouse.app.inventory.service.domain.ports.ouput.repository.StockMutationRepository;
+import com.multiwarehouse.app.inventory.service.domain.ports.output.repository.StockMutationRepository;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationId;
 import org.springframework.stereotype.Component;
 

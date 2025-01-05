@@ -1,7 +1,7 @@
 package com.multiwarehouse.app.inventory.service.messaging.publisher.kafka;
 
 import com.multiwarehouse.app.inventory.service.domain.event.InventoryStockChangedEvent;
-import com.multiwarehouse.app.inventory.service.domain.ports.ouput.message.publisher.InventoryStockChangedMessagePublisher;
+import com.multiwarehouse.app.inventory.service.domain.ports.output.message.publisher.InventoryStockChangedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

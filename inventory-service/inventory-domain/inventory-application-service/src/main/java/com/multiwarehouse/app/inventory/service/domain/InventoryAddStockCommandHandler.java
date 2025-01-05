@@ -8,7 +8,7 @@ import com.multiwarehouse.app.inventory.service.domain.entity.Inventory;
 import com.multiwarehouse.app.inventory.service.domain.entity.Product;
 import com.multiwarehouse.app.inventory.service.domain.event.InventoryStockChangedEvent;
 import com.multiwarehouse.app.inventory.service.domain.mapper.InventoryDataMapper;
-import com.multiwarehouse.app.inventory.service.domain.ports.ouput.message.publisher.InventoryStockChangedMessagePublisher;
+import com.multiwarehouse.app.inventory.service.domain.ports.output.message.publisher.InventoryStockChangedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

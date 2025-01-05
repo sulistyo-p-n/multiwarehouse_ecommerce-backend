@@ -1,5 +1,6 @@
 package com.multiwarehouse.app.authgateway.service.dataaccess.user.mapper;
 
+import com.multiwarehouse.app.authgateway.service.domain.valueobject.UserAdminWarehouseId;
 import com.multiwarehouse.app.domain.valueobject.UserId;
 import com.multiwarehouse.app.domain.valueobject.WarehouseId;
 import com.multiwarehouse.app.authgateway.service.dataaccess.user.entity.UserAdminWarehouseEntity;
@@ -28,6 +29,7 @@ public class UserDataAccessMapper {
     private UserAdminWarehouse userAdminWarehouseFromUserAdminWarehouseEntity(UserAdminWarehouseEntity userAdminWarehouseEntity) {
         if (userAdminWarehouseEntity == null) return null;
         return UserAdminWarehouse.builder()
+                .withId(new UserAdminWarehouseId(userAdminWarehouseEntity.getId()))
                 .withWarehouseId(new WarehouseId(userAdminWarehouseEntity.getWarehouseId()))
                 .build();
     }
@@ -49,6 +51,7 @@ public class UserDataAccessMapper {
     private UserAdminWarehouseEntity userAdminWarehouseEntityFromUserAdminWarehouse(UserAdminWarehouse userAdminWarehouse) {
         if (userAdminWarehouse == null) return null;
         return UserAdminWarehouseEntity.builder()
+                .id(userAdminWarehouse.getId().getValue())
                 .warehouseId(userAdminWarehouse.getWarehouseId().getValue())
                 .build();
     }

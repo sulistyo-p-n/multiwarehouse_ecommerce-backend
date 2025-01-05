@@ -42,6 +42,7 @@ public class ProductUpdateCommandHandler {
         ProductUpdatedEvent productUpdatedEvent = productDomainService.validateAndSetProduct(product, newProduct, productUpdatedMessagePublisher);
         Product productSaved = productHelper.saveProduct(productUpdatedEvent.getProduct());
         log.info("Product is updated with id: {}", productSaved.getId().getValue());
+        productUpdatedMessagePublisher.publish(productUpdatedEvent);
         return productDataMapper.updateProductResponseFromProduct(productSaved);
     }
 }

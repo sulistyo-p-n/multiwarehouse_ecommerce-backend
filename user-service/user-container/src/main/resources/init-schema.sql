@@ -20,9 +20,6 @@ CREATE TABLE "user".warehouses
     CONSTRAINT warehouses_pkey PRIMARY KEY (id)
 );
 
-INSERT INTO "user".warehouses (id, code, name, active)
-VALUES ('552b88da-b8a0-48fd-b9cb-ebb235bc0948', 'IKIAEKBP', 'Ikiae Kota Baru Parayangan', true);
-
 DROP TABLE IF EXISTS "user".users CASCADE;
 CREATE TABLE "user".users
 (

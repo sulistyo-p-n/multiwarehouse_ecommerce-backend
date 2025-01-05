@@ -6,14 +6,8 @@ logging:
     com.multiwarehouse.app: DEBUG
 
 user-service:
-  user-create-topic-name: user-create
-  #  user-update-topic-name: user-update
-  #  user-delete-topic-name: user-delete
-  warehouse-create-topic-name: warehouse-create
-  #  warehouse-update-topic-name: warehouse-update
-  #  warehouse-delete-topic-name: warehouse-delete
-  user-assign-request-topic-name: user-assign-request
-  user-assign-response-topic-name: user-assign-response
+  user-change-topic-name: user-change
+  warehouse-change-topic-name: warehouse-change
 
 spring:
   application:
@@ -61,8 +55,7 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  warehouse-create-consumer-group-id: warehouse-create-consumer
-  user-assign-response-consumer-group-id: user-assign-response-consumer
+  warehouse-change-consumer-group-id: user-warehouse-change-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

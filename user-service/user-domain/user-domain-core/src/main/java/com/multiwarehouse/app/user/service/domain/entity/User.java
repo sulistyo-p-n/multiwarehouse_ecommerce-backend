@@ -72,6 +72,7 @@ public class User extends AggregateRoot<UserId> {
         validatePassword();
         validateActive();
         validateRole();
+        validateUserAdminWarehouse();
     }
 
     private void validateUsername() {
@@ -91,9 +92,12 @@ public class User extends AggregateRoot<UserId> {
     }
 
     private void validateRole() {
-        if (getRole() == null) throw new UserDomainException("User Role cannot be null");
+        if (role == null) throw new UserDomainException("User Role cannot be null");
     }
 
+    private void validateUserAdminWarehouse() {
+        if ((role == UserRole.WAREHOUSE_ADMIN) && (userAdminWarehouse == null)) throw new UserDomainException("User UserAdminWarehouse cannot be null if role as WAREHOUSE_ADMIN");
+    }
 
     public void setUsername(String username) {
         if (username == null) return;

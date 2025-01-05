@@ -1,0 +1,88 @@
+{
+  "namespace": "com.multiwarehouse.app.kafka.user.avro.model",
+  "type": "record",
+  "name": "UserChangeAvroModel",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "userId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "username",
+      "type": "string"
+    },
+    {
+      "name": "email",
+      "type": "string"
+    },
+    {
+      "name": "password",
+      "type": "string"
+    },
+    {
+      "name": "role",
+      "type": {
+        "type": "enum",
+        "name": "UserRole",
+        "symbols": ["CUSTOMER", "SUPER_ADMIN", "WAREHOUSE_ADMIN"]
+      }
+    },
+    {
+      "name": "active",
+      "type": "boolean"
+    },
+    {
+      "name": "userAdminWarehouse",
+      "type": [
+        {
+          "type": "null"
+        },
+        {
+          "name": "UserAdminWarehouseAvroModel",
+          "type": "record",
+          "fields": [
+            {
+              "name": "userAdminWarehouseId",
+              "type": {
+                "type": "string",
+                "logicalType": "uuid"
+              }
+            },
+            {
+              "name": "warehouseId",
+              "type": {
+                "type": "string",
+                "logicalType": "uuid"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "actionType",
+      "type": {
+        "type": "enum",
+        "name": "ActionType",
+        "symbols": ["DEFAULT", "CREATED", "UPDATED", "SOFT_DELETED", "HARD_DELETED"]
+      }
+    },
+    {
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}

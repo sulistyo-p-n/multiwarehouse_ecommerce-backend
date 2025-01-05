@@ -1,6 +1,5 @@
 package com.multiwarehouse.app.authgateway.service.dataaccess.user.entity;
 
-import com.multiwarehouse.app.dataaccess.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,14 +13,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "user_admin_warehouses")
 @Entity
-public class UserAdminWarehouseEntity extends BaseEntity {
+public class UserAdminWarehouseEntity {
     @Id
     private UUID id;
+    @Column(name = "warehouse_id")
     private UUID warehouseId;
-    private Boolean active;
 
     @OneToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @Override

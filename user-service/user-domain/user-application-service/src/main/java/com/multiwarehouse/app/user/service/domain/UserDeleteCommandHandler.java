@@ -5,7 +5,7 @@ import com.multiwarehouse.app.user.service.domain.dto.delete.DeleteUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.delete.DeleteUserResponse;
 import com.multiwarehouse.app.user.service.domain.entity.User;
 import com.multiwarehouse.app.user.service.domain.event.UserDeletedEvent;
-import com.multiwarehouse.app.user.service.domain.ports.output.message.publsher.user.UserDeletedMessagePublisher;
+import com.multiwarehouse.app.user.service.domain.ports.output.message.publisher.user.UserDeletedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +28,10 @@ public class UserDeleteCommandHandler {
         UserId userId = new UserId(deleteUserCommand.getId());
         User user = userHelper.findUserById(userId);
         UserDeletedEvent userDeletedEvent = userDomainService.removeUser(user, userDeletedMessagePublisher);
-        userHelper.deleteUser(userDeletedEvent.getUser(), deleteUserCommand.getForceDelete());
+        userDeletedEvent.setForceDeleted(deleteUserCommand.isForceDelete());
+        userHelper.deleteUser(userDeletedEvent.getUser(), deleteUserCommand.isForceDelete());
         log.info("User is deleted with id: {}", userDeletedEvent.getUser().getId().getValue());
+        userDeletedMessagePublisher.publish(userDeletedEvent);
         return DeleteUserResponse.builder().id(userDeletedEvent.getUser().getId().getValue()).build();
     }
 }

@@ -28,8 +28,10 @@ public class WarehouseDeleteCommandHandler {
         WarehouseId warehouseId = new WarehouseId(deleteWarehouseCommand.getId());
         Warehouse warehouse = warehouseHelper.findWarehouseById(warehouseId);
         WarehouseDeletedEvent warehouseDeletedEvent = warehouseDomainService.validateAndRemoveWarehouse(warehouse, warehouseDeletedMessagePublisher);
-        warehouseHelper.deleteWarehouse(warehouseDeletedEvent.getWarehouse(),deleteWarehouseCommand.getForceDelete());
+        warehouseDeletedEvent.setForceDeleted(deleteWarehouseCommand.isForceDelete());
+        warehouseHelper.deleteWarehouse(warehouseDeletedEvent.getWarehouse(), deleteWarehouseCommand.isForceDelete());
         log.info("Warehouse is deleted with id: {}", warehouseDeletedEvent.getWarehouse().getId().getValue());
+        warehouseDeletedMessagePublisher.publish(warehouseDeletedEvent);
         return  DeleteWarehouseResponse.builder().id(warehouseDeletedEvent.getWarehouse().getId().getValue()).build();
     }
 }

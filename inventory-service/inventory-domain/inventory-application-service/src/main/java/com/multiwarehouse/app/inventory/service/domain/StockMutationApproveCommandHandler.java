@@ -5,7 +5,7 @@ import com.multiwarehouse.app.inventory.service.domain.dto.ApproveStockMutationR
 import com.multiwarehouse.app.inventory.service.domain.entity.StockMutation;
 import com.multiwarehouse.app.inventory.service.domain.event.InventoryStockChangedEvent;
 import com.multiwarehouse.app.inventory.service.domain.mapper.StockMutationDataMapper;
-import com.multiwarehouse.app.inventory.service.domain.ports.ouput.message.publisher.InventoryStockChangedMessagePublisher;
+import com.multiwarehouse.app.inventory.service.domain.ports.output.message.publisher.InventoryStockChangedMessagePublisher;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

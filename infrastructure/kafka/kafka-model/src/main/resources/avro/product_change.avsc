@@ -1,0 +1,64 @@
+{
+  "namespace": "com.multiwarehouse.app.kafka.product.avro.model",
+  "type": "record",
+  "name": "ProductChangeAvroModel",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "productId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "categoryId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "code",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "price",
+      "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 10,
+        "scale": 2
+      }
+    },
+    {
+      "name": "active",
+      "type": "boolean"
+    },
+    {
+      "name": "actionType",
+      "type": {
+        "type": "enum",
+        "name": "ActionType",
+        "symbols": ["DEFAULT", "CREATED", "UPDATED", "SOFT_DELETED", "HARD_DELETED"]
+      }
+    },
+    {
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}

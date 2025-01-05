@@ -1,0 +1,77 @@
+{
+  "namespace": "com.multiwarehouse.app.kafka.inventory.avro.model",
+  "type": "record",
+  "name": "InventoryChangeAvroModel",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "inventoryId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "warehouseId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "active",
+      "type": "boolean"
+    },
+    {
+      "name": "productStocks",
+      "type": {
+        "type": "array",
+        "items":{
+          "name":"ProductStockChangeAvroModel",
+          "type":"record",
+          "fields":[
+            {
+              "name": "ProductStockId",
+              "type": {
+                "type": "string",
+                "logicalType": "uuid"
+              }
+            },
+            {
+              "name": "productId",
+              "type": {
+                "type": "string",
+                "logicalType": "uuid"
+              }
+            },
+            {
+              "name": "quantity",
+              "type": "int"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "actionType",
+      "type": {
+        "type": "enum",
+        "name": "ActionType",
+        "symbols": ["DEFAULT", "CREATED", "UPDATED", "SOFT_DELETED", "HARD_DELETED"]
+      }
+    },
+    {
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}

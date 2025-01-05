@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -27,12 +26,13 @@ public class WarehouseEntity extends BaseEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof WarehouseEntity that)) return false;
-        return Objects.equals(id, that.id);
+        if (o == null || getClass() != o.getClass()) return false;
+        WarehouseEntity that = (WarehouseEntity) o;
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id);
     }
 }

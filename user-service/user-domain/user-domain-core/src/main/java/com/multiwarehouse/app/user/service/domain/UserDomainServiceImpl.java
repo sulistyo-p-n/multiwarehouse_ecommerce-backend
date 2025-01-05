@@ -17,6 +17,7 @@ public class UserDomainServiceImpl implements UserDomainService {
     public UserCreatedEvent validateAndInitializeUser(User user, DomainEventPublisher<UserCreatedEvent> userCreatedEventDomainEventPublisher) {
         user.validateInitialization();
         user.initialize();
+        user.validate();
         return new UserCreatedEvent(
                 user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
@@ -34,6 +35,7 @@ public class UserDomainServiceImpl implements UserDomainService {
         user.setUserAdminWarehouse(newUser.getUserAdminWarehouse());
         user.setUserProfile(newUser.getUserProfile());
         user.setUserAddresses(newUser.getUserAddresses());
+        user.validate();
         return new UserUpdatedEvent(
                 user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),

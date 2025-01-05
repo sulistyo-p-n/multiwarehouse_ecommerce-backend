@@ -1,6 +1,5 @@
 package com.multiwarehouse.app.user.service.dataaccess.user.entity;
 
-import com.multiwarehouse.app.dataaccess.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -6,9 +6,9 @@ logging:
     com.multiwarehouse.app: DEBUG
 
 inventory-service:
-  inventory-transfer-topic-name: inventory-transfer-product
-  inventory-add-topic-name: inventory-add-product
-  inventory-sub-topic-name: inventory-sub-product
+  inventory-change-topic-name: inventory-change
+  warehouse-change-topic-name: warehouse-change
+  product-change-topic-name: product-change
 
 spring:
   application:
@@ -56,8 +56,8 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  #  warehouse-create-consumer-group-id: warehouse-create-consumer
-  #  user-assign-response-consumer-group-id: user-assign-response-consumer
+  warehouse-change-consumer-group-id: inventory-warehouse-change-consumer
+  product-change-consumer-group-id: inventory-product-change-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

@@ -24,9 +24,8 @@ public class UserEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     private Boolean active;
-    private Boolean enable;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserAdminWarehouseEntity userAdminWarehouse;
 
     @Override

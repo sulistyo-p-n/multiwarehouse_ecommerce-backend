@@ -9,16 +9,16 @@ services:
       kafka-topics --bootstrap-server kafka-broker-1:9092 --list
       
       echo -e 'Deleting kafka topics'
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic warehouse-create --delete --if-exists
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user-create --delete --if-exists
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user-assign-request --delete --if-exists
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user-assign-response --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic warehouse-change --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic product-change --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user-change --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic inventory-change --delete --if-exists
       
       echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic warehouse-create --replication-factor 3 --partitions 3
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user-create --replication-factor 3 --partitions 3
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user-assign-request --replication-factor 3 --partitions 3
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user-assign-response --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic warehouse-change --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic product-change --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user-change --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic inventory-change --replication-factor 3 --partitions 3
       
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server kafka-broker-1:9092 --list

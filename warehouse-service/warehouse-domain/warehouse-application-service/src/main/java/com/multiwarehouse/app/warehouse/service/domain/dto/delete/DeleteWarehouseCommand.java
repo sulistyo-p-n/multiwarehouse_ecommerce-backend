@@ -16,4 +16,8 @@ public class DeleteWarehouseCommand {
     @NotNull(message = "Id {jakarta.validation.constraints.NotNull.message}")
     private UUID id;
     private final Boolean forceDelete;
+
+    public boolean isForceDelete() {
+        return (getForceDelete() != null && getForceDelete());
+    }
 }

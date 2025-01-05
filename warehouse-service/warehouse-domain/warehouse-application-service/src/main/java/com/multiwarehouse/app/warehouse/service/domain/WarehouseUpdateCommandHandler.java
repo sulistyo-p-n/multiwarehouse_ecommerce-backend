@@ -34,6 +34,7 @@ public class WarehouseUpdateCommandHandler {
         WarehouseUpdatedEvent warehouseUpdatedEvent = warehouseDomainService.validateAndSetWarehouse(warehouse, newWarehouse, warehouseUpdatedMessagePublisher);
         Warehouse warehouseSaved = warehouseHelper.saveWarehouse(warehouseUpdatedEvent.getWarehouse());
         log.info("Warehouse is updated with id: {}", warehouseSaved.getId().getValue());
+        warehouseUpdatedMessagePublisher.publish(warehouseUpdatedEvent);
         return warehouseDataMapper.updateWarehouseResponseFromWarehouse(warehouseSaved);
     }
 }

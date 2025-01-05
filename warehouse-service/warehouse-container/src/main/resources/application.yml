@@ -6,14 +6,7 @@ logging:
     com.ecommerce.app: DEBUG
 
 warehouse-service:
-  user-create-topic-name: user-create
-#  user-update-topic-name: user-update
-#  user-delete-topic-name: user-delete
-  warehouse-create-topic-name: warehouse-create
-#  warehouse-update-topic-name: warehouse-update
-#  warehouse-delete-topic-name: warehouse-delete
-  user-assign-request-topic-name: user-assign-request
-  user-assign-response-topic-name: user-assign-response
+  warehouse-change-topic-name: warehouse-change
 
 spring:
   application:
@@ -61,8 +54,7 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  user-create-consumer-group-id: user-create-consumer
-  user-assign-request-consumer-group-id: user-assign-request-consumer
+#  inventory-change-consumer-group-id: warehouse-inventory-change-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

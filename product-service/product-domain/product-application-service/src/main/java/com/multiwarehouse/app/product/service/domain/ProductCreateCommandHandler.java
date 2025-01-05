@@ -38,6 +38,7 @@ public class ProductCreateCommandHandler {
         ProductCreatedEvent productCreatedEvent = productDomainService.validateAndInitializeProduct(product, productCreatedMessagePublisher);
         Product productSaved = productHelper.saveProduct(productCreatedEvent.getProduct());
         log.info("Product is created with id: {}", productSaved.getId().getValue());
+        productCreatedMessagePublisher.publish(productCreatedEvent);
         return productDataMapper.createProductResponseFromProduct(productSaved);
     }
 }

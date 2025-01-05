@@ -1,8 +1,8 @@
 package com.multiwarehouse.app.warehouse.service.messaging.publisher.kafka;
 
-import com.multiwarehouse.app.kafka.order.avro.model.WarehouseCreateAvroModel;
 import com.multiwarehouse.app.kafka.producer.KafkaMessageHelper;
 import com.multiwarehouse.app.kafka.producer.service.KafkaProducer;
+import com.multiwarehouse.app.kafka.warehouse.avro.model.WarehouseChangeAvroModel;
 import com.multiwarehouse.app.warehouse.service.domain.config.WarehouseServiceConfigData;
 import com.multiwarehouse.app.warehouse.service.domain.event.WarehouseCreatedEvent;
 import com.multiwarehouse.app.warehouse.service.domain.port.output.message.publisher.WarehouseCreatedMessagePublisher;
@@ -16,40 +16,40 @@ public class WarehouseCreateKafkaMessagePublisher implements WarehouseCreatedMes
 
     private final WarehouseMessagingDataMapper warehouseMessagingDataMapper;
     private final WarehouseServiceConfigData warehouseServiceConfigData;
-    private final KafkaProducer<String, WarehouseCreateAvroModel> kafkaProducer;
-    private final KafkaMessageHelper warehouseKafkaMessageHelper;
+    private final KafkaProducer<String, WarehouseChangeAvroModel> kafkaProducer;
+    private final KafkaMessageHelper kafkaMessageHelper;
 
     public WarehouseCreateKafkaMessagePublisher(WarehouseMessagingDataMapper warehouseMessagingDataMapper,
                                                 WarehouseServiceConfigData warehouseServiceConfigData,
-                                                KafkaProducer<String, WarehouseCreateAvroModel> kafkaProducer,
-                                                KafkaMessageHelper warehouseKafkaMessageHelper) {
+                                                KafkaProducer<String, WarehouseChangeAvroModel> kafkaProducer,
+                                                KafkaMessageHelper kafkaMessageHelper) {
         this.warehouseMessagingDataMapper = warehouseMessagingDataMapper;
         this.warehouseServiceConfigData = warehouseServiceConfigData;
         this.kafkaProducer = kafkaProducer;
-        this.warehouseKafkaMessageHelper = warehouseKafkaMessageHelper;
+        this.kafkaMessageHelper = kafkaMessageHelper;
     }
 
     @Override
     public void publish(WarehouseCreatedEvent domainEvent) {
-        String warehouseId =domainEvent.getWarehouse().getId().getValue().toString();
+        String warehouseId = domainEvent.getWarehouse().getId().getValue().toString();
         log.info("Received WarehouseCreatedEvent for warehouse id: {}", warehouseId);
 
         try {
-            WarehouseCreateAvroModel warehouseCreateAvroModel = warehouseMessagingDataMapper
-                    .warehouseCreatedEventToWarehouseCreateAvroModel(domainEvent);
+            WarehouseChangeAvroModel warehouseChangeAvroModel = warehouseMessagingDataMapper
+                    .warehouseChangeAvroModelFromWarehouseCreatedEvent(domainEvent);
 
-            kafkaProducer.send(warehouseServiceConfigData.getWarehouseCreateTopicName(),
+            kafkaProducer.send(warehouseServiceConfigData.getWarehouseChangeTopicName(),
                     warehouseId,
-                    warehouseCreateAvroModel,
-                    warehouseKafkaMessageHelper
-                            .getKafkaCallback(warehouseServiceConfigData.getWarehouseCreateTopicName(),
-                                    warehouseCreateAvroModel,
+                    warehouseChangeAvroModel,
+                    kafkaMessageHelper
+                            .getKafkaCallback(warehouseServiceConfigData.getWarehouseChangeTopicName(),
+                                    warehouseChangeAvroModel,
                                     warehouseId,
-                                    "WarehouseCreateAvroModel"));
+                                    "WarehouseChangeAvroModel"));
 
-            log.info("WarehouseCreateAvroModel sent to Kafka for warehouse id: {}", warehouseCreateAvroModel.getWarehouseId());
+            log.info("WarehouseChangeAvroModel sent to Kafka for warehouse id: {}", warehouseChangeAvroModel.getWarehouseId());
         } catch (Exception e) {
-            log.error("Error while sending WarehouseCreateAvroModel message" +
+            log.error("Error while sending WarehouseChangeAvroModel message" +
                     " to kafka with warehouse id: {}, error: {}", warehouseId, e.getMessage());
         }
     }

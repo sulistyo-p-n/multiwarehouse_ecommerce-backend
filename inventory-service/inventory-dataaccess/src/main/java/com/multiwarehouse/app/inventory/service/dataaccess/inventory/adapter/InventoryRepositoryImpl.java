@@ -6,7 +6,7 @@ import com.multiwarehouse.app.inventory.service.dataaccess.inventory.entity.Inve
 import com.multiwarehouse.app.inventory.service.dataaccess.inventory.mapper.InventoryDataAccessMapper;
 import com.multiwarehouse.app.inventory.service.dataaccess.inventory.repository.InventoryJpaRepository;
 import com.multiwarehouse.app.inventory.service.domain.entity.Inventory;
-import com.multiwarehouse.app.inventory.service.domain.ports.ouput.repository.InventoryRepository;
+import com.multiwarehouse.app.inventory.service.domain.ports.output.repository.InventoryRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;

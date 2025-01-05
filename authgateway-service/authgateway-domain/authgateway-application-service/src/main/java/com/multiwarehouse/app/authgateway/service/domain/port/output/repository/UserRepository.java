@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
-    List<User> findAll();
-    List<User> findByCriteria(Boolean withInactive, Boolean withTrashed, UserRole userRole, String search);
     Optional<User> findById(UserId userId);
     User save(User user);
     void hardDelete(User user);

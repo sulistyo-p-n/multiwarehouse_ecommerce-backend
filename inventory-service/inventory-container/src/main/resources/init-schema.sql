@@ -19,25 +19,25 @@ CREATE TABLE "inventory".products
     CONSTRAINT products_pkey PRIMARY KEY (id)
 );
 
-INSERT INTO "inventory".products (id, product_category_id, code, name, price, active)
-VALUES (
-    '817c9739-8c2e-49e9-b6ae-000000000001',
-    'de3f041c-868a-4962-a159-87e61cc56dc8',
-    'kullaberg-001',
-    'KULLABERG HITAM',
-    699000.00,
-    true
-);
-
-INSERT INTO "inventory".products (id, product_category_id, code, name, price, active)
-VALUES (
-    '817c9739-8c2e-49e9-b6ae-000000000002',
-    'de3f041c-868a-4962-a159-87e61cc56dc8',
-    'kullaberg-002',
-    'KULLABERG PUTIH',
-    999000.00,
-    true
-);
+--INSERT INTO "inventory".products (id, product_category_id, code, name, price, active)
+--VALUES (
+--    '817c9739-8c2e-49e9-b6ae-000000000001',
+--    'de3f041c-868a-4962-a159-87e61cc56dc8',
+--    'kullaberg-001',
+--    'KULLABERG HITAM',
+--    699000.00,
+--    true
+--);
+--
+--INSERT INTO "inventory".products (id, product_category_id, code, name, price, active)
+--VALUES (
+--    '817c9739-8c2e-49e9-b6ae-000000000002',
+--    'de3f041c-868a-4962-a159-87e61cc56dc8',
+--    'kullaberg-002',
+--    'KULLABERG PUTIH',
+--    999000.00,
+--    true
+--);
 
 -- "inventory".warehouses
 DROP TABLE IF EXISTS "inventory".warehouses CASCADE;
@@ -53,11 +53,11 @@ CREATE TABLE "inventory".warehouses
     CONSTRAINT warehouses_pkey PRIMARY KEY (id)
 );
 
-INSERT INTO "inventory".warehouses (id, code, name, active)
-VALUES ('552b88da-b8a0-48fd-b9cb-000000000001', 'IKIAEKBP', 'IKIAE Kota Baru Parayangan', true);
-
-INSERT INTO "inventory".warehouses (id, code, name, active)
-VALUES ('552b88da-b8a0-48fd-b9cb-000000000002', 'IKIAEJGC', 'IKIAE Jakarta Garden City', true);
+--INSERT INTO "inventory".warehouses (id, code, name, active)
+--VALUES ('552b88da-b8a0-48fd-b9cb-000000000001', 'IKIAEKBP', 'IKIAE Kota Baru Parayangan', true);
+--
+--INSERT INTO "inventory".warehouses (id, code, name, active)
+--VALUES ('552b88da-b8a0-48fd-b9cb-000000000002', 'IKIAEJGC', 'IKIAE Jakarta Garden City', true);
 
 -- "inventory".inventories
 DROP TABLE IF EXISTS "inventory".inventories CASCADE;
@@ -78,11 +78,11 @@ ALTER TABLE "inventory".inventories
         ON DELETE CASCADE
     NOT VALID;
 
-INSERT INTO "inventory".inventories (id, warehouse_id, active)
-VALUES ('52bd9156-f039-469d-b79a-000000000001', '552b88da-b8a0-48fd-b9cb-000000000001', true);
-
-INSERT INTO "inventory".inventories (id, warehouse_id, active)
-VALUES ('52bd9156-f039-469d-b79a-000000000002', '552b88da-b8a0-48fd-b9cb-000000000002', true);
+--INSERT INTO "inventory".inventories (id, warehouse_id, active)
+--VALUES ('52bd9156-f039-469d-b79a-000000000001', '552b88da-b8a0-48fd-b9cb-000000000001', true);
+--
+--INSERT INTO "inventory".inventories (id, warehouse_id, active)
+--VALUES ('52bd9156-f039-469d-b79a-000000000002', '552b88da-b8a0-48fd-b9cb-000000000002', true);
 
 -- "inventory".product_stocks
 DROP TABLE IF EXISTS "inventory".product_stocks CASCADE;

@@ -6,7 +6,7 @@ import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserResponse;
 import com.multiwarehouse.app.user.service.domain.entity.User;
 import com.multiwarehouse.app.user.service.domain.event.UserUpdatedEvent;
 import com.multiwarehouse.app.user.service.domain.mapper.UserDataMapper;
-import com.multiwarehouse.app.user.service.domain.ports.output.message.publsher.user.UserUpdatedMessagePublisher;
+import com.multiwarehouse.app.user.service.domain.ports.output.message.publisher.user.UserUpdatedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,8 +32,9 @@ public class UserUpdateCommandHandler {
         User user = userHelper.findUserById(userId);
         User newUser = userDataMapper.userFromUpdateUserCommand(updateUserCommand);
         UserUpdatedEvent userUpdatedEvent = userDomainService.validateAndSetUser(user, newUser, userUpdatedMessagePublisher);
-        User userSaved = userHelper.saveUser(userUpdatedEvent.getUser());
+        User userSaved = userHelper.persistUser(userUpdatedEvent.getUser());
         log.info("User is updated with id: {}", userSaved.getId().getValue());
+        userUpdatedMessagePublisher.publish(userUpdatedEvent);
         return userDataMapper.updateUserResponseFromUser(userSaved);
     }
 }
