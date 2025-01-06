@@ -1,6 +1,5 @@
 package com.multiwarehouse.app.product.service.dataaccess.product.entity;
 
-import com.multiwarehouse.app.product.service.dataaccess.stock.entity.StockEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;

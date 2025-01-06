@@ -28,7 +28,7 @@ public class InventoryMessagingDataMapper {
 
     public InventoryChangeAvroModel inventoryChangeAvroModelFromInventoryUpdatedEvent(InventoryUpdatedEvent inventoryUpdatedEvent) {
         InventoryChangeAvroModel inventoryChangeAvroModel = inventoryChangeAvroModelFromInventory(inventoryUpdatedEvent.getInventory());
-        inventoryChangeAvroModel.setActionType(ActionType.CREATED);
+        inventoryChangeAvroModel.setActionType(ActionType.UPDATED);
         inventoryChangeAvroModel.setCreatedAt(inventoryUpdatedEvent.getCreatedAt().toInstant());
         return inventoryChangeAvroModel;
     }

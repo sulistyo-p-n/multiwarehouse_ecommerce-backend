@@ -13,6 +13,7 @@ import com.multiwarehouse.app.inventory.service.domain.valueobject.InventoryStoc
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalId;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,12 +34,14 @@ public class InventoryDataAccessMapper {
                 .withActive(inventoryEntity.getActive())
                 .withWarehouse(warehouseDataAccessMapper.warehouseFromWarehouseEntity(inventoryEntity.getWarehouse()))
                 .withStocks(productStocksFromProductStockEntities(inventoryEntity.getStocks()))
+                .withSoftDeleted(inventoryEntity.isSoftDeleted())
                 .build();
         inventory.getStocks().forEach(inventoryStock -> inventoryStock.setInventoryId(inventoryId));
         return inventory;
     }
 
     private List<InventoryStock> productStocksFromProductStockEntities(List<InventoryStockEntity> productStockEntities) {
+        if (productStockEntities == null) return Collections.emptyList();
         return productStockEntities.stream()
                 .map(this::productStockFromProductStockEntity)
                 .collect(Collectors.toList());
@@ -57,6 +60,7 @@ public class InventoryDataAccessMapper {
     }
 
     private List<StockJournal> stockJournalsFromStockJournalEntities(List<StockJournalEntity> stockJournalEntities) {
+        if (stockJournalEntities == null) return Collections.emptyList();
         return stockJournalEntities.stream()
                 .map(this::stockJournalFromStockJournalEntity)
                 .collect(Collectors.toList());
@@ -83,6 +87,7 @@ public class InventoryDataAccessMapper {
     }
 
     private List<InventoryStockEntity> productStockEntitiesFromProductStocks(List<InventoryStock> inventoryStocks) {
+        if (inventoryStocks == null) return Collections.emptyList();
         return inventoryStocks.stream()
                 .map(this::productStockEntityFromProductStock)
                 .collect(Collectors.toList());
@@ -100,6 +105,7 @@ public class InventoryDataAccessMapper {
     }
 
     private List<StockJournalEntity> stockJournalEntitiesFromStockJournals(List<StockJournal> stockJournals) {
+        if (stockJournals == null) return Collections.emptyList();
         return stockJournals.stream()
                 .map(this::stockJournalEntityFromStockJournal)
                 .collect(Collectors.toList());

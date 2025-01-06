@@ -22,6 +22,7 @@ public class InventoryDataMapper {
                 .id(inventory.getId().getValue())
                 .active(inventory.isActive())
                 .stocks(inventoryStockResponsesFromInventoryStocks(inventory.getStocks()))
+                .softDeleted(inventory.isSoftDeleted())
                 .build();
     }
 

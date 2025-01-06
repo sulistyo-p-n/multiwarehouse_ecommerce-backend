@@ -116,15 +116,15 @@ DROP TABLE IF EXISTS "inventory".stock_journals CASCADE;
 CREATE TABLE "inventory".stock_journals
 (
     id UUID NOT NULL,
-    product_stock_id UUID NOT NULL,
+    inventory_stock_id UUID NOT NULL,
     quantity INTEGER NOT NULL,
     type stock_journal_type NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT stock_journals_pkey PRIMARY KEY (id)
 );
 ALTER TABLE "inventory".stock_journals
-    ADD CONSTRAINT fk_product_stock_id FOREIGN KEY (product_stock_id)
-        REFERENCES "inventory".product_stocks (id) MATCH SIMPLE
+    ADD CONSTRAINT fk_inventory_stocks_id FOREIGN KEY (inventory_stock_id)
+        REFERENCES "inventory".inventory_stocks (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE CASCADE
     NOT VALID;

@@ -1,10 +1,8 @@
-package com.multiwarehouse.app.inventory.service.dataaccess.inventory.entity;
+package com.multiwarehouse.app.product.service.dataaccess.inventory.entity;
 
-import com.multiwarehouse.app.inventory.service.dataaccess.product.entity.ProductEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,14 +21,10 @@ public class InventoryStockEntity {
     @JoinColumn(name = "inventory_id")
     private InventoryEntity inventory;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private ProductEntity product;
+    @Column(name = "product_id")
+    private UUID productId;
 
     private int quantity;
-
-    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<StockJournalEntity> journals;
 
     @Override
     public boolean equals(Object o) {

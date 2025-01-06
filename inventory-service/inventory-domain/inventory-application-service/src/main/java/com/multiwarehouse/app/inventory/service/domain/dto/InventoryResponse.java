@@ -14,4 +14,6 @@ public class InventoryResponse {
     private final UUID id;
     private final Boolean active;
     private final List<InventoryStockResponse> stocks;
+
+    private final Boolean softDeleted;
 }

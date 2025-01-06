@@ -61,20 +61,35 @@ ALTER TABLE "product".product_images
         ON DELETE CASCADE
     NOT VALID;
 
--- "product".stocks
-DROP TABLE IF EXISTS "product".stocks CASCADE;
-CREATE TABLE "product".stocks
+-- "product".inventories
+DROP TABLE IF EXISTS "product".inventories CASCADE;
+CREATE TABLE "product".inventories
 (
     id UUID NOT NULL,
-    product_id UUID NOT NULL,
     warehouse_id UUID NOT NULL,
-    quantity INTEGER NOT NULL,
+    active BOOLEAN DEFAULT TRUE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP,
-    UNIQUE (product_id, warehouse_id),
-    CONSTRAINT stocks_pkey PRIMARY KEY (id)
+    CONSTRAINT inventories_pkey PRIMARY KEY (id)
 );
+
+-- "product".inventory_stocks
+DROP TABLE IF EXISTS "product".inventory_stocks CASCADE;
+CREATE TABLE "product".inventory_stocks
+(
+    id UUID NOT NULL,
+    inventory_id UUID NOT NULL,
+    product_id UUID NOT NULL,
+    quantity INTEGER NOT NULL,
+    CONSTRAINT inventory_stocks_pkey PRIMARY KEY (id)
+);
+ALTER TABLE "product".inventory_stocks
+    ADD CONSTRAINT fk_inventory_id FOREIGN KEY (inventory_id)
+        REFERENCES "product".inventories (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+    NOT VALID;
 
 -- "product".product_stocks_m_view
 DROP MATERIALIZED VIEW IF EXISTS "product".product_stocks_m_view;
@@ -89,7 +104,15 @@ AS
     FROM
         "product".products p
     LEFT JOIN
-        "product".stocks s ON p.id = s.product_id
+        "product".inventory_stocks s
+        ON p.id = s.product_id
+    LEFT JOIN
+        "product".inventories i
+        ON s.inventory_id = i.id
+	WHERE
+		i.active = TRUE
+	AND
+		i.deleted_at IS NULL
     GROUP BY
         p.id
     ORDER BY
@@ -115,9 +138,16 @@ after INSERT OR UPDATE OR DELETE OR truncate
 ON "product".products FOR each statement
 EXECUTE PROCEDURE "product".refresh_product_stocks_m_view();
 
--- "product".trigger_refresh_product_stocks_m_view_on_stocks
-DROP trigger IF EXISTS trigger_refresh_product_stocks_m_view_on_stocks ON "product".stocks;
-CREATE trigger trigger_refresh_product_stocks_m_view_on_stocks
+-- "product".trigger_refresh_product_stocks_m_view_on_inventory_stocks
+DROP trigger IF EXISTS trigger_refresh_product_stocks_m_view_on_inventory_stocks ON "product".inventory_stocks;
+CREATE trigger trigger_refresh_product_stocks_m_view_on_inventory_stocks
 after INSERT OR UPDATE OR DELETE OR truncate
-ON "product".stocks FOR each statement
+ON "product".inventory_stocks FOR each statement
+EXECUTE PROCEDURE "product".refresh_product_stocks_m_view();
+
+-- "product".trigger_refresh_product_stocks_m_view_on_inventory_stocks
+DROP trigger IF EXISTS trigger_refresh_product_stocks_m_view_on_inventories ON "product".inventories;
+CREATE trigger trigger_refresh_product_stocks_m_view_on_inventories
+after INSERT OR UPDATE OR DELETE OR truncate
+ON "product".inventories FOR each statement
 EXECUTE PROCEDURE "product".refresh_product_stocks_m_view();

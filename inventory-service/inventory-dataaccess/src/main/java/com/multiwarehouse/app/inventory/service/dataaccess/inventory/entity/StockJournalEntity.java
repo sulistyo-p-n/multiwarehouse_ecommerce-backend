@@ -20,7 +20,7 @@ public class StockJournalEntity {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "product_stock_id")
+    @JoinColumn(name = "inventory_stock_id")
     private InventoryStockEntity stock;
 
     private int quantity;

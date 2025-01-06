@@ -1,5 +1,6 @@
 package com.multiwarehouse.app.inventory.service.domain;
 
+import com.multiwarehouse.app.domain.valueobject.WarehouseId;
 import com.multiwarehouse.app.inventory.service.domain.entity.Inventory;
 import com.multiwarehouse.app.inventory.service.domain.entity.Warehouse;
 import com.multiwarehouse.app.inventory.service.domain.event.InventoryCreatedEvent;
@@ -11,6 +12,7 @@ import com.multiwarehouse.app.inventory.service.domain.ports.output.message.publ
 import com.multiwarehouse.app.inventory.service.domain.ports.output.message.publisher.InventoryUpdatedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Collections;
@@ -36,6 +38,7 @@ public class WarehouseChangeMessageListenerImpl implements WarehouseChangeMessag
     }
 
     @Override
+    @Transactional
     public void warehouseCreated(Warehouse warehouse) {
         Warehouse warehouseSaved = warehouseHelper.saveWarehouse(warehouse);
         Inventory inventory = Inventory.builder()
@@ -49,16 +52,18 @@ public class WarehouseChangeMessageListenerImpl implements WarehouseChangeMessag
     }
 
     @Override
+    @Transactional
     public void warehouseUpdated(Warehouse warehouse) {
         Warehouse warehouseSaved = warehouseHelper.saveWarehouse(warehouse);
-        Inventory inventory = inventoryHelper.findInventoryByWarehouseId(warehouse.getId());
-        InventoryUpdatedEvent inventoryUpdatedEvent = inventoryDomainService.validateAndSetInventory(inventory, warehouse.isActive(), inventoryUpdatedMessagePublisher);
+        Inventory inventory = inventoryHelper.findInventoryByWarehouseId(warehouseSaved.getId());
+        InventoryUpdatedEvent inventoryUpdatedEvent = inventoryDomainService.validateAndSetInventory(inventory, warehouseSaved.isActive(), inventoryUpdatedMessagePublisher);
         Inventory inventorySaved = inventoryHelper.saveInventory(inventoryUpdatedEvent.getInventory());
         log.info("Inventory is updated with id: {}", inventorySaved.getId().getValue());
         inventoryUpdatedMessagePublisher.publish(inventoryUpdatedEvent);
     }
 
     @Override
+    @Transactional
     public void warehouseSoftDeleted(Warehouse warehouse) {
         Inventory inventory = inventoryHelper.findInventoryByWarehouseId(warehouse.getId());
         InventoryDeletedEvent inventoryDeletedEvent = inventoryDomainService.removeInventory(inventory, inventoryDeletedMessagePublisher);
@@ -69,6 +74,7 @@ public class WarehouseChangeMessageListenerImpl implements WarehouseChangeMessag
     }
 
     @Override
+    @Transactional
     public void warehouseHardDeleted(Warehouse warehouse) {
         Inventory inventory = inventoryHelper.findInventoryByWarehouseId(warehouse.getId());
         InventoryDeletedEvent inventoryDeletedEvent = inventoryDomainService.removeInventory(inventory, inventoryDeletedMessagePublisher);

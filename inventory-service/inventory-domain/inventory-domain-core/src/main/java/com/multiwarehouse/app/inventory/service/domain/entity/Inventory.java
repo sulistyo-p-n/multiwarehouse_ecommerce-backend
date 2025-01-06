@@ -14,11 +14,14 @@ public class Inventory extends AggregateRoot<InventoryId> {
     private final List<InventoryStock> stocks;
     private Boolean active;
 
+    private final Boolean softDeleted;
+
     private Inventory(Builder builder) {
         super.setId(builder.id);
         active = builder.active;
         warehouse = builder.warehouse;
         stocks = builder.stocks;
+        softDeleted = builder.softDeleted;
     }
 
     public static Builder builder() {
@@ -137,6 +140,10 @@ public class Inventory extends AggregateRoot<InventoryId> {
         return active;
     }
 
+    public Boolean isSoftDeleted() {
+        return softDeleted;
+    }
+
     public Warehouse getWarehouse() {
         return warehouse;
     }
@@ -150,6 +157,7 @@ public class Inventory extends AggregateRoot<InventoryId> {
         private Boolean active;
         private Warehouse warehouse;
         private List<InventoryStock> stocks = new ArrayList<>();
+        private Boolean softDeleted;
 
         private Builder() {
         }
@@ -171,6 +179,11 @@ public class Inventory extends AggregateRoot<InventoryId> {
 
         public Builder withStocks(List<InventoryStock> val) {
             stocks = val;
+            return this;
+        }
+
+        public Builder withSoftDeleted(Boolean val) {
+            softDeleted = val;
             return this;
         }
 
