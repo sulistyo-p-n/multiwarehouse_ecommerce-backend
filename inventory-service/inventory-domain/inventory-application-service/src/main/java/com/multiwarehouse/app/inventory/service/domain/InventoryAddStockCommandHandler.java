@@ -37,6 +37,7 @@ public class InventoryAddStockCommandHandler {
         InventoryStockChangedEvent inventoryStockChangedEvent = inventoryDomainService.addStock(inventory, product, addStockToInventoryCommand.getQuantity(), inventoryStockChangedMessagePublisher);
         Inventory inventorySaved = inventoryHelper.saveInventory(inventory);
         log.info("Inventory Stock is added with id: {}", inventorySaved.getId().getValue());
+        inventoryStockChangedMessagePublisher.publish(inventoryStockChangedEvent);
         return inventoryDataMapper.addStockToInventoryResponseFromInventory(inventorySaved);
     }
 }

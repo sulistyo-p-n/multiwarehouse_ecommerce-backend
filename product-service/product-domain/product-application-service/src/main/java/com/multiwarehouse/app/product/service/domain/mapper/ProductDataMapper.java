@@ -105,6 +105,7 @@ public class ProductDataMapper {
                 .active(product.isActive())
                 .category(productCategoryDataMapper.getProductCategoryResponseFromProductCategory(product.getCategory()))
                 .images(this.getProductImageResponsesFromProductImages(product.getImages()))
+                .quantity(product.getQuantity())
                 .softDeleted(product.isSoftDeleted())
                 .build();
     }

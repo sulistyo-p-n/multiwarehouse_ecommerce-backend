@@ -4,6 +4,7 @@ import com.multiwarehouse.app.domain.valueobject.Money;
 import com.multiwarehouse.app.domain.valueobject.ProductId;
 import com.multiwarehouse.app.product.service.dataaccess.product.entity.ProductEntity;
 import com.multiwarehouse.app.product.service.dataaccess.product.entity.ProductImageEntity;
+import com.multiwarehouse.app.product.service.dataaccess.product.entity.ProductStockEntity;
 import com.multiwarehouse.app.product.service.domain.entity.Product;
 import com.multiwarehouse.app.product.service.domain.entity.ProductImage;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,7 @@ public class ProductDataAccessMapper {
                 .withCategory(productCategoryDataAccessMapper.productCategoryEntityToProductCategory(productEntity.getCategory()))
                 .withImages(productImageEntitiesToProductImages(productEntity.getImages()))
                 .withActive(productEntity.getActive())
+                .withQuantity(productStockEntityToStockQuantity(productEntity.getStock()))
                 .withSoftDeleted(productEntity.isSoftDeleted())
                 .build();
         product.getImages().forEach(productImage -> productImage.setProductId(productId));
@@ -43,6 +45,11 @@ public class ProductDataAccessMapper {
         return productImageEntities.stream()
                 .map(productImageDataAccessMapper::productImageEntityToProductImage)
                 .collect(Collectors.toList());
+    }
+
+    private int productStockEntityToStockQuantity(ProductStockEntity productStockEntity) {
+        if (productStockEntity == null) return 0;
+        return productStockEntity.getQuantity();
     }
 
     public ProductEntity productToProductEntity(Product product) {

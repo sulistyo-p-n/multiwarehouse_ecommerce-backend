@@ -2,8 +2,7 @@ package com.multiwarehouse.app.inventory.service.domain.mapper;
 
 import com.multiwarehouse.app.inventory.service.domain.dto.*;
 import com.multiwarehouse.app.inventory.service.domain.entity.Inventory;
-import com.multiwarehouse.app.inventory.service.domain.entity.Product;
-import com.multiwarehouse.app.inventory.service.domain.entity.ProductStock;
+import com.multiwarehouse.app.inventory.service.domain.entity.InventoryStock;
 import com.multiwarehouse.app.inventory.service.domain.entity.StockJournal;
 import org.springframework.stereotype.Component;
 
@@ -22,22 +21,22 @@ public class InventoryDataMapper {
         return InventoryResponse.builder()
                 .id(inventory.getId().getValue())
                 .active(inventory.isActive())
-                .productStocks(productStockResponsesFromProductStocks(inventory.getProductStocks()))
+                .stocks(inventoryStockResponsesFromInventoryStocks(inventory.getStocks()))
                 .build();
     }
 
-    private List<ProductStockResponse> productStockResponsesFromProductStocks(List<ProductStock> productStocks) {
-        return productStocks.stream()
-                .map(this::productStockResponseFromProductStock)
+    private List<InventoryStockResponse> inventoryStockResponsesFromInventoryStocks(List<InventoryStock> inventoryStocks) {
+        return inventoryStocks.stream()
+                .map(this::inventoryStockResponseFromInventoryStock)
                 .collect(Collectors.toList());
     }
 
-    private ProductStockResponse productStockResponseFromProductStock(ProductStock productStock) {
-        return ProductStockResponse.builder()
-                .id(productStock.getId().getValue())
-                .quantity(productStock.getQuantity())
-                .product(productDataMapper.productResponseFromProduct(productStock.getProduct()))
-                .stockJournals(stockJournalResponsesFromStockJournals(productStock.getStockJournals()))
+    private InventoryStockResponse inventoryStockResponseFromInventoryStock(InventoryStock inventoryStock) {
+        return InventoryStockResponse.builder()
+                .id(inventoryStock.getId().getValue())
+                .quantity(inventoryStock.getQuantity())
+                .product(productDataMapper.productResponseFromProduct(inventoryStock.getProduct()))
+                .journals(stockJournalResponsesFromStockJournals(inventoryStock.getJournals()))
                 .build();
     }
 

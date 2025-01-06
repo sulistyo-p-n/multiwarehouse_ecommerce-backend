@@ -7,17 +7,17 @@ import java.time.ZonedDateTime;
 
 public class InventoryCreatedEvent extends InventoryEvent {
 
-    private final DomainEventPublisher<InventoryCreatedEvent> inventoryStockCreatedEventDomainEventPublisher;
+    private final DomainEventPublisher<InventoryCreatedEvent> inventoryCreatedEventDomainEventPublisher;
 
     public InventoryCreatedEvent(Inventory inventory,
                                       ZonedDateTime createdAt,
-                                      DomainEventPublisher<InventoryCreatedEvent> inventoryStockCreatedEventDomainEventPublisher) {
+                                      DomainEventPublisher<InventoryCreatedEvent> inventoryCreatedEventDomainEventPublisher) {
         super(inventory, createdAt);
-        this.inventoryStockCreatedEventDomainEventPublisher = inventoryStockCreatedEventDomainEventPublisher;
+        this.inventoryCreatedEventDomainEventPublisher = inventoryCreatedEventDomainEventPublisher;
     }
 
     @Override
     public void fire() {
-        inventoryStockCreatedEventDomainEventPublisher.publish(this);
+        inventoryCreatedEventDomainEventPublisher.publish(this);
     }
 }

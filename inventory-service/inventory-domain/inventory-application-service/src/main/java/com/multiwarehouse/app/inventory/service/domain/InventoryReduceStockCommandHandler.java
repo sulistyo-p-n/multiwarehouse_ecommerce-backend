@@ -37,6 +37,7 @@ public class InventoryReduceStockCommandHandler {
         InventoryStockChangedEvent inventoryStockChangedEvent = inventoryDomainService.reduceStock(inventory, product, reduceStockFromInventoryCommand.getQuantity(), inventoryStockChangedMessagePublisher);
         Inventory inventorySaved = inventoryHelper.saveInventory(inventory);
         log.info("Inventory Stock is reduced with id: {}", inventorySaved.getId().getValue());
+        inventoryStockChangedMessagePublisher.publish(inventoryStockChangedEvent);
         return inventoryDataMapper.reduceStockFromInventoryResponseFromInventory(inventorySaved);
     }
 }

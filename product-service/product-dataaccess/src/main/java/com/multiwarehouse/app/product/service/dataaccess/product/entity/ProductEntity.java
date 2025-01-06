@@ -32,6 +32,10 @@ public class ProductEntity extends BaseEntity {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImageEntity> images;
 
+    @OneToOne
+    @JoinColumn(name = "id")
+    private ProductStockEntity stock;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

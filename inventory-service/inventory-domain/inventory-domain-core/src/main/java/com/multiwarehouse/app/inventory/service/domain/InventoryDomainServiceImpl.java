@@ -7,7 +7,9 @@ import com.multiwarehouse.app.inventory.service.domain.entity.Inventory;
 import com.multiwarehouse.app.inventory.service.domain.entity.Product;
 import com.multiwarehouse.app.inventory.service.domain.entity.StockMutation;
 import com.multiwarehouse.app.inventory.service.domain.event.InventoryCreatedEvent;
+import com.multiwarehouse.app.inventory.service.domain.event.InventoryDeletedEvent;
 import com.multiwarehouse.app.inventory.service.domain.event.InventoryStockChangedEvent;
+import com.multiwarehouse.app.inventory.service.domain.event.InventoryUpdatedEvent;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
 
 import java.time.ZoneId;
@@ -25,6 +27,25 @@ public class InventoryDomainServiceImpl implements InventoryDomainService {
                 inventory,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
                 inventoryStockCreatedEventDomainEventPublisher);
+    }
+
+    @Override
+    public InventoryUpdatedEvent validateAndSetInventory(Inventory inventory, Boolean active, DomainEventPublisher<InventoryUpdatedEvent> inventoryStockUpdatedEventDomainEventPublisher) {
+        inventory.setActive(active);
+        inventory.validate();
+        return new InventoryUpdatedEvent(
+                inventory,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
+                inventoryStockUpdatedEventDomainEventPublisher);
+    }
+
+    @Override
+    public InventoryDeletedEvent removeInventory(Inventory inventory, DomainEventPublisher<InventoryDeletedEvent> inventoryStockDeletedEventDomainEventPublisher) {
+        inventory.validate();
+        return new InventoryDeletedEvent(
+                inventory,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
+                inventoryStockDeletedEventDomainEventPublisher);
     }
 
     @Override

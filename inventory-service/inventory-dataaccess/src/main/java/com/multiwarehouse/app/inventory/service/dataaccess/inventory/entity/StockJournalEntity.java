@@ -21,7 +21,7 @@ public class StockJournalEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_stock_id")
-    private ProductStockEntity productStock;
+    private InventoryStockEntity stock;
 
     private int quantity;
 

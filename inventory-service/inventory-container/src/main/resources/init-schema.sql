@@ -84,23 +84,23 @@ ALTER TABLE "inventory".inventories
 --INSERT INTO "inventory".inventories (id, warehouse_id, active)
 --VALUES ('52bd9156-f039-469d-b79a-000000000002', '552b88da-b8a0-48fd-b9cb-000000000002', true);
 
--- "inventory".product_stocks
-DROP TABLE IF EXISTS "inventory".product_stocks CASCADE;
-CREATE TABLE "inventory".product_stocks
+-- "inventory".inventory_stocks
+DROP TABLE IF EXISTS "inventory".inventory_stocks CASCADE;
+CREATE TABLE "inventory".inventory_stocks
 (
     id UUID NOT NULL,
     inventory_id UUID NOT NULL,
     product_id UUID NOT NULL,
     quantity INTEGER NOT NULL,
-    CONSTRAINT product_stocks_pkey PRIMARY KEY (id)
+    CONSTRAINT inventory_stocks_pkey PRIMARY KEY (id)
 );
-ALTER TABLE "inventory".product_stocks
+ALTER TABLE "inventory".inventory_stocks
     ADD CONSTRAINT fk_inventory_id FOREIGN KEY (inventory_id)
         REFERENCES "inventory".inventories (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE CASCADE
     NOT VALID;
-ALTER TABLE "inventory".product_stocks
+ALTER TABLE "inventory".inventory_stocks
     ADD CONSTRAINT fk_product_id FOREIGN KEY (product_id)
         REFERENCES "inventory".products (id) MATCH SIMPLE
         ON UPDATE NO ACTION

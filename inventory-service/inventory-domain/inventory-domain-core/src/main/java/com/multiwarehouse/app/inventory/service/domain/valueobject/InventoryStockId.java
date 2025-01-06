@@ -4,8 +4,8 @@ import com.multiwarehouse.app.domain.valueobject.BaseId;
 
 import java.util.UUID;
 
-public class ProductStockId extends BaseId<UUID> {
-    public ProductStockId(UUID value) {
+public class InventoryStockId extends BaseId<UUID> {
+    public InventoryStockId(UUID value) {
         super(value);
     }
 }

@@ -2,7 +2,7 @@ package com.multiwarehouse.app.inventory.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
-import com.multiwarehouse.app.inventory.service.domain.valueobject.ProductStockId;
+import com.multiwarehouse.app.inventory.service.domain.valueobject.InventoryStockId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalType;
 
@@ -10,14 +10,14 @@ import java.time.Instant;
 import java.util.UUID;
 
 public class StockJournal extends BaseEntity<StockJournalId> {
-    private ProductStockId productStockId;
+    private InventoryStockId inventoryStockId;
     private final int quantity;
     private final StockJournalType type;
     private final Instant createdAt;
 
     private StockJournal(Builder builder) {
         super.setId(builder.id);
-        productStockId = builder.productStockId;
+        inventoryStockId = builder.inventoryStockId;
         quantity = builder.quantity;
         type = builder.type;
         createdAt = builder.createdAt;
@@ -27,8 +27,8 @@ public class StockJournal extends BaseEntity<StockJournalId> {
         return new Builder();
     }
 
-    public void initialize(ProductStockId productStockId) {
-        this.productStockId = productStockId;
+    public void initialize(InventoryStockId inventoryStockId) {
+        this.inventoryStockId = inventoryStockId;
         setId(new StockJournalId(UUID.randomUUID()));
     }
 
@@ -44,7 +44,7 @@ public class StockJournal extends BaseEntity<StockJournalId> {
     }
 
     private void validateProductStockId() {
-        if (productStockId == null) throw new InventoryDomainException("StockJournal.ProductStockId cannot be null!");
+        if (inventoryStockId == null) throw new InventoryDomainException("StockJournal.ProductStockId cannot be null!");
     }
 
     private void validateQuantity() {
@@ -55,8 +55,8 @@ public class StockJournal extends BaseEntity<StockJournalId> {
         if (type == null) throw new InventoryDomainException("StockJournal.Type cannot be null!");
     }
 
-    public ProductStockId getProductStockId() {
-        return productStockId;
+    public InventoryStockId getProductStockId() {
+        return inventoryStockId;
     }
 
     public int getQuantity() {
@@ -71,13 +71,13 @@ public class StockJournal extends BaseEntity<StockJournalId> {
         return createdAt;
     }
 
-    public void setProductStockId(ProductStockId productStockId) {
-        this.productStockId = productStockId;
+    public void setInventoryStockId(InventoryStockId inventoryStockId) {
+        this.inventoryStockId = inventoryStockId;
     }
 
     public static final class Builder {
         private StockJournalId id;
-        private ProductStockId productStockId;
+        private InventoryStockId inventoryStockId;
         private int quantity;
         private StockJournalType type;
         private Instant createdAt;
@@ -90,8 +90,8 @@ public class StockJournal extends BaseEntity<StockJournalId> {
             return this;
         }
 
-        public Builder withProductStockId(ProductStockId val) {
-            productStockId = val;
+        public Builder withInventoryStockId(InventoryStockId val) {
+            inventoryStockId = val;
             return this;
         }
 

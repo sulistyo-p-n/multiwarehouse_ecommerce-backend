@@ -13,9 +13,9 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product_stocks")
+@Table(name = "inventory_stocks")
 @Entity
-public class ProductStockEntity {
+public class InventoryStockEntity {
     @Id
     private UUID id;
 
@@ -29,13 +29,13 @@ public class ProductStockEntity {
 
     private int quantity;
 
-    @OneToMany(mappedBy = "productStock", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<StockJournalEntity> stockJournals;
+    @OneToMany(mappedBy = "inventoryStock", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StockJournalEntity> journals;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ProductStockEntity that)) return false;
+        if (!(o instanceof InventoryStockEntity that)) return false;
         return Objects.equals(id, that.id);
     }
 

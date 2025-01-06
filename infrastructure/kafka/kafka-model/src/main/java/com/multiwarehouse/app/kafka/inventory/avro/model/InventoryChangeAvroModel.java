@@ -13,10 +13,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1821723786255475245L;
+  private static final long serialVersionUID = -3744088328615646254L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"InventoryChangeAvroModel\",\"namespace\":\"com.multiwarehouse.app.kafka.inventory.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"inventoryId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"warehouseId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"active\",\"type\":\"boolean\"},{\"name\":\"productStocks\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ProductStockChangeAvroModel\",\"fields\":[{\"name\":\"ProductStockId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"productId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"quantity\",\"type\":\"int\"}]}}},{\"name\":\"actionType\",\"type\":{\"type\":\"enum\",\"name\":\"ActionType\",\"symbols\":[\"DEFAULT\",\"CREATED\",\"UPDATED\",\"SOFT_DELETED\",\"HARD_DELETED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"InventoryChangeAvroModel\",\"namespace\":\"com.multiwarehouse.app.kafka.inventory.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"inventoryId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"warehouseId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"active\",\"type\":\"boolean\"},{\"name\":\"stocks\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"InventoryStockChangeAvroModel\",\"fields\":[{\"name\":\"InventoryStockId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"productId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"quantity\",\"type\":\"int\"}]}}},{\"name\":\"actionType\",\"type\":{\"type\":\"enum\",\"name\":\"ActionType\",\"symbols\":[\"DEFAULT\",\"CREATED\",\"UPDATED\",\"SOFT_DELETED\",\"HARD_DELETED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -80,7 +80,7 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
   private java.util.UUID inventoryId;
   private java.util.UUID warehouseId;
   private boolean active;
-  private java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel> productStocks;
+  private java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel> stocks;
   private com.multiwarehouse.app.kafka.inventory.avro.model.ActionType actionType;
   private java.time.Instant createdAt;
 
@@ -97,16 +97,16 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
    * @param inventoryId The new value for inventoryId
    * @param warehouseId The new value for warehouseId
    * @param active The new value for active
-   * @param productStocks The new value for productStocks
+   * @param stocks The new value for stocks
    * @param actionType The new value for actionType
    * @param createdAt The new value for createdAt
    */
-  public InventoryChangeAvroModel(java.util.UUID id, java.util.UUID inventoryId, java.util.UUID warehouseId, java.lang.Boolean active, java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel> productStocks, com.multiwarehouse.app.kafka.inventory.avro.model.ActionType actionType, java.time.Instant createdAt) {
+  public InventoryChangeAvroModel(java.util.UUID id, java.util.UUID inventoryId, java.util.UUID warehouseId, java.lang.Boolean active, java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel> stocks, com.multiwarehouse.app.kafka.inventory.avro.model.ActionType actionType, java.time.Instant createdAt) {
     this.id = id;
     this.inventoryId = inventoryId;
     this.warehouseId = warehouseId;
     this.active = active;
-    this.productStocks = productStocks;
+    this.stocks = stocks;
     this.actionType = actionType;
     this.createdAt = createdAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
   }
@@ -125,7 +125,7 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
     case 1: return inventoryId;
     case 2: return warehouseId;
     case 3: return active;
-    case 4: return productStocks;
+    case 4: return stocks;
     case 5: return actionType;
     case 6: return createdAt;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -158,7 +158,7 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
     case 1: inventoryId = (java.util.UUID)value$; break;
     case 2: warehouseId = (java.util.UUID)value$; break;
     case 3: active = (java.lang.Boolean)value$; break;
-    case 4: productStocks = (java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel>)value$; break;
+    case 4: stocks = (java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel>)value$; break;
     case 5: actionType = (com.multiwarehouse.app.kafka.inventory.avro.model.ActionType)value$; break;
     case 6: createdAt = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -234,20 +234,20 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
   }
 
   /**
-   * Gets the value of the 'productStocks' field.
-   * @return The value of the 'productStocks' field.
+   * Gets the value of the 'stocks' field.
+   * @return The value of the 'stocks' field.
    */
-  public java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel> getProductStocks() {
-    return productStocks;
+  public java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel> getStocks() {
+    return stocks;
   }
 
 
   /**
-   * Sets the value of the 'productStocks' field.
+   * Sets the value of the 'stocks' field.
    * @param value the value to set.
    */
-  public void setProductStocks(java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel> value) {
-    this.productStocks = value;
+  public void setStocks(java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel> value) {
+    this.stocks = value;
   }
 
   /**
@@ -329,7 +329,7 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
     private java.util.UUID inventoryId;
     private java.util.UUID warehouseId;
     private boolean active;
-    private java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel> productStocks;
+    private java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel> stocks;
     private com.multiwarehouse.app.kafka.inventory.avro.model.ActionType actionType;
     private java.time.Instant createdAt;
 
@@ -360,8 +360,8 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
         this.active = data().deepCopy(fields()[3].schema(), other.active);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.productStocks)) {
-        this.productStocks = data().deepCopy(fields()[4].schema(), other.productStocks);
+      if (isValidValue(fields()[4], other.stocks)) {
+        this.stocks = data().deepCopy(fields()[4].schema(), other.stocks);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
       if (isValidValue(fields()[5], other.actionType)) {
@@ -396,8 +396,8 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
         this.active = data().deepCopy(fields()[3].schema(), other.active);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.productStocks)) {
-        this.productStocks = data().deepCopy(fields()[4].schema(), other.productStocks);
+      if (isValidValue(fields()[4], other.stocks)) {
+        this.stocks = data().deepCopy(fields()[4].schema(), other.stocks);
         fieldSetFlags()[4] = true;
       }
       if (isValidValue(fields()[5], other.actionType)) {
@@ -570,41 +570,41 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
     }
 
     /**
-      * Gets the value of the 'productStocks' field.
+      * Gets the value of the 'stocks' field.
       * @return The value.
       */
-    public java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel> getProductStocks() {
-      return productStocks;
+    public java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel> getStocks() {
+      return stocks;
     }
 
 
     /**
-      * Sets the value of the 'productStocks' field.
-      * @param value The value of 'productStocks'.
+      * Sets the value of the 'stocks' field.
+      * @param value The value of 'stocks'.
       * @return This builder.
       */
-    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryChangeAvroModel.Builder setProductStocks(java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel> value) {
+    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryChangeAvroModel.Builder setStocks(java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel> value) {
       validate(fields()[4], value);
-      this.productStocks = value;
+      this.stocks = value;
       fieldSetFlags()[4] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'productStocks' field has been set.
-      * @return True if the 'productStocks' field has been set, false otherwise.
+      * Checks whether the 'stocks' field has been set.
+      * @return True if the 'stocks' field has been set, false otherwise.
       */
-    public boolean hasProductStocks() {
+    public boolean hasStocks() {
       return fieldSetFlags()[4];
     }
 
 
     /**
-      * Clears the value of the 'productStocks' field.
+      * Clears the value of the 'stocks' field.
       * @return This builder.
       */
-    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryChangeAvroModel.Builder clearProductStocks() {
-      productStocks = null;
+    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryChangeAvroModel.Builder clearStocks() {
+      stocks = null;
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -697,7 +697,7 @@ public class InventoryChangeAvroModel extends org.apache.avro.specific.SpecificR
         record.inventoryId = fieldSetFlags()[1] ? this.inventoryId : (java.util.UUID) defaultValue(fields()[1]);
         record.warehouseId = fieldSetFlags()[2] ? this.warehouseId : (java.util.UUID) defaultValue(fields()[2]);
         record.active = fieldSetFlags()[3] ? this.active : (java.lang.Boolean) defaultValue(fields()[3]);
-        record.productStocks = fieldSetFlags()[4] ? this.productStocks : (java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel>) defaultValue(fields()[4]);
+        record.stocks = fieldSetFlags()[4] ? this.stocks : (java.util.List<com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel>) defaultValue(fields()[4]);
         record.actionType = fieldSetFlags()[5] ? this.actionType : (com.multiwarehouse.app.kafka.inventory.avro.model.ActionType) defaultValue(fields()[5]);
         record.createdAt = fieldSetFlags()[6] ? this.createdAt : (java.time.Instant) defaultValue(fields()[6]);
         return record;

@@ -26,7 +26,7 @@ public class InventoryEntity extends BaseEntity {
     private WarehouseEntity warehouse;
 
     @OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductStockEntity> productStocks;
+    private List<InventoryStockEntity> stocks;
 
     @Override
     public boolean equals(Object o) {

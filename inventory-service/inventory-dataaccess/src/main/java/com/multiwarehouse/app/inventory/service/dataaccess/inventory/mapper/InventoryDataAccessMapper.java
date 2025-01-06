@@ -2,14 +2,14 @@ package com.multiwarehouse.app.inventory.service.dataaccess.inventory.mapper;
 
 import com.multiwarehouse.app.domain.valueobject.InventoryId;
 import com.multiwarehouse.app.inventory.service.dataaccess.inventory.entity.InventoryEntity;
-import com.multiwarehouse.app.inventory.service.dataaccess.inventory.entity.ProductStockEntity;
+import com.multiwarehouse.app.inventory.service.dataaccess.inventory.entity.InventoryStockEntity;
 import com.multiwarehouse.app.inventory.service.dataaccess.inventory.entity.StockJournalEntity;
 import com.multiwarehouse.app.inventory.service.dataaccess.product.mapper.ProductDataAccessMapper;
 import com.multiwarehouse.app.inventory.service.dataaccess.warehouse.mapper.WarehouseDataAccessMapper;
 import com.multiwarehouse.app.inventory.service.domain.entity.Inventory;
-import com.multiwarehouse.app.inventory.service.domain.entity.ProductStock;
+import com.multiwarehouse.app.inventory.service.domain.entity.InventoryStock;
 import com.multiwarehouse.app.inventory.service.domain.entity.StockJournal;
-import com.multiwarehouse.app.inventory.service.domain.valueobject.ProductStockId;
+import com.multiwarehouse.app.inventory.service.domain.valueobject.InventoryStockId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalId;
 import org.springframework.stereotype.Component;
 
@@ -32,28 +32,28 @@ public class InventoryDataAccessMapper {
                 .withId(inventoryId)
                 .withActive(inventoryEntity.getActive())
                 .withWarehouse(warehouseDataAccessMapper.warehouseFromWarehouseEntity(inventoryEntity.getWarehouse()))
-                .withProductStocks(productStocksFromProductStockEntities(inventoryEntity.getProductStocks()))
+                .withStocks(productStocksFromProductStockEntities(inventoryEntity.getStocks()))
                 .build();
-        inventory.getProductStocks().forEach(productStock -> productStock.setInventoryId(inventoryId));
+        inventory.getStocks().forEach(inventoryStock -> inventoryStock.setInventoryId(inventoryId));
         return inventory;
     }
 
-    private List<ProductStock> productStocksFromProductStockEntities(List<ProductStockEntity> productStockEntities) {
+    private List<InventoryStock> productStocksFromProductStockEntities(List<InventoryStockEntity> productStockEntities) {
         return productStockEntities.stream()
                 .map(this::productStockFromProductStockEntity)
                 .collect(Collectors.toList());
     }
 
-    private ProductStock productStockFromProductStockEntity(ProductStockEntity productStockEntity) {
-        ProductStockId productStockId = new ProductStockId(productStockEntity.getId());
-        ProductStock productStock = ProductStock.builder()
-                .withId(productStockId)
-                .withProduct(productDataAccessMapper.productFromProductEntity(productStockEntity.getProduct()))
-                .withQuantity(productStockEntity.getQuantity())
-                .withStockJournals(stockJournalsFromStockJournalEntities(productStockEntity.getStockJournals()))
+    private InventoryStock productStockFromProductStockEntity(InventoryStockEntity inventoryStockEntity) {
+        InventoryStockId inventoryStockId = new InventoryStockId(inventoryStockEntity.getId());
+        InventoryStock inventoryStock = InventoryStock.builder()
+                .withId(inventoryStockId)
+                .withProduct(productDataAccessMapper.productFromProductEntity(inventoryStockEntity.getProduct()))
+                .withQuantity(inventoryStockEntity.getQuantity())
+                .withJournals(stockJournalsFromStockJournalEntities(inventoryStockEntity.getJournals()))
                 .build();
-        productStock.getStockJournals().forEach(stockJournal -> stockJournal.setProductStockId(productStockId));
-        return productStock;
+        inventoryStock.getJournals().forEach(stockJournal -> stockJournal.setInventoryStockId(inventoryStockId));
+        return inventoryStock;
     }
 
     private List<StockJournal> stockJournalsFromStockJournalEntities(List<StockJournalEntity> stockJournalEntities) {
@@ -76,27 +76,27 @@ public class InventoryDataAccessMapper {
                 .id(inventory.getId().getValue())
                 .active(inventory.isActive())
                 .warehouse(warehouseDataAccessMapper.warehouseEntityFromWarehouse(inventory.getWarehouse()))
-                .productStocks(productStockEntitiesFromProductStocks(inventory.getProductStocks()))
+                .stocks(productStockEntitiesFromProductStocks(inventory.getStocks()))
                 .build();
-        inventoryEntity.getProductStocks().forEach(productStockEntity -> productStockEntity.setInventory(inventoryEntity));
+        inventoryEntity.getStocks().forEach(inventoryStockEntity -> inventoryStockEntity.setInventory(inventoryEntity));
         return inventoryEntity;
     }
 
-    private List<ProductStockEntity> productStockEntitiesFromProductStocks(List<ProductStock> productStocks) {
-        return productStocks.stream()
+    private List<InventoryStockEntity> productStockEntitiesFromProductStocks(List<InventoryStock> inventoryStocks) {
+        return inventoryStocks.stream()
                 .map(this::productStockEntityFromProductStock)
                 .collect(Collectors.toList());
     }
 
-    private ProductStockEntity productStockEntityFromProductStock(ProductStock productStock) {
-        ProductStockEntity productStockEntity = ProductStockEntity.builder()
-                .id(productStock.getId().getValue())
-                .product(productDataAccessMapper.productEntityFromProduct(productStock.getProduct()))
-                .quantity(productStock.getQuantity())
-                .stockJournals(stockJournalEntitiesFromStockJournals(productStock.getStockJournals()))
+    private InventoryStockEntity productStockEntityFromProductStock(InventoryStock inventoryStock) {
+        InventoryStockEntity inventoryStockEntity = InventoryStockEntity.builder()
+                .id(inventoryStock.getId().getValue())
+                .product(productDataAccessMapper.productEntityFromProduct(inventoryStock.getProduct()))
+                .quantity(inventoryStock.getQuantity())
+                .journals(stockJournalEntitiesFromStockJournals(inventoryStock.getJournals()))
                 .build();
-        productStockEntity.getStockJournals().forEach(stockJournalEntity -> stockJournalEntity.setProductStock(productStockEntity));
-        return productStockEntity;
+        inventoryStockEntity.getJournals().forEach(stockJournalEntity -> stockJournalEntity.setStock(inventoryStockEntity));
+        return inventoryStockEntity;
     }
 
     private List<StockJournalEntity> stockJournalEntitiesFromStockJournals(List<StockJournal> stockJournals) {

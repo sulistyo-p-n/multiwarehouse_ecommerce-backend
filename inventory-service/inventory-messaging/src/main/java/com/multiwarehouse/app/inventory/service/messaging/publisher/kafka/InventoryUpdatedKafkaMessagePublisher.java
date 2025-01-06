@@ -1,8 +1,10 @@
 package com.multiwarehouse.app.inventory.service.messaging.publisher.kafka;
 
 import com.multiwarehouse.app.inventory.service.domain.config.InventoryServiceConfigData;
-import com.multiwarehouse.app.inventory.service.domain.event.InventoryStockChangedEvent;
-import com.multiwarehouse.app.inventory.service.domain.ports.output.message.publisher.InventoryStockChangedMessagePublisher;
+import com.multiwarehouse.app.inventory.service.domain.event.InventoryCreatedEvent;
+import com.multiwarehouse.app.inventory.service.domain.event.InventoryUpdatedEvent;
+import com.multiwarehouse.app.inventory.service.domain.ports.output.message.publisher.InventoryCreatedMessagePublisher;
+import com.multiwarehouse.app.inventory.service.domain.ports.output.message.publisher.InventoryUpdatedMessagePublisher;
 import com.multiwarehouse.app.inventory.service.messaging.mapper.InventoryMessagingDataMapper;
 import com.multiwarehouse.app.kafka.inventory.avro.model.InventoryChangeAvroModel;
 import com.multiwarehouse.app.kafka.producer.KafkaMessageHelper;
@@ -12,13 +14,13 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class InventoryStockChangedKafkaMessagePublisher implements InventoryStockChangedMessagePublisher {
+public class InventoryUpdatedKafkaMessagePublisher implements InventoryUpdatedMessagePublisher {
     private final InventoryMessagingDataMapper inventoryMessagingDataMapper;
     private final InventoryServiceConfigData inventoryServiceConfigData;
     private final KafkaProducer<String, InventoryChangeAvroModel> kafkaProducer;
     private final KafkaMessageHelper kafkaMessageHelper;
 
-    public InventoryStockChangedKafkaMessagePublisher(InventoryMessagingDataMapper inventoryMessagingDataMapper,
+    public InventoryUpdatedKafkaMessagePublisher(InventoryMessagingDataMapper inventoryMessagingDataMapper,
                                                  InventoryServiceConfigData inventoryServiceConfigData,
                                                  KafkaProducer<String, InventoryChangeAvroModel> kafkaProducer,
                                                  KafkaMessageHelper kafkaMessageHelper) {
@@ -29,13 +31,13 @@ public class InventoryStockChangedKafkaMessagePublisher implements InventoryStoc
     }
 
     @Override
-    public void publish(InventoryStockChangedEvent domainEvent) {
+    public void publish(InventoryUpdatedEvent domainEvent) {
         String id = domainEvent.getInventory().getId().getValue().toString();
-        log.info("Received InventoryStockChangedEvent for id: {}", id);
+        log.info("Received InventoryUpdatedEvent for id: {}", id);
 
         try {
             InventoryChangeAvroModel inventoryChangeAvroModel = inventoryMessagingDataMapper
-                    .inventoryChangeAvroModelFromInventoryStockChangedEvent(domainEvent);
+                    .inventoryChangeAvroModelFromInventoryUpdatedEvent(domainEvent);
 
             kafkaProducer.send(inventoryServiceConfigData.getInventoryChangeTopicName(),
                     id,

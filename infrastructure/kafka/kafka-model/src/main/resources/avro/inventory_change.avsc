@@ -29,15 +29,15 @@
       "type": "boolean"
     },
     {
-      "name": "productStocks",
+      "name": "stocks",
       "type": {
         "type": "array",
         "items":{
-          "name":"ProductStockChangeAvroModel",
+          "name":"InventoryStockChangeAvroModel",
           "type":"record",
           "fields":[
             {
-              "name": "ProductStockId",
+              "name": "InventoryStockId",
               "type": {
                 "type": "string",
                 "logicalType": "uuid"

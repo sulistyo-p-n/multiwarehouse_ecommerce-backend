@@ -3,7 +3,7 @@ package com.multiwarehouse.app.inventory.service.domain.entity;
 import com.multiwarehouse.app.domain.entity.BaseEntity;
 import com.multiwarehouse.app.domain.valueobject.InventoryId;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
-import com.multiwarehouse.app.inventory.service.domain.valueobject.ProductStockId;
+import com.multiwarehouse.app.inventory.service.domain.valueobject.InventoryStockId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockJournalType;
 
@@ -11,19 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ProductStock extends BaseEntity<ProductStockId> {
+public class InventoryStock extends BaseEntity<InventoryStockId> {
     private InventoryId inventoryId;
     private final Product product;
     private int quantity;
 
-    private final List<StockJournal> stockJournals;
+    private final List<StockJournal> journals;
 
-    private ProductStock(Builder builder) {
+    private InventoryStock(Builder builder) {
         super.setId(builder.id);
         inventoryId = builder.inventoryId;
         product = builder.product;
         quantity = builder.quantity;
-        stockJournals = builder.stockJournals;
+        journals = builder.journals;
     }
 
     public static Builder builder() {
@@ -32,12 +32,12 @@ public class ProductStock extends BaseEntity<ProductStockId> {
 
     public void initialize(InventoryId inventoryId) {
         this.inventoryId = inventoryId;
-        setId(new ProductStockId(UUID.randomUUID()));
-        initializeStockJournals();
+        setId(new InventoryStockId(UUID.randomUUID()));
+        initializeJournals();
     }
 
-    private void initializeStockJournals() {
-        stockJournals.forEach(stockJournal -> stockJournal.initialize(getId()));
+    private void initializeJournals() {
+        journals.forEach(journal -> journal.initialize(getId()));
     }
 
     public void validate() {
@@ -66,23 +66,23 @@ public class ProductStock extends BaseEntity<ProductStockId> {
     }
 
     private boolean isQuantityValid() {
-        return quantity == stockJournals.stream().mapToInt(StockJournal::getQuantity).sum();
+        return quantity == journals.stream().mapToInt(StockJournal::getQuantity).sum();
     }
 
     private void validateJournals() {
-        stockJournals.forEach(StockJournal::validate);
+        journals.forEach(StockJournal::validate);
     }
 
     public void addStock(int amount) {
         if (amount <= 0) throw new InventoryDomainException("ProductStock.AddStock.Amount must be greater than zero!");
-        addStockJournal(amount);
+        addJournal(amount);
         quantity += amount;
     }
 
     public void reduceStock(int amount) {
         if (amount <= 0) throw new InventoryDomainException("ProductStock.ReduceStock.Amount must be greater than zero!");
         validateAvailableStock(amount);
-        addStockJournal(-amount);
+        addJournal(-amount);
         quantity -= amount;
     }
 
@@ -90,10 +90,10 @@ public class ProductStock extends BaseEntity<ProductStockId> {
         if (getQuantity() < decreaseAmount) { throw new InventoryDomainException("ProductStock.Quantity is insufficient stock!"); }
     }
 
-    private void addStockJournal(int amount) {
-        stockJournals.add(StockJournal.builder()
+    private void addJournal(int amount) {
+        journals.add(StockJournal.builder()
                 .withId(new StockJournalId(UUID.randomUUID()))
-                .withProductStockId(getId())
+                .withInventoryStockId(getId())
                 .withQuantity(amount).withType((amount > 0) ? StockJournalType.ADDICTION : StockJournalType.REDUCTION)
                 .build());
     }
@@ -110,8 +110,8 @@ public class ProductStock extends BaseEntity<ProductStockId> {
         return quantity;
     }
 
-    public List<StockJournal> getStockJournals() {
-        return stockJournals;
+    public List<StockJournal> getJournals() {
+        return journals;
     }
 
     public void setInventoryId(InventoryId inventoryId) {
@@ -119,16 +119,16 @@ public class ProductStock extends BaseEntity<ProductStockId> {
     }
 
     public static final class Builder {
-        private ProductStockId id;
+        private InventoryStockId id;
         private InventoryId inventoryId;
         private Product product;
         private int quantity = 0;
-        private List<StockJournal> stockJournals = new ArrayList<>();;
+        private List<StockJournal> journals = new ArrayList<>();;
 
         private Builder() {
         }
 
-        public Builder withId(ProductStockId val) {
+        public Builder withId(InventoryStockId val) {
             id = val;
             return this;
         }
@@ -148,13 +148,13 @@ public class ProductStock extends BaseEntity<ProductStockId> {
             return this;
         }
 
-        public Builder withStockJournals(List<StockJournal> val) {
-            stockJournals = val;
+        public Builder withJournals(List<StockJournal> val) {
+            journals = val;
             return this;
         }
 
-        public ProductStock build() {
-            return new ProductStock(this);
+        public InventoryStock build() {
+            return new InventoryStock(this);
         }
     }
 }

@@ -11,14 +11,14 @@ import java.util.UUID;
 
 public class Inventory extends AggregateRoot<InventoryId> {
     private final Warehouse warehouse;
-    private final List<ProductStock> productStocks;
+    private final List<InventoryStock> stocks;
     private Boolean active;
 
     private Inventory(Builder builder) {
         super.setId(builder.id);
         active = builder.active;
         warehouse = builder.warehouse;
-        productStocks = builder.productStocks;
+        stocks = builder.stocks;
     }
 
     public static Builder builder() {
@@ -35,18 +35,18 @@ public class Inventory extends AggregateRoot<InventoryId> {
 
     public void initialize() {
         setId(new InventoryId(UUID.randomUUID()));
-        initializeProductStocks();
+        initializeStocks();
     }
 
-    private void initializeProductStocks() {
-        productStocks.forEach(productStock -> productStock.initialize(getId()));
+    private void initializeStocks() {
+        stocks.forEach(stock -> stock.initialize(getId()));
     }
 
     public void validate() {
         validateId();
         validateActive();
         validateWarehouse();
-        validateProductStocks();
+        validateStocks();
     }
 
     private void validateId() {
@@ -61,71 +61,71 @@ public class Inventory extends AggregateRoot<InventoryId> {
         if (warehouse == null) throw new InventoryDomainException("Inventory.Warehouse cannot be null!");
     }
 
-    private void validateProductStocks() {
-        if (productStocks == null) throw new InventoryDomainException("Inventory.ProductStocks cannot be null!");
-        productStocks.forEach(ProductStock::validate);
+    private void validateStocks() {
+        if (stocks == null) throw new InventoryDomainException("Inventory.Stocks cannot be null!");
+        stocks.forEach(InventoryStock::validate);
     }
 
     public void validateAvailableStock(Product product, int quantity) {
         if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
         if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
-        productStocks.stream()
+        stocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst()
                 .ifPresentOrElse(stock -> {
                     stock.validateAvailableStock(quantity);
                 }, () -> {
-                    throw new InventoryDomainException("Inventory.ProductStock No stock found!");
+                    throw new InventoryDomainException("Inventory.Stock No stock found!");
                 });
     }
 
     public void transferStock(Inventory targetInventory, Product product, int quantity) {
         if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
         if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
-        productStocks.stream()
+        stocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst()
                 .ifPresentOrElse(stock -> {
                     stock.reduceStock(quantity);
                     targetInventory.addStock(product, quantity);
                 }, () -> {
-                    throw new InventoryDomainException("Inventory.ProductStock No stock found!");
+                    throw new InventoryDomainException("Inventory.Stock No stock found!");
                 });
     }
 
     public void addStock(Product product, int quantity) {
         if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
         if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
-        Optional<ProductStock> filteredProductStock = productStocks.stream()
+        Optional<InventoryStock> filteredStock = stocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst();
 
-        ProductStock productStock;
-        if (filteredProductStock.isEmpty()) {
-            productStock = ProductStock.builder()
+        InventoryStock stock;
+        if (filteredStock.isEmpty()) {
+            stock = InventoryStock.builder()
                     .withProduct(product)
                     .build();
-            productStock.initialize(getId());
-            productStocks.add(productStock);
+            stock.initialize(getId());
+            stocks.add(stock);
         } else {
-            productStock = filteredProductStock.get();
+            stock = filteredStock.get();
         }
 
-        productStock.addStock(quantity);
+        stock.addStock(quantity);
     }
 
     public void reduceStock(Product product, int quantity) {
         if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
         if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
 
-        Optional<ProductStock> filteredProductStock = productStocks.stream()
+        Optional<InventoryStock> filteredStock = stocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst();
 
-        if (filteredProductStock.isEmpty()) throw new InventoryDomainException("Inventory.ProductStock No stock found!");
+        if (filteredStock.isEmpty()) throw new InventoryDomainException("Inventory.Stock No stock found!");
 
-        ProductStock productStock = filteredProductStock.get();
-        productStock.reduceStock(quantity);
+        InventoryStock stock = filteredStock.get();
+        stock.reduceStock(quantity);
     }
 
     public void setActive(Boolean active) {
@@ -141,15 +141,15 @@ public class Inventory extends AggregateRoot<InventoryId> {
         return warehouse;
     }
 
-    public List<ProductStock> getProductStocks() {
-        return productStocks;
+    public List<InventoryStock> getStocks() {
+        return stocks;
     }
 
     public static final class Builder {
         private InventoryId id;
         private Boolean active;
         private Warehouse warehouse;
-        private List<ProductStock> productStocks = new ArrayList<>();
+        private List<InventoryStock> stocks = new ArrayList<>();
 
         private Builder() {
         }
@@ -169,8 +169,8 @@ public class Inventory extends AggregateRoot<InventoryId> {
             return this;
         }
 
-        public Builder withProductStocks(List<ProductStock> val) {
-            productStocks = val;
+        public Builder withStocks(List<InventoryStock> val) {
+            stocks = val;
             return this;
         }
 

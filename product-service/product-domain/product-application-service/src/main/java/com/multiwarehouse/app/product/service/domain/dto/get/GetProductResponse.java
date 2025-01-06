@@ -22,6 +22,7 @@ public class GetProductResponse {
 
     private final GetProductCategoryResponse category;
     private final List<GetProductImageResponse> images;
+    private final int quantity;
 
     private final Boolean softDeleted;
 }

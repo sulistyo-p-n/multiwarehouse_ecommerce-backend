@@ -1,7 +1,9 @@
-package com.multiwarehouse.app.product.service.dataaccess.stock.entity;
+package com.multiwarehouse.app.product.service.dataaccess.product.entity;
 
-import com.multiwarehouse.app.product.service.dataaccess.product.entity.ProductEntity;
-import jakarta.persistence.*;
+import com.multiwarehouse.app.product.service.dataaccess.stock.entity.StockEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.Objects;
@@ -12,20 +14,20 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "stocks")
+@Table(name = "product_stocks_m_view")
 @Entity
-public class StockEntity {
+public class ProductStockEntity {
     @Id
     private UUID id;
-    private UUID product_id;
-    private UUID warehouse_id;
+    private String code;
+    private String name;
     private Integer quantity;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StockEntity that = (StockEntity) o;
+        ProductStockEntity that = (ProductStockEntity) o;
         return id.equals(that.id);
     }
 

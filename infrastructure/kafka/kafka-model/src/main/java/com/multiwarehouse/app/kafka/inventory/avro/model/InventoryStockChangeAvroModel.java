@@ -12,11 +12,11 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class ProductStockChangeAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 3588102864780667726L;
+public class InventoryStockChangeAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = -7105714428176905292L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ProductStockChangeAvroModel\",\"namespace\":\"com.multiwarehouse.app.kafka.inventory.avro.model\",\"fields\":[{\"name\":\"ProductStockId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"productId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"quantity\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"InventoryStockChangeAvroModel\",\"namespace\":\"com.multiwarehouse.app.kafka.inventory.avro.model\",\"fields\":[{\"name\":\"InventoryStockId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"productId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"quantity\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -24,17 +24,17 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
     MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.UUIDConversion());
   }
 
-  private static final BinaryMessageEncoder<ProductStockChangeAvroModel> ENCODER =
+  private static final BinaryMessageEncoder<InventoryStockChangeAvroModel> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<ProductStockChangeAvroModel> DECODER =
+  private static final BinaryMessageDecoder<InventoryStockChangeAvroModel> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<ProductStockChangeAvroModel> getEncoder() {
+  public static BinaryMessageEncoder<InventoryStockChangeAvroModel> getEncoder() {
     return ENCODER;
   }
 
@@ -42,7 +42,7 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<ProductStockChangeAvroModel> getDecoder() {
+  public static BinaryMessageDecoder<InventoryStockChangeAvroModel> getDecoder() {
     return DECODER;
   }
 
@@ -51,12 +51,12 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<ProductStockChangeAvroModel> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<InventoryStockChangeAvroModel> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this ProductStockChangeAvroModel to a ByteBuffer.
+   * Serializes this InventoryStockChangeAvroModel to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -65,17 +65,17 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
   }
 
   /**
-   * Deserializes a ProductStockChangeAvroModel from a ByteBuffer.
+   * Deserializes a InventoryStockChangeAvroModel from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a ProductStockChangeAvroModel instance decoded from the given buffer
+   * @return a InventoryStockChangeAvroModel instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static ProductStockChangeAvroModel fromByteBuffer(
+  public static InventoryStockChangeAvroModel fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
 
-  private java.util.UUID ProductStockId;
+  private java.util.UUID InventoryStockId;
   private java.util.UUID productId;
   private int quantity;
 
@@ -84,16 +84,16 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public ProductStockChangeAvroModel() {}
+  public InventoryStockChangeAvroModel() {}
 
   /**
    * All-args constructor.
-   * @param ProductStockId The new value for ProductStockId
+   * @param InventoryStockId The new value for InventoryStockId
    * @param productId The new value for productId
    * @param quantity The new value for quantity
    */
-  public ProductStockChangeAvroModel(java.util.UUID ProductStockId, java.util.UUID productId, java.lang.Integer quantity) {
-    this.ProductStockId = ProductStockId;
+  public InventoryStockChangeAvroModel(java.util.UUID InventoryStockId, java.util.UUID productId, java.lang.Integer quantity) {
+    this.InventoryStockId = InventoryStockId;
     this.productId = productId;
     this.quantity = quantity;
   }
@@ -108,7 +108,7 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return ProductStockId;
+    case 0: return InventoryStockId;
     case 1: return productId;
     case 2: return quantity;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -133,7 +133,7 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: ProductStockId = (java.util.UUID)value$; break;
+    case 0: InventoryStockId = (java.util.UUID)value$; break;
     case 1: productId = (java.util.UUID)value$; break;
     case 2: quantity = (java.lang.Integer)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -141,20 +141,20 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
   }
 
   /**
-   * Gets the value of the 'ProductStockId' field.
-   * @return The value of the 'ProductStockId' field.
+   * Gets the value of the 'InventoryStockId' field.
+   * @return The value of the 'InventoryStockId' field.
    */
-  public java.util.UUID getProductStockId() {
-    return ProductStockId;
+  public java.util.UUID getInventoryStockId() {
+    return InventoryStockId;
   }
 
 
   /**
-   * Sets the value of the 'ProductStockId' field.
+   * Sets the value of the 'InventoryStockId' field.
    * @param value the value to set.
    */
-  public void setProductStockId(java.util.UUID value) {
-    this.ProductStockId = value;
+  public void setInventoryStockId(java.util.UUID value) {
+    this.InventoryStockId = value;
   }
 
   /**
@@ -192,47 +192,47 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
   }
 
   /**
-   * Creates a new ProductStockChangeAvroModel RecordBuilder.
-   * @return A new ProductStockChangeAvroModel RecordBuilder
+   * Creates a new InventoryStockChangeAvroModel RecordBuilder.
+   * @return A new InventoryStockChangeAvroModel RecordBuilder
    */
-  public static com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder newBuilder() {
-    return new com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder();
+  public static com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder newBuilder() {
+    return new com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder();
   }
 
   /**
-   * Creates a new ProductStockChangeAvroModel RecordBuilder by copying an existing Builder.
+   * Creates a new InventoryStockChangeAvroModel RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new ProductStockChangeAvroModel RecordBuilder
+   * @return A new InventoryStockChangeAvroModel RecordBuilder
    */
-  public static com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder newBuilder(com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder other) {
+  public static com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder newBuilder(com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder other) {
     if (other == null) {
-      return new com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder();
+      return new com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder();
     } else {
-      return new com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder(other);
+      return new com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder(other);
     }
   }
 
   /**
-   * Creates a new ProductStockChangeAvroModel RecordBuilder by copying an existing ProductStockChangeAvroModel instance.
+   * Creates a new InventoryStockChangeAvroModel RecordBuilder by copying an existing InventoryStockChangeAvroModel instance.
    * @param other The existing instance to copy.
-   * @return A new ProductStockChangeAvroModel RecordBuilder
+   * @return A new InventoryStockChangeAvroModel RecordBuilder
    */
-  public static com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder newBuilder(com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel other) {
+  public static com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder newBuilder(com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel other) {
     if (other == null) {
-      return new com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder();
+      return new com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder();
     } else {
-      return new com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder(other);
+      return new com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for ProductStockChangeAvroModel instances.
+   * RecordBuilder for InventoryStockChangeAvroModel instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<ProductStockChangeAvroModel>
-    implements org.apache.avro.data.RecordBuilder<ProductStockChangeAvroModel> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<InventoryStockChangeAvroModel>
+    implements org.apache.avro.data.RecordBuilder<InventoryStockChangeAvroModel> {
 
-    private java.util.UUID ProductStockId;
+    private java.util.UUID InventoryStockId;
     private java.util.UUID productId;
     private int quantity;
 
@@ -245,10 +245,10 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder other) {
+    private Builder(com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.ProductStockId)) {
-        this.ProductStockId = data().deepCopy(fields()[0].schema(), other.ProductStockId);
+      if (isValidValue(fields()[0], other.InventoryStockId)) {
+        this.InventoryStockId = data().deepCopy(fields()[0].schema(), other.InventoryStockId);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
       if (isValidValue(fields()[1], other.productId)) {
@@ -262,13 +262,13 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
     }
 
     /**
-     * Creates a Builder by copying an existing ProductStockChangeAvroModel instance
+     * Creates a Builder by copying an existing InventoryStockChangeAvroModel instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel other) {
+    private Builder(com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.ProductStockId)) {
-        this.ProductStockId = data().deepCopy(fields()[0].schema(), other.ProductStockId);
+      if (isValidValue(fields()[0], other.InventoryStockId)) {
+        this.InventoryStockId = data().deepCopy(fields()[0].schema(), other.InventoryStockId);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.productId)) {
@@ -282,41 +282,41 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
     }
 
     /**
-      * Gets the value of the 'ProductStockId' field.
+      * Gets the value of the 'InventoryStockId' field.
       * @return The value.
       */
-    public java.util.UUID getProductStockId() {
-      return ProductStockId;
+    public java.util.UUID getInventoryStockId() {
+      return InventoryStockId;
     }
 
 
     /**
-      * Sets the value of the 'ProductStockId' field.
-      * @param value The value of 'ProductStockId'.
+      * Sets the value of the 'InventoryStockId' field.
+      * @param value The value of 'InventoryStockId'.
       * @return This builder.
       */
-    public com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder setProductStockId(java.util.UUID value) {
+    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder setInventoryStockId(java.util.UUID value) {
       validate(fields()[0], value);
-      this.ProductStockId = value;
+      this.InventoryStockId = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'ProductStockId' field has been set.
-      * @return True if the 'ProductStockId' field has been set, false otherwise.
+      * Checks whether the 'InventoryStockId' field has been set.
+      * @return True if the 'InventoryStockId' field has been set, false otherwise.
       */
-    public boolean hasProductStockId() {
+    public boolean hasInventoryStockId() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'ProductStockId' field.
+      * Clears the value of the 'InventoryStockId' field.
       * @return This builder.
       */
-    public com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder clearProductStockId() {
-      ProductStockId = null;
+    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder clearInventoryStockId() {
+      InventoryStockId = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -335,7 +335,7 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
       * @param value The value of 'productId'.
       * @return This builder.
       */
-    public com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder setProductId(java.util.UUID value) {
+    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder setProductId(java.util.UUID value) {
       validate(fields()[1], value);
       this.productId = value;
       fieldSetFlags()[1] = true;
@@ -355,7 +355,7 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
       * Clears the value of the 'productId' field.
       * @return This builder.
       */
-    public com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder clearProductId() {
+    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder clearProductId() {
       productId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -375,7 +375,7 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
       * @param value The value of 'quantity'.
       * @return This builder.
       */
-    public com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder setQuantity(int value) {
+    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder setQuantity(int value) {
       validate(fields()[2], value);
       this.quantity = value;
       fieldSetFlags()[2] = true;
@@ -395,17 +395,17 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
       * Clears the value of the 'quantity' field.
       * @return This builder.
       */
-    public com.multiwarehouse.app.kafka.inventory.avro.model.ProductStockChangeAvroModel.Builder clearQuantity() {
+    public com.multiwarehouse.app.kafka.inventory.avro.model.InventoryStockChangeAvroModel.Builder clearQuantity() {
       fieldSetFlags()[2] = false;
       return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public ProductStockChangeAvroModel build() {
+    public InventoryStockChangeAvroModel build() {
       try {
-        ProductStockChangeAvroModel record = new ProductStockChangeAvroModel();
-        record.ProductStockId = fieldSetFlags()[0] ? this.ProductStockId : (java.util.UUID) defaultValue(fields()[0]);
+        InventoryStockChangeAvroModel record = new InventoryStockChangeAvroModel();
+        record.InventoryStockId = fieldSetFlags()[0] ? this.InventoryStockId : (java.util.UUID) defaultValue(fields()[0]);
         record.productId = fieldSetFlags()[1] ? this.productId : (java.util.UUID) defaultValue(fields()[1]);
         record.quantity = fieldSetFlags()[2] ? this.quantity : (java.lang.Integer) defaultValue(fields()[2]);
         return record;
@@ -418,8 +418,8 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<ProductStockChangeAvroModel>
-    WRITER$ = (org.apache.avro.io.DatumWriter<ProductStockChangeAvroModel>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<InventoryStockChangeAvroModel>
+    WRITER$ = (org.apache.avro.io.DatumWriter<InventoryStockChangeAvroModel>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -427,8 +427,8 @@ public class ProductStockChangeAvroModel extends org.apache.avro.specific.Specif
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<ProductStockChangeAvroModel>
-    READER$ = (org.apache.avro.io.DatumReader<ProductStockChangeAvroModel>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<InventoryStockChangeAvroModel>
+    READER$ = (org.apache.avro.io.DatumReader<InventoryStockChangeAvroModel>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {

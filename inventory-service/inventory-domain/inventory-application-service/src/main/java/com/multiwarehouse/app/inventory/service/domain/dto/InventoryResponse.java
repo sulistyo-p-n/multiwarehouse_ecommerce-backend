@@ -13,5 +13,5 @@ import java.util.UUID;
 public class InventoryResponse {
     private final UUID id;
     private final Boolean active;
-    private final List<ProductStockResponse> productStocks;
+    private final List<InventoryStockResponse> stocks;
 }

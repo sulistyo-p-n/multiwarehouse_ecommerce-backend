@@ -39,6 +39,7 @@ public class StockMutationApproveCommandHandler {
         inventoryStockChangedEvents.forEach(
                 inventoryStockChangedEvent -> {
                     inventoryHelper.saveInventory(inventoryStockChangedEvent.getInventory());
+                    inventoryStockChangedMessagePublisher.publish(inventoryStockChangedEvent);
                 });
         log.info("StockMutation is approved with id: {}", stockMutationSaved.getId().getValue());
         return stockMutationDataMapper.approveStockMutationResponseFromStockMutation(stockMutationSaved);
