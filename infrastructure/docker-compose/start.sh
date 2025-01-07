@@ -14,5 +14,3 @@ docker-compose -f common.yml -f kafka_cluster.yml up
 
 echo -e "${GREEN}Start Kafka Init...${NC}"
 docker-compose -f common.yml -f init_kafka.yml up
-
-
