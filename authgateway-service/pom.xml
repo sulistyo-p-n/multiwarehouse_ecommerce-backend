@@ -12,7 +12,6 @@
     <artifactId>authgateway-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>authgateway-application</module>
         <module>authgateway-container</module>
         <module>authgateway-dataaccess</module>
         <module>authgateway-domain</module>

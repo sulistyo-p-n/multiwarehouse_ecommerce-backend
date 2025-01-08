@@ -11,6 +11,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/authgateway-service/authgateway-application/pom.xml" />
         <option value="$PROJECT_DIR$/common/common-repository/pom.xml" />
       </set>
     </option>
