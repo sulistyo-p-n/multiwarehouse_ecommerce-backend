@@ -46,6 +46,15 @@ public class UserHelper {
         return user.get();
     }
 
+    public User findUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("Couldn't find User with email: {} ", email);
+            throw new UserNotFoundException("Couldn't find User with email: " + email);
+        }
+        return user.get();
+    }
+
     public User persistUser(User user) {
         checkAdminWarehouse(user);
         return saveUser(user);

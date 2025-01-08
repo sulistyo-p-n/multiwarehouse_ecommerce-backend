@@ -11,6 +11,7 @@ public interface UserRepository  {
     List<User> findAll();
     List<User> findByCriteria(Boolean withInactive, Boolean withTrashed, UserRole userRole, String search);
     Optional<User> findById(UserId userId);
+    Optional<User> findByEmail(String email);
     User save(User user);
     void hardDelete(User user);
     void softDelete(User user);

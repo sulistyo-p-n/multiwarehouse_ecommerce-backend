@@ -7,6 +7,10 @@ import com.multiwarehouse.app.user.service.domain.dto.delete.DeleteUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUsersCommand;
+import com.multiwarehouse.app.user.service.domain.dto.login.LoginUserCommand;
+import com.multiwarehouse.app.user.service.domain.dto.login.LoginUserResponse;
+import com.multiwarehouse.app.user.service.domain.dto.register.RegisterUserCommand;
+import com.multiwarehouse.app.user.service.domain.dto.register.RegisterUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserResponse;
 import jakarta.validation.Valid;
@@ -23,4 +27,8 @@ public interface UserApplicationService {
     public List<GetUserResponse> getUsers(@Valid GetUsersCommand getUsersCommand);
 
     public GetUserResponse getUser(@Valid GetUserCommand getUserCommand);
+
+    public LoginUserResponse loginUser(@Valid LoginUserCommand loginUserCommand);
+
+    public RegisterUserResponse registerUser(@Valid RegisterUserCommand registerUserCommand);
 }

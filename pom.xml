@@ -346,11 +346,11 @@
                 <artifactId>authgateway-application-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>com.multiwarehouse.app</groupId>-->
-<!--                <artifactId>authgateway-application</artifactId>-->
-<!--                <version>${project.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>com.multiwarehouse.app</groupId>
+                <artifactId>authgateway-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.multiwarehouse.app</groupId>
                 <artifactId>authgateway-dataaccess</artifactId>

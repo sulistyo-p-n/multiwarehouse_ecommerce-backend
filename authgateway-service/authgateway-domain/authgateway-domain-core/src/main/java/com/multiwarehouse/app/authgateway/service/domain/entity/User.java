@@ -3,6 +3,7 @@ package com.multiwarehouse.app.authgateway.service.domain.entity;
 import com.multiwarehouse.app.domain.entity.AggregateRoot;
 import com.multiwarehouse.app.domain.valueobject.UserId;
 import com.multiwarehouse.app.domain.valueobject.UserRole;
+import com.multiwarehouse.app.domain.valueobject.WarehouseId;
 
 public class User extends AggregateRoot<UserId> {
     private final String username;
@@ -45,6 +46,22 @@ public class User extends AggregateRoot<UserId> {
 
     public Boolean getSoftDeleted() {
         return isSoftDeleted;
+    }
+
+    public Boolean isWarehouseAdmin() {
+        return (getRole().equals(UserRole.WAREHOUSE_ADMIN) && getUserAdminWarehouse() != null);
+    }
+
+    public Boolean isWarehouseAdmin(WarehouseId warehouseId) {
+        return isWarehouseAdmin() && (getUserAdminWarehouse().getWarehouseId().equals(warehouseId));
+    }
+
+    public Boolean isSuperAdmin() {
+        return getRole().equals(UserRole.SUPER_ADMIN);
+    }
+
+    public Boolean isCustomer() {
+        return getRole().equals(UserRole.CUSTOMER);
     }
 
     private User(Builder builder) {

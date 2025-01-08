@@ -24,7 +24,6 @@ public class UserRepositoryImpl implements UserRepository {
         this.userDataAccessMapper = userDataAccessMapper;
     }
 
-
     @Override
     public List<User> findAll() {
         return userJpaRepository.findAllNotDeleted().stream().map(userDataAccessMapper::userFromUserEntity).collect(Collectors.toList());
@@ -43,6 +42,11 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findById(UserId userId) {
         return userJpaRepository.findById(userId.getValue()).map(userDataAccessMapper::userFromUserEntity);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userJpaRepository.findByEmail(email).map(userDataAccessMapper::userFromUserEntity);
     }
 
     @Override

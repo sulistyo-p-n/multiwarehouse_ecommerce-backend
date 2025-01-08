@@ -4,6 +4,9 @@ import com.multiwarehouse.app.domain.valueobject.*;
 import com.multiwarehouse.app.user.service.domain.dto.create.CreateUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.create.CreateUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.get.GetUserResponse;
+import com.multiwarehouse.app.user.service.domain.dto.login.LoginUserResponse;
+import com.multiwarehouse.app.user.service.domain.dto.register.RegisterUserCommand;
+import com.multiwarehouse.app.user.service.domain.dto.register.RegisterUserResponse;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserCommand;
 import com.multiwarehouse.app.user.service.domain.dto.update.UpdateUserResponse;
 import com.multiwarehouse.app.user.service.domain.entity.UserAdminWarehouse;
@@ -58,6 +61,22 @@ public class UserDataMapper {
                 .build();
     }
 
+    public User userFromRegisterUserCommand(RegisterUserCommand registerUserCommand) {
+        return User.builder()
+                .withUsername(registerUserCommand.getUsername())
+                .withEmail(registerUserCommand.getEmail())
+                .withPassword(registerUserCommand.getPassword())
+                .withActive(true)
+                .withRole(UserRole.CUSTOMER)
+                .build();
+    }
+
+    public RegisterUserResponse registerUserResponseFromUser(User user) {
+        return RegisterUserResponse.builder()
+                .id(user.getId().getValue())
+                .build();
+    }
+
     private UserAdminWarehouse adminEntityFromUserAdminWarehouse(com.multiwarehouse.app.user.service.domain.dto.UserAdminWarehouse userAdminWarehouse) {
         if (userAdminWarehouse == null) return null;
         return UserAdminWarehouse.builder()
@@ -101,6 +120,18 @@ public class UserDataMapper {
                 .profile(userProfileFromUserProfileEntity(user.getUserProfile()))
                 .addresses(userAddressesFromUserAddressEntities(user.getUserAddresses()))
                 .isSoftDeleted(user.isSoftDeleted())
+                .build();
+    }
+
+    public LoginUserResponse loginUserResponseFromUser(User user) {
+        return LoginUserResponse.builder()
+                .token(user.getId().getValue())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .adminWarehouse(userAdminWarehouseFromUserAdminWarehouseEntity(user.getUserAdminWarehouse()))
+                .profile(userProfileFromUserProfileEntity(user.getUserProfile()))
+                .addresses(userAddressesFromUserAddressEntities(user.getUserAddresses()))
                 .build();
     }
 

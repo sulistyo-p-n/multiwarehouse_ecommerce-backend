@@ -51,7 +51,6 @@ public class UserController {
         CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
         log.info("User created: {}", createUserResponse);
         return ResponseEntity.ok(createUserResponse);
-
     }
 
     @PutMapping(path = "{id}")

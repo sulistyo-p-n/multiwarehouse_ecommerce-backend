@@ -16,6 +16,7 @@
         <module>authgateway-dataaccess</module>
         <module>authgateway-domain</module>
         <module>authgateway-messaging</module>
+        <module>authgateway-application</module>
     </modules>
     
     <dependencyManagement>

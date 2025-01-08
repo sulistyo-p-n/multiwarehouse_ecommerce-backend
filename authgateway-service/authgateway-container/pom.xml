@@ -12,10 +12,10 @@
     <artifactId>authgateway-container</artifactId>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.multiwarehouse.app</groupId>-->
-<!--            <artifactId>authgateway-application</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.multiwarehouse.app</groupId>
+            <artifactId>authgateway-application</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.multiwarehouse.app</groupId>
             <artifactId>authgateway-dataaccess</artifactId>
