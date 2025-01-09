@@ -71,12 +71,12 @@ CREATE TABLE "inventory".inventories
     deleted_at TIMESTAMP,
     CONSTRAINT inventories_pkey PRIMARY KEY (id)
 );
-ALTER TABLE "inventory".inventories
-    ADD CONSTRAINT fk_warehouse_id FOREIGN KEY (warehouse_id)
-        REFERENCES "inventory".warehouses (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE CASCADE
-    NOT VALID;
+--ALTER TABLE "inventory".inventories
+--    ADD CONSTRAINT fk_warehouse_id FOREIGN KEY (warehouse_id)
+--        REFERENCES "inventory".warehouses (id) MATCH SIMPLE
+--        ON UPDATE NO ACTION
+--        ON DELETE CASCADE
+--    NOT VALID;
 
 --INSERT INTO "inventory".inventories (id, warehouse_id, active)
 --VALUES ('52bd9156-f039-469d-b79a-000000000001', '552b88da-b8a0-48fd-b9cb-000000000001', true);

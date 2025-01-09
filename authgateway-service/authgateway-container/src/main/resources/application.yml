@@ -34,12 +34,12 @@ spring:
       schema-locations: classpath:init-schema.sql
   cloud:
     gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedHeaders: "*"
-            allowedMethods: "*"
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: "*"
+#            allowedHeaders: "*"
+#            allowedMethods: "*"
 #            allowedOrigins: "http://localhost:3000"
       routes:
         - id: auth-service
@@ -52,40 +52,40 @@ spring:
           predicates:
             - Path=/me
             - Method= GET, PUT
-          filters:
-            - MeAuthorizationFilter
+#          filters:
+#            - MeAuthorizationFilter
 
         - id: warehouse-service
           uri: http://localhost:8181
           predicates:
             - Path=/warehouses/**
             - Method= GET
-          filters:
-            - AdminAuthorizationFilter
+#          filters:
+#            - AdminAuthorizationFilter
 
         - id: warehouse-service
           uri: http://localhost:8181
           predicates:
             - Path=/warehouses/**
             - Method= POST, PUT, DELETE
-          filters:
-            - SuperAdminAuthorizationFilter
+#          filters:
+#            - SuperAdminAuthorizationFilter
 
         - id: user-service
           uri: http://localhost:8182
           predicates:
             - Path=/users/**
             - Method= GET, PUT
-          filters:
-            - UserAuthorizationFilter
+#          filters:
+#            - UserAuthorizationFilter
 
         - id: user-service
           uri: http://localhost:8182
           predicates:
             - Path=/users/**
             - Method= POST, DELETE
-          filters:
-            - SuperAdminAuthorizationFilter
+#          filters:
+#            - SuperAdminAuthorizationFilter
 
         - id: product-service
           uri: http://localhost:8184
@@ -98,25 +98,25 @@ spring:
           predicates:
             - Path=/product_categories/**, /products/**
             - Method= POST, PUT, DELETE
-          filters:
-            - SuperAdminAuthorizationFilter
+#          filters:
+#            - SuperAdminAuthorizationFilter
 
         - id: inventory-service
           uri: http://localhost:8188
           predicates:
             - Path=/inventories/by_warehouse/**, /stock_mutations/by_warehouse/**
             - Method= GET, POST
-          filters:
-            - WarehouseIdPathVariableFilter
-            - WarehouseAdminAuthorizationFilter
+#          filters:
+#            - WarehouseIdPathVariableFilter
+#            - WarehouseAdminAuthorizationFilter
 
         - id: inventory-service
           uri: http://localhost:8188
           predicates:
             - Path=/stock_mutations/**
             - Method= PUT
-          filters:
-            - AdminAuthorizationFilter
+#          filters:
+#            - AdminAuthorizationFilter
 
 kafka-config:
   bootstrap-servers: localhost:19092,localhost:29092,localhost:39092

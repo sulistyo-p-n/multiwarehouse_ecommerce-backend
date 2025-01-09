@@ -35,7 +35,7 @@ public class StockMutationController {
         return ResponseEntity.ok(stockMutationResponse);
     }
 
-    @PostMapping(path = "by_warehouse/{warehouseId}/request")
+    @PostMapping(path = "by_warehouse/{warehouseId}")
     public ResponseEntity<RequestStockMutationResponse> requestStockMutation(@PathVariable("warehouseId") UUID warehouseId, @RequestBody RequestStockMutationCommand requestStockMutationCommand) {
         log.info("Requesting StockMutation by warehouseId: {}", warehouseId);
         requestStockMutationCommand.setTargetWarehouseId(warehouseId);

@@ -10,24 +10,23 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 @Configuration
-public class BeanConfiguration {
+public class BeanConfiguration extends CorsConfiguration {
     @Bean
     public WebProperties.Resources resources() {
         return new WebProperties.Resources();
     }
 
-//    @Bean
-//    public CorsWebFilter corsFilter()
-//    {
-//        CorsConfiguration config = new CorsConfiguration();
-////        config.setAllowCredentials( true );
-//        config.setAllowedOrigins( List.of( "*" ) );
-//        config.setAllowedMethods( List.of( "GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD" ) );
-//        config.setAllowedHeaders( List.of( "origin", "content-type", "accept", "authorization", "cookie" ) );
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration( "/**", config );
-//
-//        return new CorsWebFilter( source );
-//    }
+    @Bean
+    public CorsWebFilter corsFilter()
+    {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins( List.of( "*" ) );
+        config.setAllowedHeaders( List.of( "*" ) );
+        config.setAllowedMethods( List.of( "*" ) );
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration( "/**", config );
+
+        return new CorsWebFilter( source );
+    }
 }
