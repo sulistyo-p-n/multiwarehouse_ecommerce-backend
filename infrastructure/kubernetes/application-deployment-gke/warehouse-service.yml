@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: warehouse-service
-          image: asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/warehouse.service:1.0-SNAPSHOT
+          image: asia-southeast2-docker.pkg.dev/multiwarehouse-447401/com-multiwarehouse-app-repository/warehouse.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/multiwarehouse?currentSchema=warehouse&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
