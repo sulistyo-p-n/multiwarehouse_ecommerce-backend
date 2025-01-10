@@ -243,26 +243,25 @@ spec:
               value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
               value: "http://gke-confluent-kafka-cp-schema-registry:8081"
-
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[0]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_0_URI
               value: "http://user-service:8182"
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[1]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_1_URI
               value: "http://user-service:8182"
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[2]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_2_URI
               value: "http://warehouse-service:8181"
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[3]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_3_URI
               value: "http://warehouse-service:8181"
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[4]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_4_URI
               value: "http://user-service:8182"
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[5]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_5_URI
               value: "http://user-service:8182"
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[6]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_6_URI
               value: "http://product-service:8184"
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[7]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_7_URI
               value: "http://product-service:8184"
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[8]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_8_URI
               value: "http://inventory-service:8188"
-            - name: SPRING_CLOUD_GATEWAY_ROUTES[9]_URI
+            - name: SPRING_CLOUD_GATEWAY_ROUTES_9_URI
               value: "http://inventory-service:8188"
 
           resources:
