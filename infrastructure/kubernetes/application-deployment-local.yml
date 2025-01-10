@@ -229,6 +229,14 @@ spec:
               value: "local-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
               value: "http://local-confluent-kafka-cp-schema-registry:8081"
+            - name: WAREHOUSE_SERVICE_URI
+              value: "http://warehouse-service:8181"
+            - name: USER_SERVICE_URI
+              value: "http://user-service:8182"
+            - name: PRODUCT_SERVICE_URI
+              value: "http://product-service:8184"
+            - name: INVENTORY_SERVICE_URI
+              value: "http://inventory-service:8188"
           resources:
             limits:
               cpu: "500m"
