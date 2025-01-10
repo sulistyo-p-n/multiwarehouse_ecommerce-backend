@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authgateway-deployment
+  namespace: default
+  labels:
+    app: authgateway-deployment
+spec:
+  selector:
+    matchLabels:
+      app: authgateway-deployment
+  template:
+    metadata:
+      labels:
+        app: authgateway-deployment
+    spec:
+      containers:
+        - name: authgateway-service
+          image: asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/authgateway.service:1.0-SNAPSHOT
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://postgres-service:5432/multiwarehouse?currentSchema=authgateway&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
+            - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
+            - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1024Mi"
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authgateway-service
+  namespace: default
+  labels:
+    app: authgateway-service
+spec:
+  selector:
+    app: authgateway-deployment
+  ports:
+    - name: authgateway-service-port
+      protocol: TCP
+      port: 8190
+  type: LoadBalancer
+  loadBalancerIP: ""
+

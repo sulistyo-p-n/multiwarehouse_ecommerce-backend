@@ -17,14 +17,16 @@ spec:
     spec:
       containers:
         - name: warehouse-service
-          image: com.multiwarehouse.app/warehouse.service:1.0-SNAPSHOT
+          image: asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/warehouse.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://host.docker.internal:5433/multiwarehouse?currentSchema=warehouse&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+              value: "jdbc:postgresql://postgres-service:5432/multiwarehouse?currentSchema=warehouse&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
-              value: "local-confluent-kafka-cp-kafka-headless:9092"
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
-              value: "http://local-confluent-kafka-cp-schema-registry:8081"
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
               cpu: "500m"
@@ -49,6 +51,7 @@ spec:
       port: 8181
   type: LoadBalancer
   loadBalancerIP: ""
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -68,14 +71,16 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: com.multiwarehouse.app/user.service:1.0-SNAPSHOT
+          image: asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/user.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://host.docker.internal:5433/multiwarehouse?currentSchema=user&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+              value: "jdbc:postgresql://postgres-service:5432/multiwarehouse?currentSchema=user&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
-              value: "local-confluent-kafka-cp-kafka-headless:9092"
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
-              value: "http://local-confluent-kafka-cp-schema-registry:8081"
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
               cpu: "500m"
@@ -100,6 +105,7 @@ spec:
       port: 8182
   type: LoadBalancer
   loadBalancerIP: ""
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -119,14 +125,16 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: com.multiwarehouse.app/product.service:1.0-SNAPSHOT
+          image: asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/product.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://host.docker.internal:5433/multiwarehouse?currentSchema=product&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+              value: "jdbc:postgresql://postgres-service:5432/multiwarehouse?currentSchema=product&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
-              value: "local-confluent-kafka-cp-kafka-headless:9092"
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
-              value: "http://local-confluent-kafka-cp-schema-registry:8081"
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
               cpu: "500m"
@@ -151,6 +159,7 @@ spec:
       port: 8184
   type: LoadBalancer
   loadBalancerIP: ""
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -170,14 +179,16 @@ spec:
     spec:
       containers:
         - name: inventory-service
-          image: com.multiwarehouse.app/inventory.service:1.0-SNAPSHOT
+          image: asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/inventory.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://host.docker.internal:5433/multiwarehouse?currentSchema=inventory&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+              value: "jdbc:postgresql://postgres-service:5432/multiwarehouse?currentSchema=inventory&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
-              value: "local-confluent-kafka-cp-kafka-headless:9092"
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
-              value: "http://local-confluent-kafka-cp-schema-registry:8081"
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
               cpu: "500m"
@@ -202,6 +213,7 @@ spec:
       port: 8188
   type: LoadBalancer
   loadBalancerIP: ""
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -221,14 +233,16 @@ spec:
     spec:
       containers:
         - name: authgateway-service
-          image: com.multiwarehouse.app/authgateway.service:1.0-SNAPSHOT
+          image: asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/authgateway.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://host.docker.internal:5433/multiwarehouse?currentSchema=authgateway&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+              value: "jdbc:postgresql://postgres-service:5432/multiwarehouse?currentSchema=authgateway&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
-              value: "local-confluent-kafka-cp-kafka-headless:9092"
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
-              value: "http://local-confluent-kafka-cp-schema-registry:8081"
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
               cpu: "500m"
@@ -253,3 +267,4 @@ spec:
       port: 8190
   type: LoadBalancer
   loadBalancerIP: ""
+

@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-deployment
+  namespace: default
+  labels:
+    app: inventory-deployment
+spec:
+  selector:
+    matchLabels:
+      app: inventory-deployment
+  template:
+    metadata:
+      labels:
+        app: inventory-deployment
+    spec:
+      containers:
+        - name: inventory-service
+          image: com.multiwarehouse.app/inventory.service:1.0-SNAPSHOT
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://host.docker.internal:5432/multiwarehouse?currentSchema=inventory&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+            - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
+              value: "local-confluent-kafka-cp-kafka-headless:9092"
+            - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
+              value: "http://local-confluent-kafka-cp-schema-registry:8081"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1024Mi"
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service
+  namespace: default
+  labels:
+    app: inventory-service
+spec:
+  selector:
+    app: inventory-deployment
+  ports:
+    - name: inventory-service-port
+      protocol: TCP
+      port: 8188
+  type: LoadBalancer
+  loadBalancerIP: ""
