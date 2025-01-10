@@ -224,7 +224,7 @@ spec:
           image: com.multiwarehouse.app/authgateway.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://host.docker.internal:5433/multiwarehouse?currentSchema=authgateway&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+              value: "jdbc:postgresql://host.docker.internal:5433/multiwarehouse?currentSchema=auth&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
               value: "local-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
