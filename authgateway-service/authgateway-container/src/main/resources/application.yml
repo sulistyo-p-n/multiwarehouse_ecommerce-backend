@@ -36,12 +36,12 @@ spring:
     gateway:
       routes:
         - id: user-service
-          uri: ${USER_SERVICE_URI:http://localhost:8182}
+          uri: http://localhost:8182
           predicates:
             - Path=/auth/**
 
         - id: user-service
-          uri: ${USER_SERVICE_URI:http://localhost:8182}
+          uri: http://localhost:8182
           predicates:
             - Path=/me
             - Method= GET, PUT
@@ -49,7 +49,7 @@ spring:
 #            - MeAuthorizationFilter
 
         - id: warehouse-service
-          uri: ${WAREHOUSE_SERVICE_URI:http://localhost:8181}
+          uri: http://localhost:8181
           predicates:
             - Path=/warehouses/**
             - Method= GET
@@ -57,7 +57,7 @@ spring:
 #            - AdminAuthorizationFilter
 
         - id: warehouse-service
-          uri: ${WAREHOUSE_SERVICE_URI:http://localhost:8181}
+          uri: http://localhost:8181
           predicates:
             - Path=/warehouses/**
             - Method= POST, PUT, DELETE
@@ -65,7 +65,7 @@ spring:
 #            - SuperAdminAuthorizationFilter
 
         - id: user-service
-          uri: ${USER_SERVICE_URI:http://localhost:8182}
+          uri: http://localhost:8182
           predicates:
             - Path=/users/**
             - Method= GET, PUT
@@ -73,7 +73,7 @@ spring:
 #            - UserAuthorizationFilter
 
         - id: user-service
-          uri: ${USER_SERVICE_URI:http://localhost:8182}
+          uri: http://localhost:8182
           predicates:
             - Path=/users/**
             - Method= POST, DELETE
@@ -81,13 +81,13 @@ spring:
 #            - SuperAdminAuthorizationFilter
 
         - id: product-service
-          uri: ${PRODUCT_SERVICE_URI:http://localhost:8184}
+          uri: http://localhost:8184
           predicates:
             - Path=/product_categories/**, /products/**
             - Method= GET
 
         - id: product-service
-          uri: ${PRODUCT_SERVICE_URI:http://localhost:8184}
+          uri: http://localhost:8184
           predicates:
             - Path=/product_categories/**, /products/**
             - Method= POST, PUT, DELETE
@@ -95,7 +95,7 @@ spring:
 #            - SuperAdminAuthorizationFilter
 
         - id: inventory-service
-          uri: ${INVENTORY_SERVICE_URI:http://localhost:8188}
+          uri: http://localhost:8188
           predicates:
             - Path=/inventories/by_warehouse/**, /stock_mutations/by_warehouse/**
             - Method= GET, POST
@@ -104,7 +104,7 @@ spring:
 #            - WarehouseAdminAuthorizationFilter
 
         - id: inventory-service
-          uri: ${INVENTORY_SERVICE_URI:http://localhost:8188}
+          uri: http://localhost:8188
           predicates:
             - Path=/stock_mutations/**
             - Method= PUT
