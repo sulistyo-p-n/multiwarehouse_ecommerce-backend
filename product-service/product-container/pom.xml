@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>product-container</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

@@ -28,7 +28,7 @@ mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -Dreduc
 2. mvn clean install
 3. install helm
 4. add cp-helm-charts
-5. helm install my-confluent cp-helm-charts
+5. helm install my-confluent cp-helm-charts \ helm install local-confluent-kafka cp-helm-charts
 6. kubectl apply -f application-deployment-local.yml
 7. kubectl apply -f kafka-client.yml
 8. kubectl apply -f postgres-deployment.yml
