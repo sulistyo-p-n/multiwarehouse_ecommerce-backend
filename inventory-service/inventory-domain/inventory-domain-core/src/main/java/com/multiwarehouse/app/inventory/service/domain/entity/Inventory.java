@@ -84,7 +84,7 @@ public class Inventory extends AggregateRoot<InventoryId> {
 
     public void transferStock(Inventory targetInventory, Product product, int quantity) {
         if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
-        if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
+        if (quantity <= 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
         stocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst()
@@ -98,7 +98,7 @@ public class Inventory extends AggregateRoot<InventoryId> {
 
     public void addStock(Product product, int quantity) {
         if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
-        if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
+        if (quantity <= 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
         Optional<InventoryStock> filteredStock = stocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))
                 .findFirst();
@@ -119,7 +119,7 @@ public class Inventory extends AggregateRoot<InventoryId> {
 
     public void reduceStock(Product product, int quantity) {
         if (product == null) throw new InventoryDomainException("Inventory.Input.Product cannot be null!");
-        if (quantity == 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
+        if (quantity <= 0) throw new InventoryDomainException("Inventory.Input.Quantity must be greater than zero!");
 
         Optional<InventoryStock> filteredStock = stocks.stream()
                 .filter(stock -> stock.getProduct().equals(product))

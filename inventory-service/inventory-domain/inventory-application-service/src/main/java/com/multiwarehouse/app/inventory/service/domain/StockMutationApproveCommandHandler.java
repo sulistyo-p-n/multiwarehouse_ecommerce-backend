@@ -34,13 +34,13 @@ public class StockMutationApproveCommandHandler {
     public ApproveStockMutationResponse approveStockMutation(ApproveStockMutationCommand approveStockMutationCommand) {
         StockMutation stockMutation = stockMutationHelper.findStockMutationById(new StockMutationId(approveStockMutationCommand.getId()));
         StockMutation stockMutationApproved = inventoryDomainService.approveStockMutation(stockMutation);
-        StockMutation stockMutationSaved = stockMutationHelper.saveStockMutation(stockMutationApproved);
         List<InventoryStockChangedEvent> inventoryStockChangedEvents = inventoryDomainService.transferStockMutation(stockMutationApproved, inventoryStockChangedMessagePublisher);
         inventoryStockChangedEvents.forEach(
                 inventoryStockChangedEvent -> {
                     inventoryHelper.saveInventory(inventoryStockChangedEvent.getInventory());
                     inventoryStockChangedMessagePublisher.publish(inventoryStockChangedEvent);
                 });
+        StockMutation stockMutationSaved = stockMutationHelper.saveStockMutation(stockMutationApproved);
         log.info("StockMutation is approved with id: {}", stockMutationSaved.getId().getValue());
         return stockMutationDataMapper.approveStockMutationResponseFromStockMutation(stockMutationSaved);
     }

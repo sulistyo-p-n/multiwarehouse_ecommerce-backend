@@ -1,8 +1,8 @@
 package com.multiwarehouse.app.inventory.service.domain.entity;
 
 import com.multiwarehouse.app.domain.entity.BaseEntity;
-import com.multiwarehouse.app.domain.valueobject.InventoryId;
 import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
+import com.multiwarehouse.app.inventory.service.domain.exception.InventoryNotFoundException;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationId;
 import com.multiwarehouse.app.inventory.service.domain.valueobject.StockMutationStatus;
 
@@ -54,6 +54,9 @@ public class StockMutation extends BaseEntity<StockMutationId> {
     }
 
     public void validateInventory() {
+        if (sourceInventory.equals(targetInventory)) {
+            throw new InventoryDomainException("Couldn't use same Source Inventory and Target Inventory with warehouseId: " + sourceInventory.getWarehouse().getId().getValue());
+        }
         sourceInventory.validate();
         targetInventory.validate();
     }

@@ -7,6 +7,7 @@ import com.multiwarehouse.app.inventory.service.domain.dto.RequestStockMutationR
 import com.multiwarehouse.app.inventory.service.domain.entity.Inventory;
 import com.multiwarehouse.app.inventory.service.domain.entity.Product;
 import com.multiwarehouse.app.inventory.service.domain.entity.StockMutation;
+import com.multiwarehouse.app.inventory.service.domain.exception.InventoryNotFoundException;
 import com.multiwarehouse.app.inventory.service.domain.mapper.StockMutationDataMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

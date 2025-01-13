@@ -10,7 +10,6 @@ import com.multiwarehouse.app.inventory.service.domain.event.InventoryCreatedEve
 import com.multiwarehouse.app.inventory.service.domain.event.InventoryDeletedEvent;
 import com.multiwarehouse.app.inventory.service.domain.event.InventoryStockChangedEvent;
 import com.multiwarehouse.app.inventory.service.domain.event.InventoryUpdatedEvent;
-import com.multiwarehouse.app.inventory.service.domain.exception.InventoryDomainException;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -50,7 +49,6 @@ public class InventoryDomainServiceImpl implements InventoryDomainService {
 
     @Override
     public InventoryStockChangedEvent addStock(Inventory inventory, Product product, int quantity, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher) {
-        validateQuantity(quantity);
         inventory.addStock(product, quantity);
         inventory.validate();
         return new InventoryStockChangedEvent(
@@ -61,17 +59,12 @@ public class InventoryDomainServiceImpl implements InventoryDomainService {
 
     @Override
     public InventoryStockChangedEvent reduceStock(Inventory inventory, Product product, int quantity, DomainEventPublisher<InventoryStockChangedEvent> inventoryStockChangedEventDomainEventPublisher) {
-        validateQuantity(quantity);
         inventory.reduceStock(product, quantity);
         inventory.validate();
         return new InventoryStockChangedEvent(
                 inventory,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
                 inventoryStockChangedEventDomainEventPublisher);
-    }
-
-    private void validateQuantity(int quantity) {
-        if (quantity == 0) throw new InventoryDomainException("Stock Quantity must be greater than zero!");
     }
 
     @Override

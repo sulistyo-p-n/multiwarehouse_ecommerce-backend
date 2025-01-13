@@ -23,7 +23,7 @@ public class ProductHelper {
         Optional<Product> product = productRepository.findById(productId);
         if (product.isEmpty()) {
             log.warn("Couldn't find Product with id: {} ", productId.getValue());
-            throw new InventoryNotFoundException("Couldn't find Product with id: " + productId.getValue());
+            throw new InventoryNotFoundException("Couldn't find Product with productId: " + productId.getValue());
         }
         return product.get();
     }
