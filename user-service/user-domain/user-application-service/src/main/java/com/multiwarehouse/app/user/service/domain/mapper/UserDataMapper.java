@@ -13,6 +13,7 @@ import com.multiwarehouse.app.user.service.domain.entity.UserAdminWarehouse;
 import com.multiwarehouse.app.user.service.domain.entity.User;
 import com.multiwarehouse.app.user.service.domain.entity.UserAddress;
 import com.multiwarehouse.app.user.service.domain.entity.UserProfile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -22,11 +23,17 @@ import java.util.stream.Collectors;
 @Component
 public class UserDataMapper {
 
+    private final PasswordEncoder passwordEncoder;
+
+    public UserDataMapper(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     public User userFromCreateUserCommand(CreateUserCommand createUserCommand) {
         return User.builder()
                 .withUsername(createUserCommand.getUsername())
                 .withEmail(createUserCommand.getEmail())
-                .withPassword(createUserCommand.getPassword())
+                .withPassword(passwordEncoder.encode(createUserCommand.getPassword()))
                 .withActive(createUserCommand.getActive())
                 .withRole(createUserCommand.getRole())
                 .withUserAdminWarehouse(adminEntityFromUserAdminWarehouse(createUserCommand.getAdminWarehouse()))
@@ -46,7 +53,7 @@ public class UserDataMapper {
                 .withId(new UserId(updateUserCommand.getId()))
                 .withUsername(updateUserCommand.getUsername())
                 .withEmail(updateUserCommand.getEmail())
-                .withPassword(updateUserCommand.getPassword())
+                .withPassword(passwordEncoder.encode(updateUserCommand.getPassword()))
                 .withActive(updateUserCommand.getActive())
                 .withRole(updateUserCommand.getRole())
                 .withUserAdminWarehouse(adminEntityFromUserAdminWarehouse(updateUserCommand.getAdminWarehouse()))
@@ -65,7 +72,7 @@ public class UserDataMapper {
         return User.builder()
                 .withUsername(registerUserCommand.getUsername())
                 .withEmail(registerUserCommand.getEmail())
-                .withPassword(registerUserCommand.getPassword())
+                .withPassword(passwordEncoder.encode(registerUserCommand.getPassword()))
                 .withActive(true)
                 .withRole(UserRole.CUSTOMER)
                 .build();
@@ -123,9 +130,10 @@ public class UserDataMapper {
                 .build();
     }
 
-    public LoginUserResponse loginUserResponseFromUser(User user) {
+    public LoginUserResponse loginUserResponseFromUser(User user, String token) {
         return LoginUserResponse.builder()
-                .token(user.getId().getValue())
+                .token(token)
+                .id(user.getId().getValue())
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .role(user.getRole())

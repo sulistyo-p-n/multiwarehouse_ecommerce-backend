@@ -15,7 +15,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class LoginUserResponse {
-    private final UUID token;
+    private final String token;
+    private final UUID id;
     private final String username;
     private final String email;
     private final UserRole role;

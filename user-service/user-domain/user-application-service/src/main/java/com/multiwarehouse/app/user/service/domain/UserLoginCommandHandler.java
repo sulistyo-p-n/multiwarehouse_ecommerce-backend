@@ -9,6 +9,7 @@ import com.multiwarehouse.app.user.service.domain.exception.UserDomainException;
 import com.multiwarehouse.app.user.service.domain.exception.UserNotFoundException;
 import com.multiwarehouse.app.user.service.domain.mapper.UserDataMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,10 +22,14 @@ import java.util.stream.Collectors;
 public class UserLoginCommandHandler {
     private final UserDataMapper userDataMapper;
     private final UserHelper userHelper;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public UserLoginCommandHandler(UserDataMapper userDataMapper, UserHelper userHelper) {
+    public UserLoginCommandHandler(UserDataMapper userDataMapper, UserHelper userHelper, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userDataMapper = userDataMapper;
         this.userHelper = userHelper;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     @Transactional(readOnly = true)
@@ -32,11 +37,13 @@ public class UserLoginCommandHandler {
         User user = userHelper.findUserByEmail(loginUserCommand.getEmail());
         validateUserPassword(user, loginUserCommand.getPassword());
         log.info("Users is selected with id: {}", user.getId().getValue());
-        return userDataMapper.loginUserResponseFromUser(user);
+        String token = jwtService.generateToken(user);
+        log.info("Users is selected with token: {}", token);
+        return userDataMapper.loginUserResponseFromUser(user, token);
     }
 
     public void validateUserPassword(User user, String password) {
-        if (!user.getPassword().equals(password)) {
+        if (passwordEncoder.matches(password, user.getPassword())) {
             log.warn("Wrong password ");
             throw new UserDomainException("Wrong password");
         }

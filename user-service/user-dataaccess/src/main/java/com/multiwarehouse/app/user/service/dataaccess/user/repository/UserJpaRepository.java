@@ -26,9 +26,15 @@ public interface UserJpaRepository extends BaseJpaRepository<UserEntity, UUID> {
             @Param("search") String search
     );
 
-    @Query("SELECT t FROM #{#entityName} t WHERE t.username = :username")
-    Optional<UserEntity> findByUsername(@Param("username") String username);
+//    @Query("SELECT t FROM #{#entityName} t WHERE t.username = :username")
+//    Optional<UserEntity> findByUsername(@Param("username") String username);
+//
+//    @Query("SELECT t FROM #{#entityName} t WHERE t.email = :email")
+//    Optional<UserEntity> findByEmail(@Param("email") String email);
 
-    @Query("SELECT t FROM #{#entityName} t WHERE t.email = :email")
-    Optional<UserEntity> findByEmail(@Param("email") String email);
+    Optional<UserEntity> findByEmail(String email);
+    Optional<UserEntity> findByUsernameOrEmail(String username, String email);
+    Optional<UserEntity> findByUsername(String username);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
 }

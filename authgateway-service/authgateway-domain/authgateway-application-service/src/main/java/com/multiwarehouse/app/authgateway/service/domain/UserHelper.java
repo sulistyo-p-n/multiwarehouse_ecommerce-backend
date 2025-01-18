@@ -16,9 +16,11 @@ import java.util.UUID;
 @Component
 public class UserHelper {
     private final UserRepository userRepository;
+    private final JwtService jwtService;
 
-    public UserHelper(UserRepository userRepository) {
+    public UserHelper(UserRepository userRepository, JwtService jwtService) {
         this.userRepository = userRepository;
+        this.jwtService = jwtService;
     }
 
     public User findUserById(UserId userId) {
@@ -31,10 +33,11 @@ public class UserHelper {
     }
 
     public User findUserByToken(String token) {
-        Optional<User> user = userRepository.findById(new UserId(UUID.fromString(token)));
+        UserId userId = new UserId(UUID.fromString(jwtService.extractId(token)));
+        Optional<User> user = userRepository.findById(userId);
         if (user.isEmpty()) {
             log.warn("Couldn't find User with token: {} ", token);
-            throw new AuthUnauthorizedException("Not authorized! with token " + token);
+            throw new AuthUnauthorizedException("Couldn't find User with token: " + token);
         }
         return user.get();
     }

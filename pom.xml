@@ -42,6 +42,7 @@
         <org.mockito.version>5.11.0</org.mockito.version>
         <org.slf4j.version>2.0.16</org.slf4j.version>
         <spring-cloud.version>2024.0.0</spring-cloud.version>
+        <io.jsonwebtoken.version>0.12.6</io.jsonwebtoken.version>
     </properties>
 
     <dependencyManagement>
