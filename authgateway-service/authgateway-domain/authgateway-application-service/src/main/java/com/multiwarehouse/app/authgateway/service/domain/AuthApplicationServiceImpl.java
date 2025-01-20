@@ -3,7 +3,9 @@ package com.multiwarehouse.app.authgateway.service.domain;
 import com.multiwarehouse.app.authgateway.service.domain.entity.User;
 import com.multiwarehouse.app.authgateway.service.domain.exception.AuthUnauthorizedException;
 import com.multiwarehouse.app.authgateway.service.domain.port.input.service.AuthApplicationService;
+import com.multiwarehouse.app.domain.valueobject.UserId;
 import com.multiwarehouse.app.domain.valueobject.WarehouseId;
+import com.multiwarehouse.app.jwt.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -24,15 +26,16 @@ public class AuthApplicationServiceImpl implements AuthApplicationService {
 
     @Override
     public User validateUser(String token) {
-        User user = userHelper.findUserByToken(token);
+        UserId userId = new UserId(UUID.fromString(jwtService.extractId(token)));
+        User user = userHelper.findUserById(userId);
         validateUserWithToken(user, token);
         return user;
     }
 
     private void validateUserWithToken(User user, String token) {
-        if (!jwtService.isTokenValid(token, user)) {
+        if (!jwtService.isTokenValid(token, user.getId().getValue().toString())) {
             log.warn("Not authorized! with token: {} ", token);
-            throw new AuthUnauthorizedException("Not authorized! with token: " + token);
+            throw new AuthUnauthorizedException("Not authorized!");
         }
     }
 
@@ -41,7 +44,7 @@ public class AuthApplicationServiceImpl implements AuthApplicationService {
         User user = validateUser(token);
         if (!(user.isSuperAdmin() || user.isWarehouseAdmin())) {
             log.warn("Couldn't find Admin with token: {} ", token);
-            throw new AuthUnauthorizedException("Not authorized! with token " + token);
+            throw new AuthUnauthorizedException("Not authorized!");
         }
         return user;
     }
@@ -51,7 +54,7 @@ public class AuthApplicationServiceImpl implements AuthApplicationService {
         User user = validateUser(token);
         if (!user.isSuperAdmin()) {
             log.warn("Couldn't find SuperAdmin with token: {} ", token);
-            throw new AuthUnauthorizedException("Not authorized! with token " + token);
+            throw new AuthUnauthorizedException("Not authorized!");
         }
         return user;
     }
@@ -61,7 +64,7 @@ public class AuthApplicationServiceImpl implements AuthApplicationService {
         User user = validateUser(token);
         if (!(user.isSuperAdmin() || user.isWarehouseAdmin(new WarehouseId(UUID.fromString(warehouseId))))) {
             log.warn("Couldn't find WarehouseAdmin with token: {} ", token);
-            throw new AuthUnauthorizedException("Not authorized! with token " + token);
+            throw new AuthUnauthorizedException("Not authorized!");
         }
         return user;
     }

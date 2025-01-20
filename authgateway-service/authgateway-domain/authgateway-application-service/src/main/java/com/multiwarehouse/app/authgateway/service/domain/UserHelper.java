@@ -16,11 +16,9 @@ import java.util.UUID;
 @Component
 public class UserHelper {
     private final UserRepository userRepository;
-    private final JwtService jwtService;
 
-    public UserHelper(UserRepository userRepository, JwtService jwtService) {
+    public UserHelper(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.jwtService = jwtService;
     }
 
     public User findUserById(UserId userId) {
@@ -28,16 +26,6 @@ public class UserHelper {
         if (user.isEmpty()) {
             log.warn("Couldn't find User with id: {} ", userId.getValue());
             throw new AuthNotFoundException("Couldn't find User with id: " + userId.getValue());
-        }
-        return user.get();
-    }
-
-    public User findUserByToken(String token) {
-        UserId userId = new UserId(UUID.fromString(jwtService.extractId(token)));
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isEmpty()) {
-            log.warn("Couldn't find User with token: {} ", token);
-            throw new AuthUnauthorizedException("Couldn't find User with token: " + token);
         }
         return user.get();
     }

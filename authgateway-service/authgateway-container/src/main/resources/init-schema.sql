@@ -41,3 +41,6 @@ ALTER TABLE "auth".user_admin_warehouses
         ON UPDATE NO ACTION
         ON DELETE CASCADE
     NOT VALID;
+
+INSERT INTO "auth".users (id, username, email, password, role)
+VALUES ('9cc9f3fa-bc72-462f-86eb-82d32418bece', 'superadmin', 'superadmin@ikiae.com', '{bcrypt}$2a$10$r9qqLybMBC5yz1oDledQteFOkhrqJRKTnSPfi79hZhFtnW4wt3vSO', 'SUPER_ADMIN');

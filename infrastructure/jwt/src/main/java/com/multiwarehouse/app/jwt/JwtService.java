@@ -1,21 +1,20 @@
-package com.multiwarehouse.app.authgateway.service.domain;
+package com.multiwarehouse.app.jwt;
 
-import com.multiwarehouse.app.authgateway.service.domain.entity.User;
-import com.multiwarehouse.app.domain.valueobject.UserId;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.function.Function;
 
+@Component
 public class JwtService {
     @Value("${security.jwt.secret-key}")
     private String secretKey;
@@ -32,12 +31,12 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(User user) {
-        return generateToken(new HashMap<>(), user);
+    public String generateToken(String id) {
+        return generateToken(new HashMap<>(), id);
     }
 
-    public String generateToken(Map<String, Object> extraClaims, User user) {
-        return buildToken(extraClaims, user, jwtExpiration);
+    public String generateToken(Map<String, Object> extraClaims, String id) {
+        return buildToken(extraClaims, id, jwtExpiration);
     }
 
     public long getExpirationTime() {
@@ -46,22 +45,22 @@ public class JwtService {
 
     private String buildToken(
             Map<String, Object> extraClaims,
-            User user,
+            String id,
             long expiration
     ) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(user.getId().getValue().toString())
+                .setSubject(id)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public boolean isTokenValid(String token, User user) {
-        final UserId userId = new UserId(UUID.fromString(extractId(token)));
-        return (user.getId().equals(userId)) && !isTokenExpired(token);
+    public boolean isTokenValid(String token, String id) {
+        final String tokenId = extractId(token);
+        return (tokenId.equals(id)) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {
