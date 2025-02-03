@@ -23,41 +23,6 @@ From the user’s perspective, it will not be apparent that the application uses
 ![Domain Analysis](docs/images/Domain-Analysis.png)
 
 ---
-
-## High-Level-Design
-![High-Level-Design](docs/images/High-Level-Design.png)
-
----
-
-## CQRS
-![CQRS](docs/images/CQRS.png)
-
----
-
-## Onion Architecture
-![Onion-Architecture](docs/images/Onion-Architecture.png)
-
----
-
-## Hexagonal Architecture
-![Hexagonal-Architecture](docs/images/Hexagonal-Architecture.png)
-
----
-
-## Entity Relation
-![Entity-Relation](docs/images/Entity-Relation.png)
-
----
-
-## Low-Level-Design
-![Low-Level-Design](docs/images/Low-Level-Design.png)
-
----
-
-## Domain Core
-![Inventory-Domain-Core](docs/images/Inventory-Domain-Core.png)
-
----
 ## Dependency Graph
 ![dependency-graph](docs/images/dependency-graph.png)
 
@@ -65,12 +30,6 @@ Run the following command to generate the dependency graph:
 ```sh
 mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -DreduceEdges=false -Dscope=compile "-Dincludes=com.multiwarehouse.app*:inventory*,com.multiwarehouse.app*:common*"
 ```
-
----
-
-## Database Diagram
-![Database Diagram](docs/images/dbd.png)
-[View Database Schema](https://dbdiagram.io/d/Multiwarehouse-E-Commerce-675fe033e763df1f000c17e4)
 
 ---
 
@@ -224,6 +183,46 @@ kubectl get hpa inventory-service --watch
   kubectl get -A --field-selector 'status.phase==Failed' pods
   kubectl delete -A --field-selector 'status.phase==Failed' pods
   ```
+
+---
+
+## High-Level-Design
+![High-Level-Design](docs/images/High-Level-Design.png)
+
+---
+
+## CQRS
+![CQRS](docs/images/CQRS.png)
+
+---
+
+## Onion Architecture
+![Onion-Architecture](docs/images/Onion-Architecture.png)
+
+---
+
+## Hexagonal Architecture
+![Hexagonal-Architecture](docs/images/Hexagonal-Architecture.png)
+
+---
+
+## Entity Relation
+![Entity-Relation](docs/images/Entity-Relation.png)
+
+---
+
+## Low-Level-Design
+![Low-Level-Design](docs/images/Low-Level-Design.png)
+
+---
+
+## Domain Core
+![Inventory-Domain-Core](docs/images/Inventory-Domain-Core.png)
+---
+
+## Database Diagram
+![Database Diagram](docs/images/dbd.png)
+[View Database Schema](https://dbdiagram.io/d/Multiwarehouse-E-Commerce-675fe033e763df1f000c17e4)
 
 ---
 ## License
