@@ -17,10 +17,27 @@ From the user’s perspective, it will not be apparent that the application uses
 - **Container Manager:** Kubernetes
 - **Cloud Service:** Google Cloud
 
+## Architectural Implementations
+
+- Domain-Driven Design (DDD)
+- Microservices
+- Command Query Responsibility Segregation (CQRS)
+- Onion Architecture
+- Hexagonal Architecture
+
 ---
 
 ## Domain Analysis
 ![Domain Analysis](docs/images/Domain-Analysis.png)
+
+- **User Service:** Manages user information, including registration, authentication, profile, and user authorization management.
+- **Product Service:** Manages product information, including product details, categories, pricing and show general stock.
+- **Warehouse Service:** Manages warehouse information, including location.
+- **Inventory Service:** Manages stock in each warehouse. This service also handles stock allocation and stock mutation request.
+- **Cart Service:** Manages users' shopping carts.
+- **Order Service:** Manages customer orders, including order creation, updates, and cancellations. This service also interacts with the Warehouse Service to determine the most suitable warehouse to fulfill customer orders.
+- **Payment Service:** Manages the payment process. The Payment Service ensures transactions are securely processed and verified.
+- **Shipping Service:** Manages product shipments, including shipping cost calculations based on warehouse and customer locations, as well as courier selection. This service also tracks order delivery status.
 
 ---
 ## Dependency Graph
