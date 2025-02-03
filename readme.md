@@ -6,6 +6,8 @@ This system enables admins to efficiently manage product stock with stock transf
 
 From the user’s perspective, it will not be apparent that the application uses multiple warehouses.
 
+for Frontend: https://github.com/sulistyo-p-n/multiwarehouse_ecommerce-frontend
+
 ## Technologies Used
 
 - **Backend:** Java Spring
