@@ -26,6 +26,7 @@ From the user’s perspective, it will not be apparent that the application uses
 ---
 ## Dependency Graph
 ![dependency-graph](docs/images/dependency-graph.png)
+
 Run the following command to generate the dependency graph:
 ```sh
 mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -DreduceEdges=false -Dscope=compile "-Dincludes=com.multiwarehouse.app*:inventory*,com.multiwarehouse.app*:common*"
