@@ -1,92 +1,188 @@
-**Database Diagram**
+# Multiwarehouse E-Commerce
+
+Multi-Warehouse E-Commerce is a management system that supports multiple warehouses for product storage.
+
+This system enables admins to efficiently manage product stock with stock transfer features between warehouses.
+
+From the user’s perspective, it will not be apparent that the application uses multiple warehouses.
+
+## Technologies Used
+
+- **Backend:** Java Spring
+- **Frontend:** Next.js + MUI
+- **Database:** PostgreSQL (with materialized view)
+- **Authentication:** JWT
+- **Message Broker:** Kafka
+- **Container:** Docker
+- **Container Manager:** Kubernetes
+- **Cloud Service:** Google Cloud
+
+---
+
+## Database Diagram
 ![Database Diagram](docs/images/dbd.png)
-https://dbdiagram.io/d/Multiwarehouse-E-Commerce-675fe033e763df1f000c17e4
+[View Database Schema](https://dbdiagram.io/d/Multiwarehouse-E-Commerce-675fe033e763df1f000c17e4)
 
 ---
-**DEPENDENCY GRAPH**
-mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -DreduceEdges=false -Dscope=compile "-Dincludes=com.multiwarehouse.app*:product*,com.multiwarehouse.app*:common*"
+## Dependency Graph
+Run the following command to generate the dependency graph:
+```sh
+mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -DreduceEdges=false -Dscope=compile "-Dincludes=com.multiwarehouse.app*:inventory*,com.multiwarehouse.app*:common*"
+```
 
 ---
-**GOOGLE CLOUD**
-1. enable kubernetes engine
-2. enable artifact registry
-3. enable artifact registry API
+## Google Cloud Setup
+Enable the following services before deployment:
+1. **Kubernetes Engine**
+2. **Artifact Registry**
+3. **Artifact Registry API**
 
 ---
-**CREATE CLUSTER**
-1. open cloud shell
-2. type: gcloud auth login -> follow the step
-   3. if you what change project 
-   4. type: gcloud projects list 
-   5. type: gcloud config set project PROJECT_ID
-6. https://cloud.google.com/compute/docs/regions-zones
-7. type: gcloud config set compute/zone asia-southeast2-a
-8. type: gcloud container clusters create com-multiwarehouse-app-cluster 
-9. connect the cluster
+## Creating a Kubernetes Cluster
+1. Open **Cloud Shell**
+2. Run the following command:
+   ```sh
+   gcloud auth login
+   ```
+   Follow the steps to authorize.
+3. If you need to switch projects:
+   ```sh
+   gcloud projects list
+   gcloud config set project PROJECT_ID
+   ```
+4. Select a regional zone:
+   ```sh
+   gcloud config set compute/zone asia-southeast2-a
+   ```
+5. Create a Kubernetes cluster:
+   ```sh
+   gcloud container clusters create com-multiwarehouse-app-cluster
+   ```
+6. Connect the cluster to Cloud Shell.
 
 ---
-**CREATE REPOSITORY**
-1. Gcloud: Go to Artifact Registry 
-2. Gcloud: Create Repository com-multiwarehouse-app-repository
+## Creating an Artifact Registry Repository
+1. Go to **Artifact Registry** in Google Cloud.
+2. Create a repository named **com-multiwarehouse-app-repository**.
 
 ---
-**CREATE IMAGE & PUSH**
-1. local: gcloud auth configure-docker asia-southeast2-docker.pkg.dev
-2. local: docker tag com.multiwarehouse.app/warehouse.service:1.0-SNAPSHOT asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/warehouse.service:1.0-SNAPSHOT 
-3. local: docker push asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/warehouse.service:1.0-SNAPSHOT
+## Build & Push Docker Image
+1. Configure Docker with Google Cloud:
+   ```sh
+   gcloud auth configure-docker asia-southeast2-docker.pkg.dev
+   ```
+2. Tag the local image:
+   ```sh
+   docker tag com.multiwarehouse.app/warehouse.service:1.0-SNAPSHOT asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/warehouse.service:1.0-SNAPSHOT
+   ```
+3. Push the image to the repository:
+   ```sh
+   docker push asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/warehouse.service:1.0-SNAPSHOT
+   ```
 
 ---
-**SETUP KAFKA SETTING**
-1. cloud shell: git clone https://github.com/confluentinc/cp-helm-charts
-2. cloud shell: helm install gke-confluent-kafka cp-helm-charts --version 0.6.0
-
-3. if needed: helm uninstall gke-confluent-kafka 
-4. if needed: kubectl delete pvc --all 
-5. if needed: kubectl delete pv --all
-
----
-**APPLY YML**
-1. cloud shell: git clone https://github.com/ronysetyawanst/com-ecommerce-app-infra.git
-2. kubectl apply -f kafka-client.yml 
-3. kubectl cp create-topics.sh kafka-client:/kafka-client-storage 
-4. kubectl exec -it kafka-client -- /bin/bash 
-5. cd ..
-6. cd ..
-7. cd kafka-client-storage 
-8. sh create-topics.sh gke-confluent-kafka-cp-zookeeper-headless 
-9. exit 
-10. kubectl apply -f postgres-deployment.yml
-11. kubectl apply -f application-deployment-gke.yml 
-
-12. if needed: kubectl delete -f kafka-client.yml 
-13. if needed: kubectl delete -f postgres-deployment.yml 
-14. if needed: kubectl delete -f application-deployment-gke.yml
-15. if needed: kubectl get -A --field-selector 'status.phase==Failed' pods 
-16. if needed: kubectl delete -A --field-selector 'status.phase==Failed' pods
+## Kafka Setup
+1. Go to infrastructure/kubernetes folder:
+   ```sh
+   cd infrastructure/kubernetes
+   ```
+2. Or clone the Helm Chart Kafka repository:
+   ```sh
+   git clone https://github.com/confluentinc/cp-helm-charts
+   ```
+3. Install Kafka on Kubernetes:
+   ```sh
+   helm install gke-confluent-kafka cp-helm-charts --version 0.6.0
+   ```
+4. If needed, uninstall Kafka:
+   ```sh
+   helm uninstall gke-confluent-kafka
+   kubectl delete pvc --all
+   kubectl delete pv --all
+   ```
 
 ---
-**CHECK RUNNING SERVICE**
-1. kubectl get all 
-2. search : services & ingress
-3. go to service
+## Apply YAML Configuration
+1. Go to infrastructure/kubernetes folder:
+   ```sh
+   cd infrastructure/kubernetes
+   ```
+2. Apply the configuration to the cluster:
+   ```sh
+   kubectl apply -f kafka-client.yml
+   kubectl cp create-topics.sh kafka-client:/kafka-client-storage
+   kubectl exec -it kafka-client -- /bin/bash
+   cd ..
+   cd ..
+   cd kafka-client-storage
+   sh create-topics.sh gke-confluent-kafka-cp-zookeeper-headless
+   exit
+   kubectl apply -f postgres-deployment.yml
+   kubectl apply -f application-deployment-gke.yml
+   ```
+3. If needed, remove the configuration:
+   ```sh
+   kubectl delete -f kafka-client.yml
+   kubectl delete -f postgres-deployment.yml
+   kubectl delete -f application-deployment-gke.yml
+   ```
 
 ---
-**CHECK SERVICE LOG**
-1. kubectl logs warehouse-deployment-78fcc5f8b4-fsfg7
+## Monitoring & Logging
+### Check Running Services
+```sh
+kubectl get all
+```
+Look for **Services & Ingress** to see the running services.
+
+### Check Service Logs
+```sh
+kubectl logs warehouse-deployment-78fcc5f8b4-fsfg7
+```
 
 ---
-**HorizontalPodAutoscaler** (https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/)
-1. kubectl autoscale deployment inventory-service --cpu-percent=50 --min=1 --max=10
-2. kubectl get hpa
-3. kubectl get hpa inventory-service --watch
-4. 
+## Horizontal Pod Autoscaler (HPA)
+Use the following command to enable auto-scaling based on CPU usage:
+```sh
+kubectl autoscale deployment inventory-service --cpu-percent=50 --min=1 --max=10
+kubectl get hpa
+kubectl get hpa inventory-service --watch
+```
+
 ---
-**LOCAL KUBERNETES**
-1. enable kubernetes in docker
-2. mvn clean install
-3. install helm
-4. add cp-helm-charts
-5. helm install my-confluent cp-helm-charts \ helm install local-confluent-kafka cp-helm-charts
-6. kubectl apply -f kafka-client.yml
-7. kubectl apply -f postgres-deployment.yml
-8. kubectl apply -f application-deployment-local.yml
+## Running Kubernetes Locally
+1. Enable Kubernetes in Docker.
+2. Build the application:
+   ```sh
+   mvn clean install
+   ```
+3. Install Helm if not already installed.
+4. Go to infrastructure/kubernetes folder:
+   ```sh
+   cd infrastructure/kubernetes
+   ```
+5. Add the Helm Chart for Kafka:
+   ```sh
+   helm install local-confluent-kafka cp-helm-charts
+   ```
+6. Apply local configurations:
+   ```sh
+   kubectl apply -f kafka-client.yml
+   kubectl apply -f postgres-deployment.yml
+   kubectl apply -f application-deployment-local.yml
+   ```
+
+---
+## Additional Notes
+- If any **pod fails**, use:
+  ```sh
+  kubectl get -A --field-selector 'status.phase==Failed' pods
+  kubectl delete -A --field-selector 'status.phase==Failed' pods
+  ```
+
+---
+## License
+This project is licensed under the **MIT License**.
+
+---
+**Author:** Sulistyo Ponco Nugroho
