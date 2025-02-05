@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,10 +38,14 @@ public class WarehouseIdPathVariableFilter extends AbstractGatewayFilterFactory<
             Matcher matcher = UUID_PATTERN.matcher(path);
             if (matcher.matches()) {
                 String uuid = matcher.group("id");
-                exchange.getRequest().mutate()
-                        .header("X-WAREHOUSE-ID", uuid)
+                ServerWebExchange mutatedExchange = exchange.mutate()
+                        .request(exchange.getRequest().mutate()
+                                .header("X-WAREHOUSE-ID", uuid)
+                                .build())
                         .build();
                 log.info("Captured WarehouseId: {}", uuid);
+                log.info("get WarehouseId: {}", mutatedExchange.getRequest().getHeaders().getFirst("X-WAREHOUSE-ID"));
+                return chain.filter(mutatedExchange);
             }
             return chain.filter(exchange);
         };
