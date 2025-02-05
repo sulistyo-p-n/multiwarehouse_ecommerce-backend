@@ -53,7 +53,7 @@ public class UserDataMapper {
                 .withId(new UserId(updateUserCommand.getId()))
                 .withUsername(updateUserCommand.getUsername())
                 .withEmail(updateUserCommand.getEmail())
-                .withPassword(passwordEncoder.encode(updateUserCommand.getPassword()))
+                .withPassword(updateUserCommand.getPassword() == null ? null : passwordEncoder.encode(updateUserCommand.getPassword()))
                 .withActive(updateUserCommand.getActive())
                 .withRole(updateUserCommand.getRole())
                 .withUserAdminWarehouse(adminEntityFromUserAdminWarehouse(updateUserCommand.getAdminWarehouse()))
