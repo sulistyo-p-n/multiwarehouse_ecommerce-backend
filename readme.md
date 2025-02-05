@@ -6,7 +6,8 @@ This system enables admins to efficiently manage product stock with stock transf
 
 From the user’s perspective, it will not be apparent that the application uses multiple warehouses.
 
-for Frontend: https://github.com/sulistyo-p-n/multiwarehouse_ecommerce-frontend
+- **for Frontend:** https://github.com/sulistyo-p-n/multiwarehouse_ecommerce-frontend
+- **for Postman Database Seeder Coolections:** [Initial Data Seeder.postman_collection](infrastructure/postman/Initial Data Seeder.postman_collection.json)
 
 ## Technologies Used
 

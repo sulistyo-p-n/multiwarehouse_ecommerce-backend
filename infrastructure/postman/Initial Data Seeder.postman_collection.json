@@ -1,0 +1,1957 @@
+{
+	"info": {
+		"_postman_id": "51f85fe6-9d08-4bd4-98af-0499f96882b6",
+		"name": "Initial Data Seeder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40642121"
+	},
+	"item": [
+		{
+			"name": "Add Warehouse IKIAEKBP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"warehouseId-KBP\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "c7e353e3-c9a1-483f-83f3-a31a390ec6d2",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"IKIAEKBP\",\r\n    \"name\": \"IKIAE Kota Baru Parahyangan\",\r\n    \"description\": \"IKIAE Kota Baru Parahyangan hadir sebagai tempat di mana Anda dapat menemukan ide serta perabot untuk mewujudkan rumah impian\",\r\n    \"active\": 1,\r\n    \"address\": {\r\n        \"street\": \"Parahyangan St No.Kav 9, Kertajaya, Padalarang\",\r\n        \"city\": \"Kabupaten Bandung\",\r\n        \"postalCode\": \"40553\",\r\n        \"latitude\": -6.867092,\r\n        \"longitude\": 107.4667057\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{warehouse_url}}/warehouses",
+					"host": [
+						"{{warehouse_url}}"
+					],
+					"path": [
+						"warehouses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Warehouse IKIAEALS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"warehouseId-ALS\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "c7e353e3-c9a1-483f-83f3-a31a390ec6d2",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"IKIAEALS\",\r\n    \"name\": \"IKIAE Alam Sutera\",\r\n    \"description\": \"IKIAE Alam Sutera hadir sebagai tempat di mana Anda dapat menemukan ide serta perabot untuk mewujudkan rumah impian\",\r\n    \"active\": 1,\r\n    \"address\": {\r\n        \"street\": \"Jl. Jalur Sutera Boulevard No. 45 Alam Sutera\",\r\n        \"city\": \"Tangerang\",\r\n        \"postalCode\": \"15144\",\r\n        \"latitude\": -6.22056,\r\n        \"longitude\": 106.662355\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{warehouse_url}}/warehouses",
+					"host": [
+						"{{warehouse_url}}"
+					],
+					"path": [
+						"warehouses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Warehouse IKIAEJGC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"warehouseId-JGC\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "c7e353e3-c9a1-483f-83f3-a31a390ec6d2",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"IKIAEJGC\",\r\n    \"name\": \"IKIAE Jakarta Garden City\",\r\n    \"description\": \"IKIAE Jakarta Garden City hadir sebagai tempat di mana Anda dapat menemukan ide serta perabot untuk mewujudkan rumah impian\",\r\n    \"active\": 1,\r\n    \"address\": {\r\n        \"street\": \"Jl. Jakarta Garden City Boulevard\",\r\n        \"city\": \"Jakarta\",\r\n        \"postalCode\": \"13910\",\r\n        \"latitude\": -6.171046,\r\n        \"longitude\": 106.95309\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{warehouse_url}}/warehouses",
+					"host": [
+						"{{warehouse_url}}"
+					],
+					"path": [
+						"warehouses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add ProductCategory Sofa 001",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productCategoryId001\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"PC001\",\r\n    \"name\": \"Sofa\",\r\n    \"description\": \"perabotan rumah tangga yang berbentuk kursi panjang dengan sandaran dan lengan\",\r\n    \"active\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/product_categories",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"product_categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add ProductCategory Kursi 002",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productCategoryId002\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"PC002\",\r\n    \"name\": \"Kursi\",\r\n    \"description\": \"perlengkapan rumah tangga yang berfungsi sebagai tempat duduk\",\r\n    \"active\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/product_categories",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"product_categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add ProductCategory Meja 003",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productCategoryId003\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"PC003\",\r\n    \"name\": \"Meja\",\r\n    \"description\": \"perabotan yang memiliki permukaan datar dan kaki-kaki sebagai penyangganya\",\r\n    \"active\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/product_categories",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"product_categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product KLIPPAN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productId-KLIPPAN\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"001-klippan-art-10399315\",\r\n    \"name\": \"KLIPPAN\",\r\n    \"description\": \"sofa 2 dudukan, Bomstad hitam\",\r\n    \"price\": 4995000.00,\r\n    \"categoryId\": \"{{productCategoryId001}}\",\r\n    \"active\": 1,\r\n    \"images\": [\r\n        {\r\n            \"name\": \"Gambar Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/629/0562963_PE663653_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 1\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/271/0827136_PE709127_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Belakang\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/271/0827135_PE709126_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Bahan Luar\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/271/0827131_PE663657_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Ukuran\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/011/0701157_PE723951_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/products",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product STOCKHOLM",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productId-STOCKHOLM\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"001-stockholm-art-30245044\",\r\n    \"name\": \"STOCKHOLM\",\r\n    \"description\": \"Sofa 3 dudukan, seglora alami\",\r\n    \"price\": 4995000.00,\r\n    \"categoryId\": \"{{productCategoryId001}}\",\r\n    \"active\": 1,\r\n    \"images\": [\r\n        {\r\n            \"name\": \"Gambar Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/837/0183763_PE334809_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 1\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/204/0820478_PE598993_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Belakang\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/204/0820477_PE596534_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Bahan Luar\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/204/0820476_PE585752_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Ukuran\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/489/0748954_PE745346_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/products",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product GLOSTAD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productId-GLOSTAD\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"001-glostad-art-00488821\",\r\n    \"name\": \"GLOSTAD\",\r\n    \"description\": \"Sofa 2 dudukan, knisa biru medium\",\r\n    \"price\": 1895000.00,\r\n    \"categoryId\": \"{{productCategoryId001}}\",\r\n    \"active\": 1,\r\n    \"images\": [\r\n        {\r\n            \"name\": \"Gambar Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/509/0950900_PE800740_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 1\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/467/1246750_PE922288_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Belakang\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/509/0950901_PE800741_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Bahan Luar\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/509/0950903_PE800739_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Ukuran\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/835/0983590_PE816016_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/products",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product SALNO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productId-SALNO\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"002-salno-art-70564374\",\r\n    \"name\": \"SALNO\",\r\n    \"description\": \"Kursi berlengan, rotan\",\r\n    \"price\": 1495000.00,\r\n    \"categoryId\": \"{{productCategoryId002}}\",\r\n    \"active\": 1,\r\n    \"images\": [\r\n        {\r\n            \"name\": \"Gambar Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/050/1205085_PE906934_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 1\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/191/1219150_PE913307_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Belakang\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/103/1210367_PE909688_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Bahan Luar\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/050/1205090_PE906936_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Ukuran\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/991/1099161_PE865634_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/products",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product POANG",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productId-POANG\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"002-poang-spr-19240788\",\r\n    \"name\": \"POANG\",\r\n    \"description\": \"Kursi berlengan, veneer kayu birch/knisa krem muda\",\r\n    \"price\": 1495000.00,\r\n    \"categoryId\": \"{{productCategoryId002}}\",\r\n    \"active\": 1,\r\n    \"images\": [\r\n        {\r\n            \"name\": \"Gambar Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/715/0571500_PE666933_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 1\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/372/0837298_PE666936_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Belakang\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/372/0837295_PE666935_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Bahan Luar\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/372/0837285_PE666934_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Ukuran\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/149/1314996_PE940336_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/products",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product RADVIKEN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productId-RADVIKEN\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"002-radviken-art-30295473\",\r\n    \"name\": \"RADVIKEN\",\r\n    \"description\": \"Kursi berlengan, cokelat tua/hitam\",\r\n    \"price\": 2995000.00,\r\n    \"categoryId\": \"{{productCategoryId002}}\",\r\n    \"active\": 1,\r\n    \"images\": [\r\n        {\r\n            \"name\": \"Gambar Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/258/0325825_PE517684_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 1\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/653/1265349_PH176564_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Belakang\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/258/0325828_PE517686_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Bahan Luar\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/258/0325827_PE517685_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Ukuran\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/593/1059367_PE849603_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/products",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product VITTSJO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productId-VITTSJO\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"003-vittsjo-art-00213313\",\r\n    \"name\": \"VITTSJO\",\r\n    \"description\": \"Meja tamu, hitam-cokelat/kaca, 75 cm\",\r\n    \"price\": 899000.00,\r\n    \"categoryId\": \"{{productCategoryId003}}\",\r\n    \"active\": 1,\r\n    \"images\": [\r\n        {\r\n            \"name\": \"Gambar Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/353/0135348_PE292039_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 1\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/366/0836655_PE601386_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Belakang\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/853/0185307_PE316781_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Bahan Luar\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/588/1058803_PH181553_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Ukuran\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/196/0719688_PE732149_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/products",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product FJALLBO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productId-FJALLBO\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"003-fjallbo-art-30340381\",\r\n    \"name\": \"FJALLBO\",\r\n    \"description\": \"Meja tamu, hitam, 90x46 cm\",\r\n    \"price\": 899000.00,\r\n    \"categoryId\": \"{{productCategoryId003}}\",\r\n    \"active\": 1,\r\n    \"images\": [\r\n        {\r\n            \"name\": \"Gambar Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/759/0475920_PE615876_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 1\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/258/0925806_PH163283_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Belakang\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/258/0925808_PH163284_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Bahan Luar\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/359/0835970_PE681429_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Ukuran\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/316/0731681_PE738387_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/products",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product KVISTBRO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"productId-KVISTBRO\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"003-kvistbro-art-30322240\",\r\n    \"name\": \"KVISTBRO\",\r\n    \"description\": \"Meja penyimpanan, putih, 61 cm\",\r\n    \"price\": 999000.00,\r\n    \"categoryId\": \"{{productCategoryId003}}\",\r\n    \"active\": 1,\r\n    \"images\": [\r\n        {\r\n            \"name\": \"Gambar Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/423/0442383_PE593769_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 1\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Depan\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/359/0835956_PE610730_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Penempatan Belakang\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/359/0835958_PE612941_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Bahan Luar\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/359/0835954_PE610728_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        },\r\n        {\r\n            \"name\": \"Gambar Ukuran\",\r\n            \"description\": \"elegan dan menawan\",\r\n            \"path\": \"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/317/0731746_PE738428_S5.webp\",\r\n            \"active\": 1,\r\n            \"front\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{product_url}}/products",
+					"host": [
+						"{{product_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock KLIPPAN to KBP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-KLIPPAN}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-KBP}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-KBP}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock STOCKHOLM to KBP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-STOCKHOLM}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-KBP}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-KBP}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock GLOSTAD to KBP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-GLOSTAD}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-KBP}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-KBP}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock SALNO to KBP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-SALNO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-KBP}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-KBP}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock POANG to KBP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-POANG}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-KBP}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-KBP}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock RADVIKEN to KBP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-RADVIKEN}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-KBP}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-KBP}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock VITTSJO to KBP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-VITTSJO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-KBP}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-KBP}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock FJALLBO to KBP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-FJALLBO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-KBP}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-KBP}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock KVISTBRO to KBP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-KVISTBRO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-KBP}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-KBP}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock KLIPPAN to ALS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-KLIPPAN}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-ALS}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-ALS}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock STOCKHOLM to ALS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-STOCKHOLM}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-ALS}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-ALS}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock GLOSTAD to ALS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-GLOSTAD}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-ALS}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-ALS}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock SALNO to ALS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-SALNO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-ALS}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-ALS}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock POANG to ALS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-POANG}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-ALS}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-ALS}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock RADVIKEN to ALS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-RADVIKEN}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-ALS}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-ALS}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock VITTSJO to ALS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-VITTSJO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-ALS}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-ALS}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock FJALLBO to ALS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-FJALLBO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-ALS}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-ALS}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock KVISTBRO to ALS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-KVISTBRO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-ALS}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-ALS}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock KLIPPAN to JGC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-KLIPPAN}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-JGC}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-JGC}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock STOCKHOLM to JGC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-STOCKHOLM}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-JGC}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-JGC}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock GLOSTAD to JGC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-GLOSTAD}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-JGC}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-JGC}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock SALNO to JGC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-SALNO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-JGC}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-JGC}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock POANG to JGC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-POANG}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-JGC}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-JGC}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock RADVIKEN to JGC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-RADVIKEN}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-JGC}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-JGC}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock VITTSJO to JGC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-VITTSJO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-JGC}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-JGC}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock FJALLBO to JGC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-FJALLBO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-JGC}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-JGC}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory Stock KVISTBRO to JGC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"randomNum\", _.random (20,200));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"{{productId-KVISTBRO}}\",\r\n    \"quantity\": {{randomNum}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{inventory_url}}/inventories/by_warehouse/{{warehouseId-JGC}}/add_product_stock",
+					"host": [
+						"{{inventory_url}}"
+					],
+					"path": [
+						"inventories",
+						"by_warehouse",
+						"{{warehouseId-JGC}}",
+						"add_product_stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Admin IKIAEKBP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.variables.set(\"userId-KBP\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"adminkbp\",\r\n    \"email\": \"adminkbp@ikiae.com\",\r\n    \"password\": \"password\",\r\n    \"active\": 1,\r\n    \"role\": \"WAREHOUSE_ADMIN\",\r\n    \"adminWarehouse\": {\r\n        \"warehouseId\": \"{{warehouseId-KBP}}\"\r\n    }, \r\n    \"profile\": {\r\n        \"firstname\": \"Admini\",\r\n        \"lastname\": \"Wati Kbp\",\r\n        \"dateOfBirth\": \"1992-01-01\",\r\n        \"phoneNumber\": \"0856123456789\",\r\n        \"profilePicture\": \"pp2.png\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{user_url}}/users",
+					"host": [
+						"{{user_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Admin IKIAEALS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.variables.set(\"userId-ALS\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"adminals\",\r\n    \"email\": \"adminals@ikiae.com\",\r\n    \"password\": \"password\",\r\n    \"active\": 1,\r\n    \"role\": \"WAREHOUSE_ADMIN\",\r\n    \"adminWarehouse\": {\r\n        \"warehouseId\": \"{{warehouseId-ALS}}\"\r\n    }, \r\n    \"profile\": {\r\n        \"firstname\": \"Admini\",\r\n        \"lastname\": \"Wati Als\",\r\n        \"dateOfBirth\": \"1992-01-01\",\r\n        \"phoneNumber\": \"0856123456789\",\r\n        \"profilePicture\": \"pp2.png\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{user_url}}/users",
+					"host": [
+						"{{user_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Admin IKIAEJGC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.variables.set(\"userId-JGC\", responseData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"adminjgc\",\r\n    \"email\": \"adminjgc@ikiae.com\",\r\n    \"password\": \"password\",\r\n    \"active\": 1,\r\n    \"role\": \"WAREHOUSE_ADMIN\",\r\n    \"adminWarehouse\": {\r\n        \"warehouseId\": \"{{warehouseId-JGC}}\"\r\n    }, \r\n    \"profile\": {\r\n        \"firstname\": \"Admini\",\r\n        \"lastname\": \"Wati Jgc\",\r\n        \"dateOfBirth\": \"1992-01-01\",\r\n        \"phoneNumber\": \"0856123456789\",\r\n        \"profilePicture\": \"pp2.png\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{user_url}}/users",
+					"host": [
+						"{{user_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "warehouse_url",
+			"value": "localhost:8181",
+			"type": "string"
+		},
+		{
+			"key": "user_url",
+			"value": "localhost:8182",
+			"type": "string"
+		},
+		{
+			"key": "product_url",
+			"value": "localhost:8184",
+			"type": "string"
+		},
+		{
+			"key": "inventory_url",
+			"value": "localhost:8188",
+			"type": "string"
+		},
+		{
+			"key": "warehouseId-KBP",
+			"value": ""
+		},
+		{
+			"key": "warehouseId-ALS",
+			"value": ""
+		},
+		{
+			"key": "warehouseId-JGC",
+			"value": ""
+		},
+		{
+			"key": "productCategoryId001",
+			"value": ""
+		},
+		{
+			"key": "productCategoryId002",
+			"value": ""
+		},
+		{
+			"key": "productCategoryId003",
+			"value": ""
+		},
+		{
+			"key": "productId-KLIPPAN",
+			"value": ""
+		},
+		{
+			"key": "productId-STOCKHOLM",
+			"value": ""
+		},
+		{
+			"key": "productId-GLOSTAD",
+			"value": ""
+		},
+		{
+			"key": "productId-SALNO",
+			"value": ""
+		},
+		{
+			"key": "productId-POANG",
+			"value": ""
+		},
+		{
+			"key": "productId-RADVIKEN",
+			"value": ""
+		},
+		{
+			"key": "productId-VITTSJO",
+			"value": ""
+		},
+		{
+			"key": "productId-FJALLBO",
+			"value": ""
+		},
+		{
+			"key": "productId-KVISTBRO",
+			"value": ""
+		},
+		{
+			"key": "randomNum",
+			"value": ""
+		}
+	]
+}
