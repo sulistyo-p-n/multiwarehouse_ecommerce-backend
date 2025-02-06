@@ -152,4 +152,4 @@ security:
     text: sulistyo ponco nugroho
     key: pranadipa adamasya satyanugroho
     secret-key: 54b56cbc136f46447341b80eaf3fe2dfac6b16d6cfbabe969572d58dcbd9aee6
-    expiration-time: 3600000
+    expiration-time: 360000000

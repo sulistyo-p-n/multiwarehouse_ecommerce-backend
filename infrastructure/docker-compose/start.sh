@@ -4,6 +4,8 @@
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+#cd infrastructure/docker-compose
+
 echo -e "${GREEN}Start Docker Compose...${NC}"
 
 echo -e "${GREEN}Start Zookeeper...${NC}"
