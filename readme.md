@@ -171,7 +171,7 @@ Use the following command to enable auto-scaling based on CPU usage:
 ```sh
 kubectl autoscale deployment inventory-service --cpu-percent=50 --min=1 --max=10
 kubectl get hpa
-kubectl get hpa inventory-service --watch
+kubectl get hpa inventory-hpa --watch
 ```
 
 ---
