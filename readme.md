@@ -96,13 +96,13 @@ Enable the following services before deployment:
    ```sh
    gcloud auth configure-docker asia-southeast2-docker.pkg.dev
    ```
-2. Tag the local image:
+2. Go to infrastructure/kubernetes folder:
    ```sh
-   docker tag com.multiwarehouse.app/warehouse.service:1.0-SNAPSHOT asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/warehouse.service:1.0-SNAPSHOT
+   cd infrastructure/kubernetes
    ```
-3. Push the image to the repository:
+3. run command to create tag and push image to Google Cloud Repository:
    ```sh
-   docker push asia-southeast2-docker.pkg.dev/long-canto-439612-d1/com-multiwarehouse-app-repository/warehouse.service:1.0-SNAPSHOT
+   sh tag-and-push-images.sh multiwarehouse-447401
    ```
 
 ---

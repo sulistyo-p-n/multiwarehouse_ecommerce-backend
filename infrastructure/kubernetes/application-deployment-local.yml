@@ -49,6 +49,7 @@ spec:
       port: 8181
   type: LoadBalancer
   loadBalancerIP: ""
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -100,6 +101,7 @@ spec:
       port: 8182
   type: LoadBalancer
   loadBalancerIP: ""
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -151,6 +153,7 @@ spec:
       port: 8184
   type: LoadBalancer
   loadBalancerIP: ""
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -202,6 +205,27 @@ spec:
       port: 8188
   type: LoadBalancer
   loadBalancerIP: ""
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: inventory-hpa
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: inventory-deployment
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+
 ---
 apiVersion: apps/v1
 kind: Deployment
